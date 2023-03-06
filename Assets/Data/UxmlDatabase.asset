@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139cf26d76b24a2d910b079b5b464a89, type: 3}
+  m_Name: UxmlDatabase
+  m_EditorClassIdentifier: 
+  Uxmls:
+    m_keys:
+    - CardInspector
+    - CardNavigator
+    - CardNavigatorElement
+    - ActionList
+    - ActionListElement
+    - ActionParamList
+    - ActionIntParamListElement
+    - ActionStringParamListElement
+    m_values:
+    - {fileID: 9197481963319205126, guid: 08e1ad7cb378cee4d98ff9af79647e23, type: 3}
+    - {fileID: 9197481963319205126, guid: 55305e19e403af24dbf651e738036719, type: 3}
+    - {fileID: 9197481963319205126, guid: 7e1599ba0b857ab41b139c84b6bade9a, type: 3}
+    - {fileID: 9197481963319205126, guid: 9cd032cd4d85d9d408fe8aa7d1088540, type: 3}
+    - {fileID: 9197481963319205126, guid: 8d5b04d11b4fe934eb0ceba0a0807775, type: 3}
+    - {fileID: 9197481963319205126, guid: e825147a15f8a2e4b8aa54eec4033d7f, type: 3}
+    - {fileID: 9197481963319205126, guid: f1506481e3bb02847980f9b0b00aa983, type: 3}
+    - {fileID: 9197481963319205126, guid: 48143b58e01c3594b97b8833341f4145, type: 3}

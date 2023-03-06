@@ -1,0 +1,38 @@
+.unity-text-field__label {
+    min-width: 40px;
+}
+
+.unity-integer-field__label {
+    min-width: 1px;
+}
+
+.unity-enum-field__label {
+    min-width: 1px;
+}
+
+.unity-base-field {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.unity-base-popup-field__input {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.unity-button {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

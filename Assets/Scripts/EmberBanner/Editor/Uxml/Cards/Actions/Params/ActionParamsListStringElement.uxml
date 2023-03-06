@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/EmberBanner/Editor/Uxml/Uss/Defaults.uss?fileID=7433441132597879392&amp;guid=cfdb7865d99ff9f4dbbc5eaffcc2eee9&amp;type=3#Defaults" />
+    <ui:VisualElement name="Root" style="flex-grow: 1; background-color: rgb(60, 60, 60); height: 25px; max-height: 25px; flex-direction: row; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="TypeColorElement" style="width: 3%; border-right-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 255);" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="NameLabel" style="width: 15%; -unity-text-align: middle-center; -unity-font-style: bold; color: rgb(255, 255, 255); flex-grow: 1; border-right-width: 1px; border-left-color: rgba(0, 0, 0, 255); border-right-color: rgba(0, 0, 0, 255); border-top-color: rgba(0, 0, 0, 255); border-bottom-color: rgba(0, 0, 0, 255);" />
+        <ui:TextField picking-mode="Ignore" label="Tags" name="TagsField" multiline="true" style="-unity-text-align: middle-left; width: 55%; color: rgb(255, 255, 255); flex-grow: 1;" />
+        <ui:TextField picking-mode="Ignore" label="Value" name="ValueField" multiline="true" style="-unity-text-align: middle-left; width: 25%; color: rgb(255, 255, 255); flex-shrink: 1; flex-grow: 0;" />
+        <ui:Button text="-" display-tooltip-when-elided="true" name="RemoveButton" style="width: 2%; height: 21px; margin-left: 1px; margin-right: 1px; margin-top: 1px; margin-bottom: 1px;" />
+    </ui:VisualElement>
+</ui:UXML>

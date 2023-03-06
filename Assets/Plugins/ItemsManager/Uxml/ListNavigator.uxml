@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/ItemsManager/Uxml/Uss/TabbedManagerTextField.uss?fileID=7433441132597879392&amp;guid=2b925a5cc2acb654d8550aea5b6d8b97&amp;type=3#TabbedManagerTextField" />
+    <ui:VisualElement name="ControlsContainer" style="height: 33px; background-color: rgb(26, 26, 26); flex-direction: row;">
+        <ui:TextField picking-mode="Ignore" label="New Element" name="NewElementNameField" class="tabbedManager-Text-Field" style="width: 189px; flex-grow: 1; justify-content: center; align-items: center;" />
+        <ui:Button text="+" display-tooltip-when-elided="true" name="AddButton" style="align-items: stretch; justify-content: center; transform-origin: center; position: relative; min-width: 31px;" />
+        <ui:Button text="-" display-tooltip-when-elided="true" name="RemoveButton" style="align-items: stretch; justify-content: center; transform-origin: center; position: relative; min-width: 31px;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="SearchContainer" style="height: 33px; background-color: rgb(43, 43, 43); flex-direction: row;" />
+    <ui:ScrollView name="ElementsContainer" style="flex-grow: 1;" />
+</ui:UXML>

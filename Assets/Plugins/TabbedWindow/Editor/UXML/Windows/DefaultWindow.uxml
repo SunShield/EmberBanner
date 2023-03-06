@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="TabButtonsContainer" style="height: 29px; justify-content: center; align-items: center; min-height: 15px; background-color: rgb(36, 36, 36); flex-direction: row;" />
+    <ui:VisualElement name="TabContainer" style="height: 104px; flex-grow: 1; flex-direction: row;" />
+</ui:UXML>
