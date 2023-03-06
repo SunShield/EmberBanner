@@ -7,6 +7,8 @@ namespace EmberBanner.Unity.Battle.Management
 {
     public class BattleStructure : EBMonoBehaviour
     {
+        [SerializeField] public Transform DeadUnitsOrigin;
+        
         [SerializeField] private List<UnitSpot> _playerSpots;
         [SerializeField] private List<UnitSpot> _enemySpots;
 

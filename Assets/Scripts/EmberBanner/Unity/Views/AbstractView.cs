@@ -14,6 +14,7 @@ namespace EmberBanner.Unity.Views
         where TEntity : AbstractEntity<TModel>
     {
         public int ViewId { get; private set; }
-        public TEntity Entity { get; private set; }
+        public TEntity Entity { get; set; }
+        public TModel Model => Entity.Model;
     }
 }

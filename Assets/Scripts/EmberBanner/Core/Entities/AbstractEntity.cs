@@ -13,5 +13,11 @@ namespace EmberBanner.Core.Ingame
     {
         public int Id { get; private set; }
         public TModel Model { get; private set; }
+
+        public AbstractEntity(int id, TModel model)
+        {
+            Id = id;
+            Model = model;
+        }
     }
 }

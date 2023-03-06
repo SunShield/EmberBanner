@@ -15,5 +15,10 @@ namespace EmberBanner.Unity.Battle.Systems.UnitSpotSystem
             unit.Tran.parent = Tran;
             unit.Tran.localPosition = Vector3.zero;
         }
+
+        public void RemoveUnit()
+        {
+            Unit = null;
+        }
     }
 }

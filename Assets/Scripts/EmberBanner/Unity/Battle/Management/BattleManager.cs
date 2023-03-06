@@ -1,4 +1,9 @@
-﻿using EmberBanner.Unity.Service;
+﻿using EmberBanner.Unity.Battle.Systems.StateSystem;
+using EmberBanner.Unity.Battle.Systems.TurnOrder;
+using EmberBanner.Unity.Battle.Views.Factories;
+using EmberBanner.Unity.Battle.Views.Units;
+using EmberBanner.Unity.Battle.Views.Units.Crystals;
+using EmberBanner.Unity.Service;
 using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Management
@@ -17,8 +22,16 @@ namespace EmberBanner.Unity.Battle.Management
         }
 
         [SerializeField] private BattleStructure _structure;
+        [SerializeField] private BattleStateController _stateController;
+        [SerializeField] private BattleUnitViewFactory _unitViewFactory;
+        [SerializeField] private BattleUnitCrystalViewFactory _crystalViewFactory;
         
+        public TurnOrderController TurnOrderController { get; private set; } = new();
         public BattleRegistry Registry { get; private set; } = new();
+        
+        public BattleStateController StateController => _stateController;
         public BattleStructure Structure => _structure;
+        public BattleUnitViewFactory UnitViewFactory => _unitViewFactory;
+        public BattleUnitCrystalViewFactory CrystalViewFactory => _crystalViewFactory;
     }
 }
