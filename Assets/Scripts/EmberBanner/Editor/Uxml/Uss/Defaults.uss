@@ -36,3 +36,13 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.crystal-integer-field .unity-integer-field__input {
+    font-size: 32;
+    -unity-text-align: middle-center;
+}
+
+.magnitude-integer-field .unity-integer-field__input {
+    font-size: 32;
+    -unity-text-align: middle-center;
+}

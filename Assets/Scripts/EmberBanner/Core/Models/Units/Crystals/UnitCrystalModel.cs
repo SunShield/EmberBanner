@@ -6,6 +6,6 @@ namespace EmberBanner.Core.Models.Units.Crystals
     [Serializable]
     public class UnitCrystalModel : AbstractModel
     {
-        public IntSpan RollBounds;
+        public IntSpan RollBounds = new();
     }
 }

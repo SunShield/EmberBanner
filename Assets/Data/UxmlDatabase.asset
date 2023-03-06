@@ -25,6 +25,8 @@ MonoBehaviour:
     - UnitInspector
     - UnitNavigator
     - UnitNavigatorElement
+    - CrystalList
+    - CrystalListElement
     m_values:
     - {fileID: 9197481963319205126, guid: 08e1ad7cb378cee4d98ff9af79647e23, type: 3}
     - {fileID: 9197481963319205126, guid: 55305e19e403af24dbf651e738036719, type: 3}
@@ -37,3 +39,5 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: 71cf1f2fad394a04d88b3d479ffe5157, type: 3}
     - {fileID: 9197481963319205126, guid: d2759fc26c99d8340b15cad0e99d6fd9, type: 3}
     - {fileID: 9197481963319205126, guid: 92bbb40f5abef7d41939d48f267ccab4, type: 3}
+    - {fileID: 9197481963319205126, guid: 6e0b8702378521f4f9ef240a722a75a0, type: 3}
+    - {fileID: 9197481963319205126, guid: 300a33250bbd9b541958ad581dc8309b, type: 3}

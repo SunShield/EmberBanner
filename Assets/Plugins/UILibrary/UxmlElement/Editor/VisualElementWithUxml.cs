@@ -17,6 +17,12 @@ namespace UILibrary.UxmlElement.Editor
         {
             var visualTree = UxmlDatabase.Instance.Uxmls[UxmlKey];
             Root = UQueryExtensions.Q<VisualElement>(visualTree.CloneTree(), "Root");
+
+            foreach (var stylesheet in visualTree.stylesheets)
+            {
+                Root.styleSheets.Add(stylesheet);
+            }
+            
             Add(Root);
         }
     }

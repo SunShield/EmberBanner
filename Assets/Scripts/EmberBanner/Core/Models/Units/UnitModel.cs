@@ -12,7 +12,7 @@ namespace EmberBanner.Core.Models.Units
         public int MaxHealth;
         public int StartingEnergy;
         public int MaxEnergy;
-        public List<UnitCrystalModel> Crystals;
+        public List<UnitCrystalModel> Crystals = new();
 
         public Sprite Sprite;
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35d638973b14ef7bcfb5120e4c9eb69, type: 3}
   m_Name: UnitDatabase
   m_EditorClassIdentifier: 
-  _cards:
+  _units:
     m_keys:
     - Skeleton
     m_values:

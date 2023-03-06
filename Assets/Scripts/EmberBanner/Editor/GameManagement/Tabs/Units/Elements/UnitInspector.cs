@@ -1,4 +1,7 @@
-﻿using EmberBanner.Core.Models.Units;
+﻿using System.Linq;
+using EmberBanner.Core.Models.Units;
+using EmberBanner.Core.Models.Units.Crystals;
+using EmberBanner.Editor.GameManagement.Tabs.Units.Elements.Crystals;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using NFate.Editor.EditorElements;
 using UnityEditor.UIElements;
@@ -11,13 +14,15 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
     {
         protected override string UxmlKey { get; } = "UnitInspector";
         
-        private Label _elementName;
+        private Label         _elementName;
         private VisualElement _icon;
-        private ObjectField _iconPicker;
-        private IntegerField _startingHealthField;
-        private IntegerField _maxHealthField;
-        private IntegerField _startingEnergyField;
-        private IntegerField _maxEnergyField;
+        private ObjectField   _iconPicker;
+        private IntegerField  _startingHealthField;
+        private IntegerField  _maxHealthField;
+        private IntegerField  _startingEnergyField;
+        private IntegerField  _maxEnergyField;
+        private VisualElement _crystalsContainer;
+        private CrystalList   _crystalList;
 
         public UnitInspector() : base()
         {
@@ -34,6 +39,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxHealthField       = Root.Q<IntegerField>("MaxHealthField");
             _startingEnergyField  = Root.Q<IntegerField>("StartingEnergyField");
             _maxEnergyField       = Root.Q<IntegerField>("MaxEnergyField");
+            _crystalsContainer    = Root.Q<VisualElement>("CrystalsContainer");
+            AddCrystalsList();
         }
 
         private void AddEvents()
@@ -65,6 +72,41 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
                 InspectedElement.MaxEnergy = evt.newValue;
             });
         }
+
+        private void AddCrystalsList()
+        {
+            var data = new CrystalListData()
+            {
+                ValuesPoolGetter = () => InspectedElement.Crystals,
+                ElementByKeyGetter = key => InspectedElement.Crystals.First(crystal => crystal.Name == key),
+                ElementInListPredicate = crystal => true,
+                OnAddElementClickedCallback = AddCrystal,
+                OnRemoveElementClickedCallback = RemoveCrystal
+            };
+
+            void AddCrystal(string crystalName)
+            {
+                InspectedElement.Crystals.Add(new UnitCrystalModel() { Name = crystalName });
+                Database.Update();
+            }
+
+            void RemoveCrystal(string crystalName)
+            {
+                for (int i = 0; i < InspectedElement.Crystals.Count; i++)
+                {
+                    if (InspectedElement.Crystals[i].Name == crystalName)
+                    {
+                        InspectedElement.Crystals.RemoveAt(i);
+                        return;
+                    }
+                }
+                Database.Update();
+            }
+            
+            _crystalList = new CrystalList();
+            _crystalList.Initialize(data);
+            _crystalsContainer.Add(_crystalList);
+        }
         
         protected override void PostPrepare()
         {
@@ -80,6 +122,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxHealthField.value = InspectedElement.MaxHealth;
             _startingEnergyField.value = InspectedElement.StartingEnergy;
             _maxEnergyField.value = InspectedElement.MaxEnergy;
+            
+            _crystalList.Update();
         }
     }
 }

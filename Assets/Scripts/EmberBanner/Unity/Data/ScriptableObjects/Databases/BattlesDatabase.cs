@@ -5,19 +5,20 @@ using EmberBanner.Core.Service.Classes.Collections;
 using ItemsManager.Databases;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
 {
     [CreateAssetMenu(menuName = "Databases/Battle Database", fileName = "BattleDatabase")]
     public class BattlesDatabase : ScriptableObject, IDictionaryDatabase<string, BattleModel>
     {
-        [SerializeField] private StringToBattleModelDictionary _cards;
-        public IDictionary<string, BattleModel> Elements => _cards;
-        public int Count => _cards.Count;
+        [FormerlySerializedAs("_cards")] [SerializeField] private StringToBattleModelDictionary _battles;
+        public IDictionary<string, BattleModel> Elements => _battles;
+        public int Count => _battles.Count;
         
         public void Update() => EditorUtility.SetDirty(this);
-        public void AddElement(BattleModel element) => _cards.Add(element.Name, element);
-        public void RemoveElement(BattleModel element) => _cards.Remove(element.Name);
-        public List<BattleModel> GetElementsForIteration() => _cards.Values.ToList();
+        public void AddElement(BattleModel element) => _battles.Add(element.Name, element);
+        public void RemoveElement(BattleModel element) => _battles.Remove(element.Name);
+        public List<BattleModel> GetElementsForIteration() => _battles.Values.ToList();
     }
 }
