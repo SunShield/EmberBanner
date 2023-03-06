@@ -13,5 +13,24 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles
         }
 
         protected override BattlesDatabase GetDatabase() => GeneralDatabase.Battles;
+
+        public void OnUnitAdded(string unitName)
+        {
+            Inspector.Update();
+        }
+        
+        public void OnUnitRemoved(string unitName)
+        {
+            foreach (var battleModel in Database.Elements.Values)
+            {
+                foreach (var determinedEnemy in battleModel.DeterminedEnemies)
+                {
+                    if (determinedEnemy.UnitName != unitName) continue;
+                    determinedEnemy.UnitName = "";
+                }
+            }
+            
+            Inspector.Update();
+        }
     }
 }

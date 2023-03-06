@@ -31,6 +31,9 @@ namespace EmberBanner.Editor.GameManagement.Windows
             var battlesTab = new BattlesManagerTab(this, "Battles", @"Assets/Data/Databases/GeneralDatabase.asset");
             battlesTab.Prepare();
 
+            unitsTab.onUnitAdded += battlesTab.OnUnitAdded;
+            unitsTab.onUnitRemoved += battlesTab.OnUnitRemoved;
+
             return new() { cardsTab, unitsTab, battlesTab };
         }
     }

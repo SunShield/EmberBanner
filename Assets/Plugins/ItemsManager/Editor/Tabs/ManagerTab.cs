@@ -35,6 +35,7 @@ namespace ItemsManager.Editor.Tabs
             Inspector.SetDatabase(Database);
             Inspector.Prepare(this);
             BuildNavigator();
+            PostPrepare();
         }
 
         protected abstract TDatabase GetDatabase();
@@ -67,6 +68,7 @@ namespace ItemsManager.Editor.Tabs
         }
 
         protected virtual void ConfigureNavigator(TNavigator navigator) { }
+        protected virtual void PostPrepare() { }
 
         private void OnNavigatorSelectedItemChanged(TElement element)
         {

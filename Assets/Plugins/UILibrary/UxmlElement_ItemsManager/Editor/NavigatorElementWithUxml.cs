@@ -10,7 +10,7 @@ namespace NFate.Editor.EditorElements
         where TElement : IAbstractDatabaseElement
     {
         private const string RootElementName = "Root";
-        protected virtual Color SelectedColor { get; } = new Color(0.4f, 0.7f, 0.9f, 1f);
+        protected virtual Color SelectedColor { get; } = new (0.4f, 0.7f, 0.9f, 1f);
         
         protected abstract string UxmlKey { get; }
         
@@ -32,7 +32,7 @@ namespace NFate.Editor.EditorElements
         
         public override void SetSelected(bool selected)
         {
-            style.backgroundColor = !selected ? DefaultBgColor : SelectedColor;
+            Root.style.backgroundColor = !selected ? DefaultBgColor : SelectedColor;
         }
     }
 }
