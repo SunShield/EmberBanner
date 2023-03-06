@@ -27,6 +27,9 @@ MonoBehaviour:
     - UnitNavigatorElement
     - CrystalList
     - CrystalListElement
+    - BattleInspector
+    - BattleNavigator
+    - BattleNavigatorElement
     m_values:
     - {fileID: 9197481963319205126, guid: 08e1ad7cb378cee4d98ff9af79647e23, type: 3}
     - {fileID: 9197481963319205126, guid: 55305e19e403af24dbf651e738036719, type: 3}
@@ -41,3 +44,6 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: 92bbb40f5abef7d41939d48f267ccab4, type: 3}
     - {fileID: 9197481963319205126, guid: 6e0b8702378521f4f9ef240a722a75a0, type: 3}
     - {fileID: 9197481963319205126, guid: 300a33250bbd9b541958ad581dc8309b, type: 3}
+    - {fileID: 9197481963319205126, guid: 73c9e36388062b34e966fdfb5f19b1c0, type: 3}
+    - {fileID: 9197481963319205126, guid: 9f7de8f2fddeabb44a2e30096095bab8, type: 3}
+    - {fileID: 9197481963319205126, guid: 2710d79a99dfab54aa2c2429f9dd20ff, type: 3}

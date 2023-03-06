@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmberBanner.Editor.GameManagement.Tabs.Battles;
 using EmberBanner.Editor.GameManagement.Tabs.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Units;
 using TabbedWindow.Tabs;
@@ -26,8 +27,11 @@ namespace EmberBanner.Editor.GameManagement.Windows
 
             var unitsTab = new UnitsManagementTab(this, "Units", @"Assets/Data/Databases/GeneralDatabase.asset");
             unitsTab.Prepare();
+            
+            var battlesTab = new BattlesManagerTab(this, "Battles", @"Assets/Data/Databases/GeneralDatabase.asset");
+            battlesTab.Prepare();
 
-            return new() { cardsTab, unitsTab };
+            return new() { cardsTab, unitsTab, battlesTab };
         }
     }
 }
