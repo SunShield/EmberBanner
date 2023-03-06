@@ -1,5 +1,4 @@
 ﻿using System;
-using EmberBanner.Core.Enums;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Classes.Fundamental;
@@ -26,6 +25,7 @@ namespace EmberBanner.Core.Models.Actions
         {
             Name = name;
             Type = type;
+            Params = new();
         }
     }
 }

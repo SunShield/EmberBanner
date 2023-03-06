@@ -1,4 +1,6 @@
 ﻿using System;
+using ItemsManager.Databases.Elements;
+using UnityEngine;
 
 namespace EmberBanner.Core.Models
 {
@@ -8,8 +10,8 @@ namespace EmberBanner.Core.Models
     /// They never change and can be edited through editor tools
     /// </summary>
     [Serializable]
-    public abstract class AbstractModel
+    public abstract class AbstractModel : IAbstractDatabaseElement
     {
-        public string Name;
+        [field: SerializeField] public string Name { get; set; }
     }
 }

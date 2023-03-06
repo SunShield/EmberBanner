@@ -22,6 +22,9 @@ MonoBehaviour:
     - ActionParamList
     - ActionIntParamListElement
     - ActionStringParamListElement
+    - UnitInspector
+    - UnitNavigator
+    - UnitNavigatorElement
     m_values:
     - {fileID: 9197481963319205126, guid: 08e1ad7cb378cee4d98ff9af79647e23, type: 3}
     - {fileID: 9197481963319205126, guid: 55305e19e403af24dbf651e738036719, type: 3}
@@ -31,3 +34,6 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: e825147a15f8a2e4b8aa54eec4033d7f, type: 3}
     - {fileID: 9197481963319205126, guid: f1506481e3bb02847980f9b0b00aa983, type: 3}
     - {fileID: 9197481963319205126, guid: 48143b58e01c3594b97b8833341f4145, type: 3}
+    - {fileID: 9197481963319205126, guid: 71cf1f2fad394a04d88b3d479ffe5157, type: 3}
+    - {fileID: 9197481963319205126, guid: d2759fc26c99d8340b15cad0e99d6fd9, type: 3}
+    - {fileID: 9197481963319205126, guid: 92bbb40f5abef7d41939d48f267ccab4, type: 3}

@@ -7,5 +7,7 @@ namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
     public class GeneralDatabase : AbstractGeneralDatabase
     {
         public CardsDatabase Cards;
+        public UnitsDatabase Units;
+        public BattlesDatabase Battles;
     }
 }

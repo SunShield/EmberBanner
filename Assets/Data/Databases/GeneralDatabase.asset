@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: GeneralDatabase
   m_EditorClassIdentifier: 
   Cards: {fileID: 11400000, guid: ee182e2bcca621042819f445c6a8146b, type: 2}
+  Units: {fileID: 11400000, guid: 6ff760ea24b54514590ce3a6cdb8607b, type: 2}
+  Battles: {fileID: 11400000, guid: 0ce05252107ad43419deceff7e701f5c, type: 2}

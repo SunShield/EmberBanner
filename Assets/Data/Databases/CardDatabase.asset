@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
     m_keys:
-    - Test Strike
+    - Test Card
     m_values:
-    - <Name>k__BackingField: Test Strike
+    - <Name>k__BackingField: Test Card
       Sprite: {fileID: 0}
       Cost: 0
       Actions:
-      - Name: 6
+      - <Name>k__BackingField: 1
         RawDescription: 
         Magnitude: 0
         ClashingPower:
@@ -33,7 +33,7 @@ MonoBehaviour:
         CoinsAmount: 0
         IsFast: 0
         TargetsCount: 0
-        Type: 1
+        Type: 0
         AggressionType: 0
         DefenseType: 0
         Params:

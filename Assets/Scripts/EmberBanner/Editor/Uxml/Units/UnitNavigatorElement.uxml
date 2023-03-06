@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="Root" style="height: 32px; -unity-background-scale-mode: stretch-to-fill; flex-direction: row; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-bottom: 0; background-color: rgb(58, 58, 58);">
+        <ui:VisualElement name="Sprite" style="width: 28px; height: 100%; background-image: url(&apos;project://database/Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Dark/d_Visibility_Hidded@4x.png?fileID=2800000&amp;guid=36502ae6ddbac9e4dbf8fcd5889d661d&amp;type=3#d_Visibility_Hidded@4x&apos;); min-height: 0; flex-basis: auto; left: auto; top: auto; bottom: auto; visibility: visible; overflow: visible; padding-left: 0; padding-bottom: 0; padding-right: 0; padding-top: 0; min-width: 0;" />
+        <ui:Label text="Name" display-tooltip-when-elided="true" name="NameLabel" style="width: 402px; justify-content: center; align-items: center; height: 21px; flex-shrink: 1; min-width: 0; flex-grow: 1; min-height: 0; -unity-text-align: middle-left; font-size: 13px; -unity-font-style: bold;" />
+    </ui:VisualElement>
+</ui:UXML>
