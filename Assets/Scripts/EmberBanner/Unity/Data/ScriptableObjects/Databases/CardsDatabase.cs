@@ -19,5 +19,6 @@ namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
         public void AddElement(CardModel element) => _cards.Add(element.Name, element);
         public void RemoveElement(CardModel element) => _cards.Remove(element.Name);
         public List<CardModel> GetElementsForIteration() => _cards.Values.ToList();
+        public CardModel this[string name] => Elements[name];
     }
 }

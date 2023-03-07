@@ -1,4 +1,4 @@
-﻿using EmberBanner.Core.Ingame.Units.Crystals;
+﻿using EmberBanner.Core.Entities.Impl.Units.Crystals;
 using EmberBanner.Core.Models.Units.Crystals;
 using UnityEngine;
 

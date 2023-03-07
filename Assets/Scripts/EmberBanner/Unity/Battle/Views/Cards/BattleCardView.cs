@@ -1,5 +1,5 @@
-﻿using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Ingame.Cards;
+﻿using EmberBanner.Core.Entities.Impl.Cards;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Cards;
 
 namespace EmberBanner.Unity.Battle.Views.Cards

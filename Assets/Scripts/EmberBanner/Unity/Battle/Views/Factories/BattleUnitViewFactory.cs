@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using EmberBanner.Core.Entities.Impl.Units;
 using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Ingame.Units;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Views.Units;
 using EmberBanner.Unity.Battle.Views.Units.Crystals;

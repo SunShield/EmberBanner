@@ -7,5 +7,6 @@ namespace ItemsManager.Databases
         where TElement : IAbstractDatabaseElement
     {
         IDictionary<TKey, TElement> Elements { get; }
+        TElement this[string name] { get; }
     }
 }

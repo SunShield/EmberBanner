@@ -42,6 +42,8 @@ namespace Plugins.ComplexValue
 
         public void SetFilter(ComplexValueFilterDelegate filter) => _filter = filter;
 
+        public void SetBaseValue(int baseValue) => BaseValue = baseValue;
+
         public int CalculateNewValue(int newValue)
         {
             BaseValue = newValue;

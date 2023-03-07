@@ -20,5 +20,6 @@ namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
         public void AddElement(BattleModel element) => _battles.Add(element.Name, element);
         public void RemoveElement(BattleModel element) => _battles.Remove(element.Name);
         public List<BattleModel> GetElementsForIteration() => _battles.Values.ToList();
+        public BattleModel this[string name] => Elements[name];
     }
 }

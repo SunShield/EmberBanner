@@ -14,11 +14,14 @@ namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
     {
         [FormerlySerializedAs("_cards")] [SerializeField] private StringToUnitModelDictionary _units;
         public IDictionary<string, UnitModel> Elements => _units;
+
+
         public int Count => _units.Count;
         
         public void Update() => EditorUtility.SetDirty(this);
         public void AddElement(UnitModel element) => _units.Add(element.Name, element);
         public void RemoveElement(UnitModel element) => _units.Remove(element.Name);
         public List<UnitModel> GetElementsForIteration() => _units.Values.ToList();
+        public UnitModel this[string name] => Elements[name];
     }
 }

@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Models;
+﻿using System;
+using EmberBanner.Core.Models;
 
 namespace EmberBanner.Core.Ingame
 {
@@ -11,8 +12,8 @@ namespace EmberBanner.Core.Ingame
     public abstract class AbstractEntity<TModel>
         where TModel : AbstractModel
     {
-        public int Id { get; private set; }
-        public TModel Model { get; private set; }
+        public int Id { get; protected set; }
+        public TModel Model { get; }
 
         public AbstractEntity(int id, TModel model)
         {

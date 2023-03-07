@@ -13,29 +13,5 @@ MonoBehaviour:
   m_Name: CardDatabase
   m_EditorClassIdentifier: 
   _cards:
-    m_keys:
-    - Test Card
-    m_values:
-    - <Name>k__BackingField: Test Card
-      Sprite: {fileID: 0}
-      Cost: 0
-      Actions:
-      - <Name>k__BackingField: 1
-        RawDescription: 
-        Magnitude: 0
-        ClashingPower:
-          Min: 0
-          Max: 0
-        ClashingPowerGrowthRate:
-          Span: 0
-          Growth: 0
-        Threshold: 0
-        CoinsAmount: 0
-        IsFast: 0
-        TargetsCount: 0
-        Type: 0
-        AggressionType: 0
-        DefenseType: 0
-        Params:
-          m_keys: []
-          m_values: []
+    m_keys: []
+    m_values: []

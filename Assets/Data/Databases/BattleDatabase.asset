@@ -22,4 +22,6 @@ MonoBehaviour:
       - <Name>k__BackingField: 3
         UnitName: Skeleton
       - <Name>k__BackingField: 4
-        UnitName: Skeleton
+        UnitName: Wolf
+      - <Name>k__BackingField: 5
+        UnitName: Death Knight
