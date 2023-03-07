@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/EmberBanner/Editor/Uxml/Uss/Defaults.uss?fileID=7433441132597879392&amp;guid=cfdb7865d99ff9f4dbbc5eaffcc2eee9&amp;type=3#Defaults" />
+    <ui:VisualElement name="Root" style="flex-grow: 0; background-color: rgb(58, 58, 58); height: 320%; flex-direction: column; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px;">
+        <ui:VisualElement name="ContentContainer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 30px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%;">
+            <ui:VisualElement name="StatsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 446px; border-right-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: row;">
+                <ui:DropdownField label="Card Name" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="PossibleCardsDropdown" style="-unity-text-align: middle-left; width: 300px; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:Button text="-" display-tooltip-when-elided="true" name="RemoveButton" style="width: 26px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="MiddleContainer" style="height: 11px; flex-direction: row-reverse; background-color: rgb(0, 0, 0);">
+            <ui:Button text="Hide" display-tooltip-when-elided="true" name="ShowHideButton" style="height: 10px; flex-shrink: 1; font-size: 7px; flex-grow: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 8px; margin-top: 0; margin-bottom: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ParamsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 351px;">
+            <ui:VisualElement name="LeftColumn" style="flex-grow: 0; background-color: rgb(0, 0, 0); width: 108px;" />
+            <ui:VisualElement name="StatChangesContasiner" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 70%;" />
+            <ui:VisualElement name="Divider" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-left: 1px; margin-right: 1px; width: 1px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

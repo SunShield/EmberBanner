@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/EmberBanner/Editor/Uxml/Uss/Defaults.uss?fileID=7433441132597879392&amp;guid=cfdb7865d99ff9f4dbbc5eaffcc2eee9&amp;type=3#Defaults" />
+    <ui:VisualElement name="Root" style="flex-grow: 1; background-color: rgb(58, 58, 58);">
+        <ui:VisualElement name="ControlsContainer" style="flex-grow: 0; background-color: rgb(24, 24, 24); height: 34px; flex-direction: row; align-items: center;">
+            <ui:Button text="+" display-tooltip-when-elided="true" name="AddButton" style="width: 31px; height: 90%; margin-left: 3px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;" />
+        </ui:VisualElement>
+        <ui:ScrollView name="ElementsContainer" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

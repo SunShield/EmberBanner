@@ -14,11 +14,12 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
     {
         protected override string UxmlKey { get; } = "CardInspector";
         
-        private Label _elementName;
+        private Label         _elementName;
         private VisualElement _icon;
-        private ObjectField _iconPicker;
+        private ObjectField   _iconPicker;
+        private IntegerField  _costField;
         private VisualElement _actionsContainer;
-        private ActionList _actionList;
+        private ActionList    _actionList;
 
         public CardInspector() : base()
         {
@@ -31,6 +32,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _elementName = Root.Q<Label>("ElementName");
             _icon = Root.Q<VisualElement>("Icon");
             _iconPicker = Root.Q<ObjectField>("IconPicker");
+            _costField = Root.Q<IntegerField>("CostField");
             _actionsContainer = Root.Q<VisualElement>("ActionsContainer");
 
             AddActionsList();
@@ -81,6 +83,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 _icon.style.backgroundImage = new StyleBackground(InspectedElement.Sprite);
                 PostElementUpdate();
             });
+
+            _costField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.Cost = evt.newValue;
+            });
         }
         
         protected override void PostPrepare()
@@ -92,6 +99,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _elementName.text = InspectedElement.Name;
             _icon.style.backgroundImage = new StyleBackground(InspectedElement.Sprite);
             _iconPicker.value = InspectedElement.Sprite;
+            _costField.value = InspectedElement.Cost;
             _actionList.Update();
         }
     }

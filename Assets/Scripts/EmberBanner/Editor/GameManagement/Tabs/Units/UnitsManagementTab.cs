@@ -15,6 +15,23 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units
 
         protected override UnitsDatabase GetDatabase() => GeneralDatabase.Units;
 
+        public void OnCardAdded(string cardName)
+        {
+            Inspector.Update();
+        }
+
+        public void OnCardRemoved(string cardName)
+        {
+            foreach (var unitModel in Database.Elements.Values)
+            {
+                foreach (var defaultCardModel in unitModel.DefaultCards)
+                {
+                    if (defaultCardModel.CardName != cardName) continue;
+                    defaultCardModel.CardName = "";
+                }
+            }
+        }
+
         protected override void PostPrepare()
         {
             Navigator.onElementAdded += FireOnUnitAddedEvent;

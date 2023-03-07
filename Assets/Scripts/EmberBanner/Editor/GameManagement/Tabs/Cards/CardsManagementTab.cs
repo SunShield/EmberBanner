@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Models.Cards;
+﻿using System;
+using EmberBanner.Core.Models.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using ItemsManager.Editor.Tabs;
@@ -13,5 +14,17 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards
         }
 
         protected override CardsDatabase GetDatabase() => GeneralDatabase.Cards;
+        
+        protected override void PostPrepare()
+        {
+            Navigator.onElementAdded += FireOnCardAddedEvent;
+            Navigator.onElementRemoved += unit => FireOnCardRemovedEvent(unit.Name);
+        }
+        
+        private void FireOnCardAddedEvent(string unitName) => onCardAdded?.Invoke(unitName);
+        private void FireOnCardRemovedEvent(string unitName) => onCardRemoved?.Invoke(unitName);
+
+        public event Action<string> onCardAdded;
+        public event Action<string> onCardRemoved;
     }
 }

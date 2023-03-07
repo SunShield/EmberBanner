@@ -23,19 +23,31 @@ MonoBehaviour:
       MaxHealth: 100
       StartingEnergy: 30
       MaxEnergy: 30
+      HandSize: 0
+      Draw: 0
       Crystals: []
+      IsEnemyUnit: 1
+      DefaultCards: []
       Sprite: {fileID: 21300000, guid: 9b2035832fc6fb14ca68e89d9ab9e9b9, type: 3}
     - <Name>k__BackingField: Wolf
       StartingHealth: 40
       MaxHealth: 40
       StartingEnergy: 40
       MaxEnergy: 40
+      HandSize: 0
+      Draw: 0
       Crystals: []
+      IsEnemyUnit: 1
+      DefaultCards: []
       Sprite: {fileID: 21300000, guid: a8dd67000a29ccd4f8e60153238e0225, type: 3}
     - <Name>k__BackingField: Death Knight
       StartingHealth: 70
       MaxHealth: 70
       StartingEnergy: 70
       MaxEnergy: 70
+      HandSize: 0
+      Draw: 0
       Crystals: []
+      IsEnemyUnit: 1
+      DefaultCards: []
       Sprite: {fileID: 21300000, guid: f6cffd73850cf2f4a9bcff6d72351e01, type: 3}

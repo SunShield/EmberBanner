@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using EmberBanner.Core.Models.Units;
+using EmberBanner.Core.Models.Units.Cards;
 using EmberBanner.Core.Models.Units.Crystals;
+using EmberBanner.Editor.GameManagement.Tabs.Units.Elements.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Units.Elements.Crystals;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using NFate.Editor.EditorElements;
@@ -21,8 +23,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
         private IntegerField  _maxHealthField;
         private IntegerField  _startingEnergyField;
         private IntegerField  _maxEnergyField;
+        private IntegerField  _handSizeField;
+        private IntegerField  _drawField;
+        private Toggle        _isEnemyToggle;
         private VisualElement _crystalsContainer;
         private CrystalList   _crystalList;
+        private VisualElement _cardsContainer;
+        private UnitCardList  _unitUnitCardList;
 
         public UnitInspector() : base()
         {
@@ -39,8 +46,15 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxHealthField       = Root.Q<IntegerField>("MaxHealthField");
             _startingEnergyField  = Root.Q<IntegerField>("StartingEnergyField");
             _maxEnergyField       = Root.Q<IntegerField>("MaxEnergyField");
+            _handSizeField        = Root.Q<IntegerField>("HandSizeField");
+            _drawField            = Root.Q<IntegerField>("DrawField");
+            _isEnemyToggle        = Root.Q<Toggle>("IsEnemyToggle");
             _crystalsContainer    = Root.Q<VisualElement>("CrystalsContainer");
+            _cardsContainer       = Root.Q<VisualElement>("CardsContainer");
+            _cardsContainer.style.display = DisplayStyle.None;
+            
             AddCrystalsList();
+            AddUnitCardsList();
         }
 
         private void AddEvents()
@@ -70,6 +84,22 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxEnergyField.RegisterValueChangedCallback(evt =>
             {
                 InspectedElement.MaxEnergy = evt.newValue;
+            });
+
+            _handSizeField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.HandSize = evt.newValue;
+            });
+
+            _drawField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.Draw = evt.newValue;
+            });
+
+            _isEnemyToggle.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.IsEnemyUnit = evt.newValue;
+                _cardsContainer.style.display = InspectedElement.IsEnemyUnit ? DisplayStyle.Flex : DisplayStyle.None;
             });
         }
 
@@ -107,6 +137,41 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _crystalList.Initialize(data);
             _crystalsContainer.Add(_crystalList);
         }
+
+        private void AddUnitCardsList()
+        {
+            var data = new UnitCardListData()
+            {
+                ValuesPoolGetter = () => InspectedElement.DefaultCards,
+                ElementByKeyGetter = key => InspectedElement.DefaultCards.First(crystal => crystal.Name == key),
+                ElementInListPredicate = card => true,
+                OnAddElementClickedCallback = AddCard,
+                OnRemoveElementClickedCallback = RemoveCard
+            };
+
+            void AddCard(string cardName)
+            {
+                InspectedElement.DefaultCards.Add(new UnitDefaultCardModel() { Name = cardName });
+                Database.Update();
+            }
+
+            void RemoveCard(string cardName)
+            {
+                for (int i = 0; i < InspectedElement.DefaultCards.Count; i++)
+                {
+                    if (InspectedElement.DefaultCards[i].Name == cardName)
+                    {
+                        InspectedElement.DefaultCards.RemoveAt(i);
+                        return;
+                    }
+                }
+                Database.Update();
+            }
+            
+            _unitUnitCardList = new UnitCardList();
+            _unitUnitCardList.Initialize(data);
+            _cardsContainer.Add(_unitUnitCardList);
+        }
         
         protected override void PostPrepare()
         {
@@ -115,6 +180,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
 
         protected override void OnElementSet()
         {
+            Update();
+        }
+
+        public void Update()
+        {
             _elementName.text = InspectedElement.Name;
             _icon.style.backgroundImage = new StyleBackground(InspectedElement.Sprite);
             _iconPicker.value = InspectedElement.Sprite;
@@ -122,8 +192,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxHealthField.value = InspectedElement.MaxHealth;
             _startingEnergyField.value = InspectedElement.StartingEnergy;
             _maxEnergyField.value = InspectedElement.MaxEnergy;
-            
+            _handSizeField.value = InspectedElement.HandSize;
+            _drawField.value = InspectedElement.Draw;
+            _isEnemyToggle.value = InspectedElement.IsEnemyUnit;
+            _cardsContainer.style.display = InspectedElement.IsEnemyUnit ? DisplayStyle.Flex : DisplayStyle.None;
+
             _crystalList.Update();
+            _unitUnitCardList.Update();
         }
     }
 }

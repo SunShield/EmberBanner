@@ -11,15 +11,21 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
         private static UnitEntityFactory _instance;
         public static UnitEntityFactory I => _instance ??= new();
 
-        public UnitEntity CreateEntity(string modelName)
+        private bool _nextEntityIsTemporary;
+
+        public UnitEntity CreateEntity(string modelName, bool temporaryEntity = false)
         {
+            if (temporaryEntity) _nextEntityIsTemporary = true;
+            
             var model = DataHolder.I.Data.Units[modelName];
             return CreateEntity(model);
         }
 
         protected override void OnPostCreateEntity(UnitEntity entity, UnitModel model)
         {
-            GeneralEntityDatabase.I.Units.AddEntity(entity);
+            if (!_nextEntityIsTemporary)
+                GeneralEntityDatabase.I.Units.AddEntity(entity);
+            _nextEntityIsTemporary = false;
         }
     }
 }

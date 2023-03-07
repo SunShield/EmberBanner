@@ -20,9 +20,21 @@
                     <uie:IntegerField value="0" name="StartingEnergyField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                     <uie:IntegerField value="0" name="MaxEnergyField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                 </ui:VisualElement>
+                <ui:VisualElement name="HandContainer" style="height: 26px; flex-direction: row;">
+                    <ui:Label text="Hand Size/Draw" display-tooltip-when-elided="true" name="HandDrawLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <uie:IntegerField value="0" name="HandSizeField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                    <uie:IntegerField value="0" name="DrawField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="IsEnemyContainer" style="height: 26px; flex-direction: row;">
+                    <ui:Label text="IsEnemy" display-tooltip-when-elided="true" name="IsEnemyLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 125px;" />
+                    <ui:Toggle name="IsEnemyToggle" style="width: 102px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Divider" style="flex-grow: 0; background-color: rgb(0, 0, 0); height: 1px; width: 100%; margin-top: 1px; margin-bottom: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);" />
-            <ui:VisualElement name="CrystalsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 100%;" />
+            <ui:VisualElement name="ConfigurableDataContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 100%; flex-direction: row;">
+                <ui:VisualElement name="CrystalsContainer" style="width: 50%;" />
+                <ui:VisualElement name="CardsContainer" style="width: 50%;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
