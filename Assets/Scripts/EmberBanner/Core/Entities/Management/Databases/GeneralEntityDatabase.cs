@@ -7,11 +7,6 @@ namespace EmberBanner.Core.Entities.Management.Databases
         private static GeneralEntityDatabase _instance;
         public static GeneralEntityDatabase I => _instance ??= new();
 
-        protected GeneralEntityDatabase()
-        {
-            Load();
-        }
-
         public CardEntitiesDatabase Cards = new();
         public UnitEntitiesDatabase Units = new();
 

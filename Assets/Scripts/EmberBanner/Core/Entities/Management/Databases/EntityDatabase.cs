@@ -61,7 +61,7 @@ namespace EmberBanner.Core.Entities.Management.Databases
         private void LoadEntity(TSaveData entitySaveData)
         {
             var model = GetModel(entitySaveData.ModelName);
-            var entity = Activator.CreateInstance(typeof(TSaveData), entitySaveData.Id, model) as TEntity;
+            var entity = Activator.CreateInstance(typeof(TEntity), entitySaveData.Id, model) as TEntity;
             entity.Initialize(entitySaveData);
             Entities.Add(entity.Id, entity);
         }
