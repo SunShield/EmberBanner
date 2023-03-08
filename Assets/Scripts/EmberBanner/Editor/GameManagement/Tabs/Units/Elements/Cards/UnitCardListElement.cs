@@ -2,40 +2,60 @@
 using EmberBanner.Core.Models.Units.Cards;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements.Cards
 {
     public class UnitCardListElement : ManagedListElement<UnitDefaultCardModel, UnitCardListElementData>
     {
-        protected override string UxmlKey { get; } = "CardListElement";
+        protected override string UxmlKey { get; } = "UnitCardListElement";
         private bool _isHidden = false;
         
-        private DropdownField _possibleValuesDropdown;
+        private DropdownField _possibleCardsDropdown;
         private Button        _showHideButton;
         private VisualElement _paramsContainer;
+        private VisualElement _spriteElement;
+        private IntegerField  _cardsAmountField;
         
         protected override void PostGatherElements()
         {
-            _possibleValuesDropdown = Root.Q<DropdownField>("PossibleValuesDropdown");
-            _possibleValuesDropdown.choices = GeneralDatabase.EI.Units.Elements.Keys.ToList();
-            if (_possibleValuesDropdown.choices.Count > 0)
+            _possibleCardsDropdown = Root.Q<DropdownField>("PossibleCardsDropdown");
+            _possibleCardsDropdown.choices = GeneralDatabase.EI.Cards.Elements.Keys.ToList();
+            if (_possibleCardsDropdown.choices.Count > 0)
             {
-                _possibleValuesDropdown.index = 0;
-                Element.CardName = _possibleValuesDropdown.value;
+                if (string.IsNullOrEmpty(Element.CardName))
+                {
+                    _possibleCardsDropdown.index = 0;
+                    Element.CardName = _possibleCardsDropdown.value;
+                }
+                else
+                {
+                    _possibleCardsDropdown.index = _possibleCardsDropdown.choices.IndexOf(Element.CardName);
+                }
             }
             
-            _showHideButton  = Root.Q<Button>("ShowHideButton");
-            _paramsContainer = Root.Q<VisualElement>("ParamsContainer");
+            _showHideButton   = Root.Q<Button>("ShowHideButton");
+            _paramsContainer  = Root.Q<VisualElement>("ParamsContainer");
+            _spriteElement    = Root.Q<VisualElement>("SpriteElement");
+            _spriteElement.style.backgroundImage = new StyleBackground(GeneralDatabase.EI.Cards[Element.CardName].Sprite);
+            _cardsAmountField = Root.Q<IntegerField>("CardsAmountField");
+            _cardsAmountField.value = Element.Amount;
 
             ToggleHiddenState();
         }
         
         protected override void PostAddEvents()
         {
-            _possibleValuesDropdown.RegisterValueChangedCallback(evt =>
+            _possibleCardsDropdown.RegisterValueChangedCallback(evt =>
             {
-                Element.CardName = _possibleValuesDropdown.value;
+                Element.CardName = _possibleCardsDropdown.value;
+                _spriteElement.style.backgroundImage = new StyleBackground(GeneralDatabase.EI.Cards[Element.CardName].Sprite);
+            });
+
+            _cardsAmountField.RegisterValueChangedCallback(evt =>
+            {
+                Element.Amount = evt.newValue;
             });
 
             _showHideButton.clicked += ToggleHiddenState;

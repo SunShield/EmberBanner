@@ -39,6 +39,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
 
         private void BuildGeometry()
         {
+            style.flexGrow = 1f;
             _elementName          = Root.Q<Label>("ElementName");
             _icon                 = Root.Q<VisualElement>("Icon");
             _iconPicker           = Root.Q<ObjectField>("IconPicker");
@@ -151,7 +152,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
 
             void AddCard(string cardName)
             {
-                InspectedElement.DefaultCards.Add(new UnitDefaultCardModel() { Name = cardName });
+                InspectedElement.DefaultCards.Add(new UnitDefaultCardModel() { Name = cardName, Amount = 1 });
                 Database.Update();
             }
 

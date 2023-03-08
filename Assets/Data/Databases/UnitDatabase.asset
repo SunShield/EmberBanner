@@ -15,39 +15,140 @@ MonoBehaviour:
   _units:
     m_keys:
     - Skeleton
-    - Wolf
+    - Sir Calvus
     - Death Knight
+    - Wraith
+    - Bone Beast
     m_values:
     - <Name>k__BackingField: Skeleton
-      StartingHealth: 100
-      MaxHealth: 100
-      StartingEnergy: 30
-      MaxEnergy: 30
-      HandSize: 0
-      Draw: 0
-      Crystals: []
-      IsEnemyUnit: 1
-      DefaultCards: []
-      Sprite: {fileID: 21300000, guid: 9b2035832fc6fb14ca68e89d9ab9e9b9, type: 3}
-    - <Name>k__BackingField: Wolf
       StartingHealth: 40
       MaxHealth: 40
-      StartingEnergy: 40
-      MaxEnergy: 40
-      HandSize: 0
-      Draw: 0
-      Crystals: []
+      StartingEnergy: 30
+      MaxEnergy: 30
+      HandSize: 3
+      Draw: 1
+      Crystals:
+      - <Name>k__BackingField: 1
+        RollBounds:
+          Min: 1
+          Max: 3
       IsEnemyUnit: 1
-      DefaultCards: []
-      Sprite: {fileID: 21300000, guid: a8dd67000a29ccd4f8e60153238e0225, type: 3}
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Deadly Swing
+        Amount: 5
+      - <Name>k__BackingField: 3
+        CardName: Mortify
+        Amount: 1
+      Sprite: {fileID: 21300000, guid: 9b2035832fc6fb14ca68e89d9ab9e9b9, type: 3}
+    - <Name>k__BackingField: Sir Calvus
+      StartingHealth: 140
+      MaxHealth: 140
+      StartingEnergy: 120
+      MaxEnergy: 120
+      HandSize: 4
+      Draw: 2
+      Crystals:
+      - <Name>k__BackingField: 1
+        RollBounds:
+          Min: 3
+          Max: 5
+      - <Name>k__BackingField: 2
+        RollBounds:
+          Min: 3
+          Max: 5
+      - <Name>k__BackingField: 3
+        RollBounds:
+          Min: 1
+          Max: 8
+      IsEnemyUnit: 1
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Holy Slash
+        Amount: 3
+      - <Name>k__BackingField: 2
+        CardName: Defence of the Stalwart
+        Amount: 2
+      - <Name>k__BackingField: 3
+        CardName: Smite
+        Amount: 1
+      - <Name>k__BackingField: 4
+        CardName: Benediction
+        Amount: 2
+      - <Name>k__BackingField: 5
+        CardName: Shield of Faith
+        Amount: 2
+      - <Name>k__BackingField: 6
+        CardName: Holy Beam
+        Amount: 1
+      Sprite: {fileID: 21300000, guid: a29b4396cf8962f429537ae0a687f948, type: 3}
     - <Name>k__BackingField: Death Knight
       StartingHealth: 70
       MaxHealth: 70
       StartingEnergy: 70
       MaxEnergy: 70
-      HandSize: 0
-      Draw: 0
-      Crystals: []
+      HandSize: 3
+      Draw: 2
+      Crystals:
+      - <Name>k__BackingField: 1
+        RollBounds:
+          Min: 1
+          Max: 2
+      - <Name>k__BackingField: 2
+        RollBounds:
+          Min: 4
+          Max: 5
       IsEnemyUnit: 1
-      DefaultCards: []
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Ray of Death
+        Amount: 4
+      - <Name>k__BackingField: 2
+        CardName: Unearth
+        Amount: 1
+      - <Name>k__BackingField: 3
+        CardName: Darkness
+        Amount: 1
       Sprite: {fileID: 21300000, guid: f6cffd73850cf2f4a9bcff6d72351e01, type: 3}
+    - <Name>k__BackingField: Wraith
+      StartingHealth: 30
+      MaxHealth: 30
+      StartingEnergy: 90
+      MaxEnergy: 90
+      HandSize: 3
+      Draw: 2
+      Crystals:
+      - <Name>k__BackingField: 1
+        RollBounds:
+          Min: 3
+          Max: 6
+      IsEnemyUnit: 1
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Soulburn
+        Amount: 3
+      - <Name>k__BackingField: 2
+        CardName: Withering Touch
+        Amount: 3
+      Sprite: {fileID: 21300000, guid: a96e728ae6e152041b6b34ff61d7a2ee, type: 3}
+    - <Name>k__BackingField: Bone Beast
+      StartingHealth: 60
+      MaxHealth: 60
+      StartingEnergy: 35
+      MaxEnergy: 35
+      HandSize: 3
+      Draw: 2
+      Crystals:
+      - <Name>k__BackingField: 1
+        RollBounds:
+          Min: 2
+          Max: 4
+      IsEnemyUnit: 1
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Sigil of the Dead
+        Amount: 3
+      - <Name>k__BackingField: 3
+        CardName: Noxious Claw
+        Amount: 3
+      Sprite: {fileID: 21300000, guid: 739f8d3321bbbf54aaa7e22e949767b6, type: 3}

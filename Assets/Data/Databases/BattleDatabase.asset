@@ -21,7 +21,9 @@ MonoBehaviour:
       DeterminedEnemies:
       - <Name>k__BackingField: 3
         UnitName: Skeleton
-      - <Name>k__BackingField: 4
-        UnitName: Wolf
-      - <Name>k__BackingField: 5
+      - <Name>k__BackingField: 6
         UnitName: Death Knight
+      - <Name>k__BackingField: 7
+        UnitName: Wraith
+      - <Name>k__BackingField: 8
+        UnitName: Bone Beast

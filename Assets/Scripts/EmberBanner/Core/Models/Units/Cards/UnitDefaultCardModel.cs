@@ -9,5 +9,10 @@ namespace EmberBanner.Core.Models.Units.Cards
     public class UnitDefaultCardModel : AbstractModel
     {
         public string CardName;
+        
+        /// <summary>
+        /// How many copies of this card are added to unit's deck
+        /// </summary>
+        public int Amount;
     }
 }
