@@ -9,6 +9,7 @@ namespace EmberBanner.Core.Models.Battles
     public class UnitInBattleModel : AbstractModel
     {
         public string UnitName;
+        public int Wave;
         
         public UnitInBattleModel(string name)
         {

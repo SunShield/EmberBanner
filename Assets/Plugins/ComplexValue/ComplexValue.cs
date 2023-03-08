@@ -144,7 +144,7 @@ namespace Plugins.ComplexValue
         private int CalculateFinalBaseValue(int finalBaseFlatValue, ComplexValueFilterDelegate filter = null)
         {
             var hasFilter = filter != null;
-            var multiplier = 1f;
+            var multiplier = 0f;
 
             foreach (var increasement in BaseValuePercentIncreasements.Values)
             {

@@ -4,6 +4,7 @@
         <ui:VisualElement name="ContentContainer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 30px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%;">
             <ui:VisualElement name="StatsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 446px; border-right-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: row;">
                 <ui:DropdownField label="Unit Name" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="PossibleUnitsDropdown" style="-unity-text-align: middle-left; width: 300px; color: rgb(255, 255, 255);" />
+                <uie:IntegerField label="Wave" value="0" name="WaveField" style="color: rgb(255, 255, 255); width: 99px; -unity-text-align: middle-center; -unity-font-style: bold;" />
             </ui:VisualElement>
             <ui:Button text="-" display-tooltip-when-elided="true" name="RemoveButton" style="width: 26px;" />
         </ui:VisualElement>

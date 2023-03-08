@@ -2,6 +2,7 @@
 using EmberBanner.Core.Models.Battles;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
@@ -14,6 +15,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
         private DropdownField _possibleUnitsDropdown;
         private Button        _showHideButton;
         private VisualElement _paramsContainer;
+        private IntegerField  _waveField;
 
         protected override void PostGatherElements()
         {
@@ -34,6 +36,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
             
             _showHideButton  = Root.Q<Button>("ShowHideButton");
             _paramsContainer = Root.Q<VisualElement>("ParamsContainer");
+            _waveField       = Root.Q<IntegerField>("WaveField");
+            _waveField.value = Element.Wave;
 
             ToggleHiddenState();
         }
@@ -46,6 +50,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
             });
 
             _showHideButton.clicked += ToggleHiddenState;
+
+            _waveField.RegisterValueChangedCallback(evt =>
+            {
+                Element.Wave = evt.newValue;
+            });
         }
         
         private void ToggleHiddenState()

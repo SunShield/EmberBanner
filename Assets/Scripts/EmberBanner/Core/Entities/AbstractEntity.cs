@@ -13,6 +13,7 @@ namespace EmberBanner.Core.Ingame
         where TModel : AbstractModel
     {
         public int Id { get; protected set; }
+        public bool IsTemporary => Id < 0;
         public TModel Model { get; }
 
         public AbstractEntity(int id, TModel model)

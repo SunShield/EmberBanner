@@ -8,13 +8,30 @@ namespace EmberBanner.Core.Ingame.Management.Factories
         where TEntity : AbstractEntity<TModel>
         where TModel : AbstractModel
     {
-        public TEntity CreateEntity(TModel model)
+        /// <summary>
+        /// Temp ids are always negative
+        /// </summary>
+        private static int _tempId = 0;
+        private static int GetTempId => --_tempId;
+        
+        protected bool NextEntityIsTemporary { get; private set; }
+        
+        public TEntity CreateEntity(TModel model, bool isTemporaryEntity = false)
         {
-            var entity = Activator.CreateInstance(typeof(TEntity), EntityIdHolder.GetId, model) as TEntity;
+            NextEntityIsTemporary = isTemporaryEntity;
+            var entity = Activator.CreateInstance(typeof(TEntity), GetId(isTemporaryEntity), model) as TEntity;
             OnPostCreateEntity(entity, model);
             return entity;
         }
 
+        private int GetId(bool temporaryEntity) => !temporaryEntity ? EntityIdHolder.GetId : GetTempId;
+
+        private void PostCreateEntity(TEntity entity, TModel model)
+        {
+            OnPostCreateEntity(entity, model);
+            NextEntityIsTemporary = false;
+        }
+        
         protected virtual void OnPostCreateEntity(TEntity entity, TModel model) { }
     }
 }

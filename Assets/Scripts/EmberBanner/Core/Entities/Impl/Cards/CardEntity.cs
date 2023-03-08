@@ -20,7 +20,7 @@ namespace EmberBanner.Core.Entities.Impl.Cards
             
             foreach (var actionModel in model.Actions)
             {
-                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel);
+                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, IsTemporary);
                 Actions.Add(actionEntity);
             }
         }

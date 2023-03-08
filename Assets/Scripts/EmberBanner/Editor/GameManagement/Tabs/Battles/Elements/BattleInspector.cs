@@ -50,7 +50,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements
 
             void AddUnit(string crystalName)
             {
-                InspectedElement.DeterminedEnemies.Add(new UnitInBattleModel(crystalName));
+                InspectedElement.DeterminedEnemies.Add(new UnitInBattleModel(crystalName) { Wave = 1 });
                 Database.Update();
             }
 

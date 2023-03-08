@@ -2,6 +2,7 @@
 using EmberBanner.Core.Entities.Management.Databases;
 using EmberBanner.Core.Ingame.Management.Factories;
 using EmberBanner.Core.Models.Units;
+using EmberBanner.Core.Service.Debug;
 using EmberBanner.Unity.Data;
 
 namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
@@ -11,21 +12,23 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
         private static UnitEntityFactory _instance;
         public static UnitEntityFactory I => _instance ??= new();
 
-        private bool _nextEntityIsTemporary;
-
         public UnitEntity CreateEntity(string modelName, bool temporaryEntity = false)
         {
-            if (temporaryEntity) _nextEntityIsTemporary = true;
-            
             var model = DataHolder.I.Data.Units[modelName];
-            return CreateEntity(model);
+            return CreateEntity(model, temporaryEntity);
         }
 
         protected override void OnPostCreateEntity(UnitEntity entity, UnitModel model)
         {
-            if (!_nextEntityIsTemporary)
+            var message = $"Unit Entity (id: {entity.Id} | model: {model.Name}) created";
+            var tempMessage = "Temporary ";
+            var finalMessage = NextEntityIsTemporary ? tempMessage : "";
+            finalMessage += message;
+            
+            EBDebugger.Log(EBDebugContext.Entities, EBDebugContext.Units, finalMessage);
+            
+            if (!NextEntityIsTemporary)
                 GeneralEntityDatabase.I.Units.AddEntity(entity);
-            _nextEntityIsTemporary = false;
         }
     }
 }
