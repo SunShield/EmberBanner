@@ -36,6 +36,6 @@ namespace EmberBanner.Core.Ingame.Management.SaveLoad
         /// Generates data for saving entity
         /// </summary>
         /// <returns></returns>
-        public abstract TSaveData GenerateSaveDataInternal(TSaveData saveData);
+        protected abstract TSaveData GenerateSaveDataInternal(TSaveData saveData);
     }
 }

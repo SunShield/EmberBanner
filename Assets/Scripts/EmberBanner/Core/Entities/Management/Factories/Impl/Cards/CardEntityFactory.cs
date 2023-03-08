@@ -20,6 +20,12 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Cards
 
         protected override void OnPostCreateEntity(CardEntity entity, CardModel model)
         {
+            foreach (var actionModel in model.Actions)
+            {
+                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, NextEntityIsTemporary);
+                entity.Actions.Add(actionEntity);
+            }
+            
             var message = $"Card Entity (id: {entity.Id} | model: {model.Name}) created";
             var tempMessage = "Temporary ";
             var finalMessage = NextEntityIsTemporary ? tempMessage : "";

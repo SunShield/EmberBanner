@@ -1,8 +1,6 @@
 ﻿using EmberBanner.Unity.Battle.Systems.StateSystem;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Views.Factories;
-using EmberBanner.Unity.Battle.Views.Units;
-using EmberBanner.Unity.Battle.Views.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 

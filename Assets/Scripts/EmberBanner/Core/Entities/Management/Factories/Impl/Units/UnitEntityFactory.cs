@@ -20,6 +20,12 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
 
         protected override void OnPostCreateEntity(UnitEntity entity, UnitModel model)
         {
+            foreach (var crystalModel in model.Crystals)
+            {
+                var crystalEntity = UnitCrystalEntityFactory.I.CreateEntity(crystalModel, NextEntityIsTemporary);
+                entity.Crystals.Add(crystalEntity);
+            }
+            
             var message = $"Unit Entity (id: {entity.Id} | model: {model.Name}) created";
             var tempMessage = "Temporary ";
             var finalMessage = NextEntityIsTemporary ? tempMessage : "";

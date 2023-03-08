@@ -1,6 +1,6 @@
 ﻿using EmberBanner.Core.Entities.Impl.Units.Crystals;
-using EmberBanner.Unity.Battle.Views.Units;
-using EmberBanner.Unity.Battle.Views.Units.Crystals;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 

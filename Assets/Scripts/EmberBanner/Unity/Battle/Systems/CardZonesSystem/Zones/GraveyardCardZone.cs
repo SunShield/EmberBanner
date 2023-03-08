@@ -1,4 +1,4 @@
-﻿using EmberBanner.Unity.Battle.Views.Cards;
+﻿using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones

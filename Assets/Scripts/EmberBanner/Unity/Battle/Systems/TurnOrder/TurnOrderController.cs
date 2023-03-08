@@ -2,7 +2,7 @@
 using System.Linq;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Unity.Battle.Management;
-using EmberBanner.Unity.Battle.Views.Units.Crystals;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.TurnOrder
 {

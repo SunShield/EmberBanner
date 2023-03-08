@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Unity.Battle.Views.Cards;
-using EmberBanner.Unity.Battle.Views.Units;
+using EmberBanner.Unity.Battle.Views.Impl.Cards;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 
 namespace EmberBanner.Unity.Battle.Management
 {

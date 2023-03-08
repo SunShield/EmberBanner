@@ -1,4 +1,4 @@
-﻿using EmberBanner.Unity.Battle.Views.Units;
+﻿using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 

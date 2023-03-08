@@ -3,9 +3,8 @@ using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Units;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace EmberBanner.Unity.Battle.Views.Units
+namespace EmberBanner.Unity.Battle.Views.Impl.Units
 {
     public class BattleUnitView : BattleView<UnitModel, UnitEntity>
     {

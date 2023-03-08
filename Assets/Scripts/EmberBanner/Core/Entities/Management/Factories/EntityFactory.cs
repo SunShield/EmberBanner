@@ -20,7 +20,7 @@ namespace EmberBanner.Core.Ingame.Management.Factories
         {
             NextEntityIsTemporary = isTemporaryEntity;
             var entity = Activator.CreateInstance(typeof(TEntity), GetId(isTemporaryEntity), model) as TEntity;
-            OnPostCreateEntity(entity, model);
+            PostCreateEntity(entity, model);
             return entity;
         }
 

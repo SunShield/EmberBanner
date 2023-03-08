@@ -2,7 +2,7 @@
 using EmberBanner.Core.Models.Units.Crystals;
 using UnityEngine;
 
-namespace EmberBanner.Unity.Battle.Views.Units.Crystals
+namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 {
     public class BattleUnitCrystalView : BattleView<UnitCrystalModel, UnitCrystalEntity>
     {

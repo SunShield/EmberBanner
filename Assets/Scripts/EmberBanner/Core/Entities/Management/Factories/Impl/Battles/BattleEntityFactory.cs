@@ -1,4 +1,6 @@
-﻿using EmberBanner.Core.Ingame.Impl.Battles;
+﻿using System.Linq;
+using EmberBanner.Core.Entities.Management.Factories.Impl.Units;
+using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Ingame.Management.Factories;
 using EmberBanner.Core.Models.Battles;
 using EmberBanner.Core.Service.Debug;
@@ -19,6 +21,18 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
 
         protected override void OnPostCreateEntity(BattleEntity entity, BattleModel model)
         {
+            var maxWaves = model.DeterminedEnemies.Max(e => e.Wave);
+            for(int i = 0; i < maxWaves; i++)
+                entity.EnemiesByWaves.Add(new());
+            
+            foreach (var determinedEnemy in model.DeterminedEnemies)
+            {
+                var enemy = UnitEntityFactory.I.CreateEntity(determinedEnemy.UnitName, true);
+                entity.EnemiesByWaves[determinedEnemy.Wave - 1].Add(enemy.Id, enemy);
+            }
+            
+            // Enemies Generation here later (generation params can be added in model)
+            
             EBDebugger.Log(EBDebugContext.Entities, EBDebugContext.Battle, $"Battle Entity (id: {entity.Id} | model: {model.Name}) created");
         }
     }

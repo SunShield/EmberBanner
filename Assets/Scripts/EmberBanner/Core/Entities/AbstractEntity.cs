@@ -1,5 +1,4 @@
-﻿using System;
-using EmberBanner.Core.Models;
+﻿using EmberBanner.Core.Models;
 
 namespace EmberBanner.Core.Ingame
 {

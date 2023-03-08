@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using EmberBanner.Unity.Battle.Views.Units.Crystals;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
-namespace EmberBanner.Unity.Battle.Views.Units
+namespace EmberBanner.Unity.Battle.Views.Impl.Units
 {
     public class BattleUnitCrystalsView : EBMonoBehaviour
     {

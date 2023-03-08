@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using EmberBanner.Core.Entities.Impl.Units;
-using EmberBanner.Core.Entities.Management.Factories.Impl.Cards;
 using EmberBanner.Core.Entities.Management.SaveLoad.Data.Impl.Cards;
 using EmberBanner.Core.Ingame.Management.SaveLoad;
 using EmberBanner.Core.Models.Cards;
@@ -17,17 +16,11 @@ namespace EmberBanner.Core.Entities.Impl.Cards
         public CardEntity(int id, CardModel model) : base(id, model)
         {
             Cost = new(true, model.Cost);
-            
-            foreach (var actionModel in model.Actions)
-            {
-                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, IsTemporary);
-                Actions.Add(actionEntity);
-            }
         }
 
         public void SetOwner(UnitEntity owner) => Owner = owner;
 
-        public override CardSaveData GenerateSaveDataInternal(CardSaveData saveData)
+        protected override CardSaveData GenerateSaveDataInternal(CardSaveData saveData)
         {
             return saveData;
         }

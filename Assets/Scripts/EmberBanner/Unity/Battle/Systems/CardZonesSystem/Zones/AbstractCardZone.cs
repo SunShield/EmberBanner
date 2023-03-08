@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EmberBanner.Unity.Battle.Views.Cards;
+using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
