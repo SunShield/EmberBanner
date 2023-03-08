@@ -14,7 +14,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
         {
             var message = $"Battle Unit Crystal Entity (id: {entity.Id} | roll: {entity.MinBound.CalculateValue()}~{entity.MaxBound.CalculateValue()}) created";
             
-            EBDebugger.Log(EBDebugContext.Entities, EBDebugContext.Units, message);
+            EBDebugger.Log(EBDebugContext.Battle, EBDebugContext.Entities, EBDebugContext.Units, message);
         }
     }
 }

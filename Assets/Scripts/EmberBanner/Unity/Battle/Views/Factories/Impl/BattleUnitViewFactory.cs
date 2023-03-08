@@ -11,6 +11,16 @@ namespace EmberBanner.Unity.Battle.Views.Factories.Impl
 {
     public class BattleUnitViewFactory : ViewFactory<BattleUnitView, BattleUnitEntity, UnitModel>
     {
+        private static BattleUnitViewFactory _instance;
+        public static BattleUnitViewFactory I
+        {
+            get
+            {
+                if (_instance == null) _instance = FindObjectOfType<BattleUnitViewFactory>();
+                return _instance;
+            }
+        }
+        
         [SerializeField] private BattleUnitView _prefab;
 
         protected override void PostCreateView(BattleUnitView view)
@@ -22,7 +32,9 @@ namespace EmberBanner.Unity.Battle.Views.Factories.Impl
                 var crystalView = BattleManager.I.CrystalViewFactory.CreateView(crystalEntityTyped);
                 crystals.Add(crystalView);
             }
-            view.UnitCrystals.SetCrystals(crystals);
+            view.SetCrystals(crystals);
+            
+            BattleManager.I.AddUnit(view);
         }
 
         protected override BattleUnitView GetPrefab(BattleUnitEntity entity) => _prefab;

@@ -8,17 +8,14 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
     public class BattleUnitCrystalsView : EBMonoBehaviour
     {
         [SerializeField] private Transform _crystalsOrigin;
-        public List<BattleUnitCrystalView> Crystals { get; private set; }
+        public List<BattleUnitCrystalView> Crystals { get; private set; } = new();
 
         public void SetCrystals(List<BattleUnitCrystalView> crystals)
         {
-            Crystals = crystals;
-            foreach (var crystal in Crystals)
+            foreach (var crystal in crystals)
             {
                 AddCrystal(crystal);
             }
-            
-            SetCrystalPositions();
         }
 
         private void AddCrystal(BattleUnitCrystalView crystal)
@@ -26,6 +23,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             crystal.Tran.parent = _crystalsOrigin;
             crystal.Tran.localPosition = Vector3.zero;
             Crystals.Add(crystal);
+            
+            SetCrystalPositions();
         }
 
         private void SetCrystalPositions()

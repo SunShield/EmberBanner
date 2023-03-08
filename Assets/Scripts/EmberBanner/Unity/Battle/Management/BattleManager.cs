@@ -1,7 +1,9 @@
-﻿using EmberBanner.Core.Ingame.Impl.Battles;
+﻿using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.StateSystem;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Views.Factories.Impl;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
@@ -34,9 +36,17 @@ namespace EmberBanner.Unity.Battle.Management
         public BattleUnitViewFactory UnitViewFactory => _unitViewFactory;
         public BattleUnitCrystalViewFactory CrystalViewFactory => _crystalViewFactory;
 
-        public void Begin(BattleEntity entity)
+        public void InitializeBattle(BattleEntity entity)
         {
             Entity = entity;
+        }
+
+        public void AddUnit(BattleUnitView unit)
+        {
+            Registry.AddUnit(unit);
+            var isUnitPlayer = unit.Controller == UnitControllerType.Player;
+            var spot = isUnitPlayer ? _structure.GetFreePlayerSpot() : _structure.GetFreeEnemySpot();
+            spot.AddUnit(unit);
         }
     }
 }

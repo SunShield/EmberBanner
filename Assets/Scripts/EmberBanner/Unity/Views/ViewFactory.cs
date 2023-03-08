@@ -13,6 +13,7 @@ namespace EmberBanner.Unity.Views
         {
             var prefab = GetPrefab(entity);
             var view = Instantiate(prefab);
+            view.Initialize(entity);
             PostCreateView(view);
             return view;
         }

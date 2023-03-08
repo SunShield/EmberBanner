@@ -20,6 +20,9 @@ namespace EmberBanner.Unity.Views
         public void Initialize(TEntity entity)
         {
             Entity = entity;
+            PostInitialize();
         }
+
+        protected virtual void PostInitialize() { }
     }
 }

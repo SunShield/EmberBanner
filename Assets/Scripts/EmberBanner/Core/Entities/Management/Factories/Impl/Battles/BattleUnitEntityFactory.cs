@@ -22,14 +22,14 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
         {
             foreach (var crystalModel in model.Crystals)
             {
-                var crystalEntity = BattleUnitCrystalEntityFactory.I.CreateEntity(crystalModel, true);
+                var crystalEntity = BattleUnitCrystalEntityFactory.I.CreateEntity(crystalModel, null, true);
                 entity.Crystals.Add(crystalEntity);
             }
 
             var controllerString = entity.Controller.ToString();
             var message = $"Battle Unit Entity (controller: {controllerString} | id: {entity.Id} | model: {model.Name}) created";
             
-            EBDebugger.Log(EBDebugContext.Battle, EBDebugContext.Units, message);
+            EBDebugger.Log(EBDebugContext.Battle, EBDebugContext.Entities, EBDebugContext.Units, message);
         }
     }
 }
