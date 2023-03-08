@@ -5,6 +5,9 @@ using EmberBanner.Unity.Battle.Views.Impl.Units;
 
 namespace EmberBanner.Unity.Battle.Management
 {
+    /// <summary>
+    /// This class holds only currently "active" stuff: units and cards which are directly in battle right now 
+    /// </summary>
     public class BattleRegistry
     {
         public Dictionary<int, BattleCardView> Cards       { get; private set; } = new();

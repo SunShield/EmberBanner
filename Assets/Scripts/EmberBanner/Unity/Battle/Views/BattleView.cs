@@ -4,10 +4,9 @@ using EmberBanner.Unity.Views;
 
 namespace EmberBanner.Unity.Battle.Views
 {
-    public abstract class BattleView<TModel, TEntity> : AbstractView<TModel, TEntity>
+    public abstract class BattleView<TEntity, TModel> : AbstractView<TEntity, TModel>
         where TModel : AbstractModel
         where TEntity : AbstractEntity<TModel>
     {
-        public int Id => Entity.Id;
     }
 }

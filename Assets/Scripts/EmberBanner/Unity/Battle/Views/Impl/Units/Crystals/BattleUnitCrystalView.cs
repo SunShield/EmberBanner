@@ -1,23 +1,12 @@
-﻿using EmberBanner.Core.Entities.Impl.Units.Crystals;
+﻿using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units.Crystals;
-using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 {
-    public class BattleUnitCrystalView : BattleView<UnitCrystalModel, UnitCrystalEntity>
+    public class BattleUnitCrystalView : BattleView<BattleUnitCrystalEntity, UnitCrystalModel>
     {
-        public BattleUnitView Owner { get; private set; }
-        public int? Roll { get; private set; }
-
-        public void Initialize(UnitCrystalEntity entity, BattleUnitView owner)
-        {
-            Owner = owner;
-            Entity = entity;
-        }
-
-        public void DoRoll()
-        {
-            Roll = Random.Range(Model.RollBounds.Min, Model.RollBounds.Max + 1);
-        }
+        public int? CurrentRoll => Entity.CurrentRoll;
+        public UnitControllerType Controller => Entity.Owner.Controller;
     }
 }

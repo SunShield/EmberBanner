@@ -44,6 +44,19 @@ namespace EmberBanner.Core.Service.Debug
             UnityEngine.Debug.Log(formattedMessage);
         }
         
+        public static void Log(EBDebugContext context1, EBDebugContext context2, EBDebugContext context3, string message)
+        {
+            if (!IsDebugEnabled) return;
+            
+            InitializeIfNeeded();
+            
+            var contextString1 = GetContextString(context1);
+            var contextString2 = GetContextString(context2);
+            var contextString3 = GetContextString(context3);
+            var formattedMessage = $"{contextString1}{contextString2}{contextString3} :{message}";
+            UnityEngine.Debug.Log(formattedMessage);
+        }
+        
         public static void LogError(EBDebugContext context1, EBDebugContext context2, string message)
         {
             if (!IsDebugEnabled) return;

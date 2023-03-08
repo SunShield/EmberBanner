@@ -60,7 +60,7 @@ namespace EmberBanner.Core.Entities.Impl.Units
         public UnitEntity CreateCopy()
         {
             var entity = new UnitEntity(Id, Model);
-            entity.Initialize(GenerateSaveData());
+            entity.PostLoad(GenerateSaveData());
             return entity;
         }
     }

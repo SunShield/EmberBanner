@@ -12,17 +12,17 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
         private static UnitEntityFactory _instance;
         public static UnitEntityFactory I => _instance ??= new();
 
-        public UnitEntity CreateEntity(string modelName, bool temporaryEntity = false)
+        public UnitEntity CreateEntity(string modelName, object payload, bool temporaryEntity = false)
         {
             var model = DataHolder.I.Data.Units[modelName];
-            return CreateEntity(model, temporaryEntity);
+            return CreateEntity(model, null, temporaryEntity);
         }
 
         protected override void OnPostCreateEntity(UnitEntity entity, UnitModel model)
         {
             foreach (var crystalModel in model.Crystals)
             {
-                var crystalEntity = UnitCrystalEntityFactory.I.CreateEntity(crystalModel, NextEntityIsTemporary);
+                var crystalEntity = UnitCrystalEntityFactory.I.CreateEntity(crystalModel, entity, NextEntityIsTemporary);
                 entity.Crystals.Add(crystalEntity);
             }
             

@@ -16,10 +16,11 @@ namespace EmberBanner.Core.Ingame.Management.Factories
         
         protected bool NextEntityIsTemporary { get; private set; }
         
-        public TEntity CreateEntity(TModel model, bool isTemporaryEntity = false)
+        public TEntity CreateEntity(TModel model, object payload = null, bool isTemporaryEntity = false)
         {
             NextEntityIsTemporary = isTemporaryEntity;
             var entity = Activator.CreateInstance(typeof(TEntity), GetId(isTemporaryEntity), model) as TEntity;
+            entity.Initialize(payload);
             PostCreateEntity(entity, model);
             return entity;
         }

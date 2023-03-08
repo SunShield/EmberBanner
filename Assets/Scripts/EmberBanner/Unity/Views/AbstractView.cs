@@ -9,12 +9,17 @@ namespace EmberBanner.Unity.Views
     ///
     /// Entities can have multiple views (like, InventoryEntity, BattleEntity etc)
     /// </summary>
-    public abstract class AbstractView<TModel, TEntity> : EBMonoBehaviour
+    public abstract class AbstractView<TEntity, TModel> : EBMonoBehaviour
         where TModel : AbstractModel
         where TEntity : AbstractEntity<TModel>
     {
-        public int ViewId { get; private set; }
         public TEntity Entity { get; set; }
+        public int Id => Entity.Id;
         public TModel Model => Entity.Model;
+
+        public void Initialize(TEntity entity)
+        {
+            Entity = entity;
+        }
     }
 }

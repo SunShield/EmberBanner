@@ -11,7 +11,7 @@ namespace EmberBanner.Core.Ingame.Management.Cloners
     {
         protected sealed override void ProcessClonedEntity(TEntity originalEntity, TEntity entityClone)
         {
-            entityClone.Initialize(originalEntity.GenerateSaveData());
+            entityClone.PostLoad(originalEntity.GenerateSaveData());
         }
 
         protected virtual void ProcessEntityPostInitialize(TEntity originalEntity, TEntity entityClone) { }

@@ -20,5 +20,11 @@ namespace EmberBanner.Core.Ingame
             Id = id;
             Model = model;
         }
+
+        /// <summary>
+        /// Use this to add any custom data required for Entity
+        /// </summary>
+        /// <param name="payload"></param>
+        public virtual void Initialize(object payload) { }
     }
 }

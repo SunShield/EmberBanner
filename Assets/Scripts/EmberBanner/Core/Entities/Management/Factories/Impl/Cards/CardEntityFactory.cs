@@ -15,14 +15,14 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Cards
         public CardEntity CreateEntity(string modelName, bool temporaryEntity = false)
         {
             var model = DataHolder.I.Data.Cards[modelName];
-            return CreateEntity(model, temporaryEntity);
+            return CreateEntity(model, null, temporaryEntity);
         }
 
         protected override void OnPostCreateEntity(CardEntity entity, CardModel model)
         {
             foreach (var actionModel in model.Actions)
             {
-                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, NextEntityIsTemporary);
+                var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, null, NextEntityIsTemporary);
                 entity.Actions.Add(actionEntity);
             }
             

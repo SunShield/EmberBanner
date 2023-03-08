@@ -1,6 +1,7 @@
-﻿using EmberBanner.Unity.Battle.Systems.StateSystem;
+﻿using EmberBanner.Core.Ingame.Impl.Battles;
+using EmberBanner.Unity.Battle.Systems.StateSystem;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
-using EmberBanner.Unity.Battle.Views.Factories;
+using EmberBanner.Unity.Battle.Views.Factories.Impl;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
@@ -26,10 +27,16 @@ namespace EmberBanner.Unity.Battle.Management
         
         public TurnOrderController TurnOrderController { get; private set; } = new();
         public BattleRegistry Registry { get; private set; } = new();
+        public BattleEntity Entity { get; private set; }
         
         public BattleStateController StateController => _stateController;
         public BattleStructure Structure => _structure;
         public BattleUnitViewFactory UnitViewFactory => _unitViewFactory;
         public BattleUnitCrystalViewFactory CrystalViewFactory => _crystalViewFactory;
+
+        public void Begin(BattleEntity entity)
+        {
+            Entity = entity;
+        }
     }
 }

@@ -23,11 +23,11 @@ namespace EmberBanner.Unity.Battle.Systems.TurnOrder
             var crystals = units.SelectMany(u => Crystals).ToList();
             crystals.Sort((crystal1, crystal2) =>
             {
-                if (crystal1.Roll > crystal2.Roll) return 1;
-                if (crystal2.Roll > crystal1.Roll) return -1;
+                if (crystal1.CurrentRoll > crystal2.CurrentRoll) return 1;
+                if (crystal2.CurrentRoll > crystal1.CurrentRoll) return -1;
 
-                var isRoll1Player = crystal1.Owner.Controller == UnitControllerType.Player;
-                var isRoll2Player = crystal2.Owner.Controller == UnitControllerType.Player;
+                var isRoll1Player = crystal1.Controller == UnitControllerType.Player;
+                var isRoll2Player = crystal2.Controller == UnitControllerType.Player;
 
                 if (isRoll1Player && !isRoll2Player) return 1;
                 if (!isRoll1Player && isRoll2Player) return -1;

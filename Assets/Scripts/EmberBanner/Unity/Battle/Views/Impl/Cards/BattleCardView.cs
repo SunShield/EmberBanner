@@ -4,7 +4,7 @@ using EmberBanner.Core.Models.Cards;
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Cards
 {
-    public class BattleCardView : BattleView<CardModel, CardEntity>
+    public class BattleCardView : BattleView<CardEntity, CardModel>
     {
         public BattleCardZone Zone { get; private set; }
 

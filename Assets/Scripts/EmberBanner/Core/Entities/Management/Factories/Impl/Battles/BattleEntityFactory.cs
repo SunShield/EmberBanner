@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using EmberBanner.Core.Entities.Management.Factories.Impl.Units;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Ingame.Management.Factories;
 using EmberBanner.Core.Models.Battles;
@@ -27,7 +27,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
             
             foreach (var determinedEnemy in model.DeterminedEnemies)
             {
-                var enemy = UnitEntityFactory.I.CreateEntity(determinedEnemy.UnitName, true);
+                var enemy = BattleUnitEntityFactory.I.CreateEntity(determinedEnemy.UnitName, UnitControllerType.Enemy);
                 entity.EnemiesByWaves[determinedEnemy.Wave - 1].Add(enemy.Id, enemy);
             }
             

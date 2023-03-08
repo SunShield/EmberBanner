@@ -11,7 +11,7 @@ namespace EmberBanner.Core.Ingame.Management.SaveLoad
         {
         }
 
-        public void Initialize(TSaveData saveData)
+        public void PostLoad(TSaveData saveData)
         {
             PostLoadInternal(saveData);
         }
