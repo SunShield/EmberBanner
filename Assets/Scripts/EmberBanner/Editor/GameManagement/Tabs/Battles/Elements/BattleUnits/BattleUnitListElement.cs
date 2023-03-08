@@ -21,8 +21,15 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
             _possibleUnitsDropdown.choices = GeneralDatabase.EI.Units.Elements.Keys.ToList();
             if (_possibleUnitsDropdown.choices.Count > 0)
             {
-                _possibleUnitsDropdown.index = 0;
-                Element.UnitName = _possibleUnitsDropdown.value;
+                if (string.IsNullOrEmpty(Element.UnitName))
+                {
+                    _possibleUnitsDropdown.index = 0;
+                    Element.UnitName = _possibleUnitsDropdown.value;
+                }
+                else
+                {
+                    _possibleUnitsDropdown.index = _possibleUnitsDropdown.choices.IndexOf(Element.UnitName);
+                }
             }
             
             _showHideButton  = Root.Q<Button>("ShowHideButton");
