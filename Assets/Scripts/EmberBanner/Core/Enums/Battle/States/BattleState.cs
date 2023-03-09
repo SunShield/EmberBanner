@@ -5,6 +5,7 @@
         PreStart,
         Start,
         TurnStart,
+        TurnPlan, // selecting cards and targets here
         
         //// Player repeatedly for each unit
         /**/ CrystalTurnStart,

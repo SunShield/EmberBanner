@@ -46,5 +46,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             if (isFirstTurn) _zonesManager.DrawCardsAtBattleStart();
             else             _zonesManager.DrawCardsAtTurnStart();
         }
+
+        public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
     }
 }

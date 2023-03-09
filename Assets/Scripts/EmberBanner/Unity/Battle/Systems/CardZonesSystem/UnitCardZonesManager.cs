@@ -62,5 +62,12 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
                 _library.AddCard(card);
             }
         }
+
+        public void SetActive(bool active)
+        {
+            _library.gameObject.SetActive(active);
+            _hand.gameObject.SetActive(active);
+            _graveyard.gameObject.SetActive(active);
+        }
     }
 }

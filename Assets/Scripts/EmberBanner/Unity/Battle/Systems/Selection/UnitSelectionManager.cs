@@ -1,4 +1,8 @@
-﻿using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
+﻿using System;
+using EmberBanner.Core.Enums.Battle.States;
+using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.StateSystem;
+using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using TMPro;
@@ -33,9 +37,18 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
         }
         
         public BattleUnitView SelectedUnit => SelectedSpot != null ? SelectedSpot.Unit : null;
-        
+
+        private void Start()
+        {
+            BattleManager.I.StateController.onStateChanged += OnStateChanged;
+        }
+
         public void SelectSpot(UnitSpot spot)
         {
+            if (BattleManager.I.StateController.State < BattleState.TurnPlan ||
+                BattleManager.I.StateController.State > BattleState.TurnEnd) 
+                return;
+            
             if (spot.Unit == null) return;
             if (SelectedSpot != null) UnselectSpot();
             SelectedSpot = spot;
@@ -48,6 +61,13 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             
             SelectedSpot.SetSelectedState(false);
             SelectedSpot = null;
+        }
+
+        private void OnStateChanged(BattleState newState)
+        {
+            if (BattleManager.I.StateController.State < BattleState.TurnPlan ||
+                BattleManager.I.StateController.State > BattleState.TurnEnd) 
+                UnselectSpot();
         }
 
         private void Update()

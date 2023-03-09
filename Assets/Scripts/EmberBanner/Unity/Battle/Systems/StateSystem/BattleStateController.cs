@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Enums.Battle.States;
+﻿using System;
+using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Service;
@@ -35,9 +36,14 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             else if (State == BattleState.TurnStart)
             {
                 TurnNumber++;
-                BattleManager.I.TurnOrderController.DetermineTurnOrder();
                 DrawCards();
-                State = BattleState.CrystalTurnStart;
+                RollCrystals();
+                BattleManager.I.TurnOrderController.DetermineTurnOrder();
+                State = BattleState.TurnPlan;
+            }
+            else if (State == BattleState.TurnPlan)
+            {
+                State = BattleState.CrustalTurn;
             }
             else if (State == BattleState.CrystalTurnStart)
             {
@@ -59,13 +65,15 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.TurnEnd)
             {
-                State = BattleState.CrystalTurnStart;
+                ClearTurn();
+                State = BattleState.TurnStart;
             }
             else if (State == BattleState.PreEnd)
             {
                 State = BattleState.End;
             }
 
+            onStateChanged?.Invoke(State);
             _stateText.text = State.ToString();
         }
 
@@ -77,5 +85,29 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 unit.DrawCards(TurnNumber == 1);
             }
         }
+
+        private void RollCrystals()
+        {
+            foreach (var unit in BattleManager.I.Registry.Units.Values)
+            {
+                foreach (var crystal in unit.UnitCrystals.Crystals)
+                {
+                    crystal.Roll();
+                }
+            }
+        }
+
+        private void ClearTurn()
+        {
+            foreach (var unit in BattleManager.I.Registry.Units.Values)
+            {
+                foreach (var crystal in unit.UnitCrystals.Crystals)
+                {
+                    crystal.Clear();
+                }
+            }
+        }
+
+        public event Action<BattleState> onStateChanged;
     }
 }
