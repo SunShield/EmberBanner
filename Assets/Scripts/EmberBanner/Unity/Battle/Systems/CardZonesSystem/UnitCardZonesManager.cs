@@ -2,6 +2,7 @@
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 

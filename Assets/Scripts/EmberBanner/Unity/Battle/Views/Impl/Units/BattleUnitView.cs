@@ -41,12 +41,27 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             _zonesManager = zonesManager;
         }
 
+        public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
+
         public void DrawCards(bool isFirstTurn)
         {
             if (isFirstTurn) _zonesManager.DrawCardsAtBattleStart();
             else             _zonesManager.DrawCardsAtTurnStart();
         }
 
-        public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
+        public bool CanPlayCard(BattleCardView card)
+        {
+            return card.Entity.Cost.CalculateValue() <= Entity.CurrentEnergy;
+        }
+
+        public void PayCard(BattleCardView card)
+        {
+            Entity.CurrentEnergy -= card.Entity.Cost.CalculateValue();
+        }
+
+        public void UnpayCard(BattleCardView card)
+        {
+            Entity.CurrentEnergy += card.Entity.Cost.CalculateValue();
+        }
     }
 }

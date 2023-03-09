@@ -19,6 +19,7 @@ namespace EmberBanner.Core.Models.Actions
         public ActionType Type;
         public AggressionType AggressionType;
         public DefenseType DefenseType;
+        public bool IsMain;
         public StringToActionParamModelDictionary Params;
 
         public ActionModel(string name, ActionType type)

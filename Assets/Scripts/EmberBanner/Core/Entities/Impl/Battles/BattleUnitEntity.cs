@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using EmberBanner.Core.Entities.Impl.Units;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Units;
@@ -13,6 +12,8 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
     /// </summary>
     public class BattleUnitEntity : UnitEntity
     {
+        public int CurrentEnergy { get; set; }
+        
         public UnitControllerType Controller { get; private set; }
 
         public BattleUnitEntity(int id, UnitModel model) : base(id, model)
@@ -22,6 +23,7 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         public override void Initialize(object payload)
         {
             Controller = (UnitControllerType)payload;
+            CurrentEnergy = StartingEnergy.CalculateValue();
         }
 
         public IEnumerable<BattleUnitCrystalEntity> EnumerateCrystals()

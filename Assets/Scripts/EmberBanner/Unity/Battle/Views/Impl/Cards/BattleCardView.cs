@@ -3,6 +3,7 @@ using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Unity.Battle.Systems.Selection;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using TMPro;
 using UnityEngine;
 
@@ -17,8 +18,9 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         [SerializeField] private TextMeshPro _nameText;
         [SerializeField] private TextMeshPro _costText;
 
-        public BattleCardZone Zone => Entity.Zone;
+        public BattleUnitCrystalView Crystal { get; private set; }
 
+        public BattleCardZone Zone => Entity.Zone;
         protected override void PostInitialize()
         {
             var spriteSize = Entity.Model.Sprite.texture.width;
@@ -32,7 +34,10 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
 
         public void OnLeaveZone(BattleCardZone zone)
         {
-            
+            if (zone == BattleCardZone.Play)
+            {
+                gameObject.SetActive(true);
+            }
         }
 
         public void OnEnterZone(BattleCardZone zone)
@@ -40,6 +45,10 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
             if (zone == BattleCardZone.Hand)
             {
                 _costText.text = Model.Cost.ToString();
+            }
+            else if (zone == BattleCardZone.Play)
+            {
+                gameObject.SetActive(false);
             }
         }
 
@@ -51,5 +60,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         }
 
         public void SetSelected(bool selected) => _selectedGraphics.SetActive(selected);
+
+        public void SetCrystal(BattleUnitCrystalView crystal) => Crystal = crystal;
     }
 }

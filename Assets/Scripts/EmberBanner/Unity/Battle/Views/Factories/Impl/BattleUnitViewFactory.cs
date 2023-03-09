@@ -31,10 +31,9 @@ namespace EmberBanner.Unity.Battle.Views.Factories.Impl
                 var crystalEntityTyped = crystalEntity;
                 var crystalView = BattleManager.I.CrystalViewFactory.CreateView(crystalEntityTyped);
                 crystals.Add(crystalView);
+                crystalView.SetOwnerView(view);
             }
             view.SetCrystals(crystals);
-            
-            
             
             BattleManager.I.AddUnit(view);
         }

@@ -31,15 +31,37 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         protected override void PostAddElement(string elementKey)
         {
             _currentHighestKey++;
+            var element = Elements[elementKey];
+            element.actionSetMain += OnMainActionChanged;
         }
 
-        protected override ActionListElement CreateListElementInstance(ActionModel element) => element.Type switch
+        protected override ActionListElement CreateListElementInstance(ActionModel element)
         {
-            ActionType.Aggression => new AggressionActionListElement(),
-            ActionType.Defense => new DefenseActionListElement(),
-            ActionType.Support => new SupportActionListElement(),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+            ActionListElement listElement = element.Type switch
+            {
+                ActionType.Aggression => new AggressionActionListElement(),
+                ActionType.Defense => new DefenseActionListElement(),
+                ActionType.Support => new SupportActionListElement(),
+                _ => null
+            };
+
+            listElement.actionSetMain += OnMainActionChanged;
+
+            return listElement;
+        }
+
+        private void OnMainActionChanged(string newMainActionName)
+        {
+            foreach (var actionName in Elements.Keys)
+            {
+                var action = Elements[actionName];
+                action.SetMainActionToggle(actionName == newMainActionName);
+            }
+            
+            FireOnMainActionSetEvent(newMainActionName);
+        }
+
+        private void FireOnMainActionSetEvent(string actionName) => onMainActionSet?.Invoke(actionName);
 
         protected override string GetElementKey() => (_currentHighestKey + 1).ToString();
         protected override string GetStringKey(ActionModel value) => value.Name;
@@ -52,5 +74,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ? elements.Select(e => int.Parse(e.Name)).Max() 
                 : 0;
         }
+
+        public event Action<string> onMainActionSet;
     }
 }

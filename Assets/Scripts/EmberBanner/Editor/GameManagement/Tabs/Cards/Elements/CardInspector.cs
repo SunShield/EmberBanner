@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions;
@@ -20,6 +23,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
         private IntegerField  _costField;
         private VisualElement _actionsContainer;
         private ActionList    _actionList;
+        private DropdownField _mainTargetDropdown;
 
         public CardInspector() : base()
         {
@@ -34,7 +38,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _iconPicker = Root.Q<ObjectField>("IconPicker");
             _costField = Root.Q<IntegerField>("CostField");
             _actionsContainer = Root.Q<VisualElement>("ActionsContainer");
-
+            _mainTargetDropdown = Root.Q<DropdownField>("MainTargetDropdown");
+            
             AddActionsList();
         }
 
@@ -54,6 +59,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 var action = new ActionModel(actionName, _actionList.CurrentActionType);
                 
                 InspectedElement.Actions.Add(action);
+
+                if (InspectedElement.Actions.Count == 1)
+                    action.IsMain = true;
+                
+                UpdateMainTargetDropdown();
                 Database.Update();
             }
 
@@ -67,11 +77,17 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                         return;
                     }
                 }
+
+                if (InspectedElement.Actions.Count == 0)
+                    InspectedElement.MainTarget = CardMainTargetType.No;
+                
+                UpdateMainTargetDropdown();
                 Database.Update();
             }
             
             _actionList = new ActionList();
             _actionList.Initialize(actionListData);
+            _actionList.onMainActionSet += OnMainActionChanged;
             _actionsContainer.Add(_actionList);
         }
 
@@ -88,6 +104,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             {
                 InspectedElement.Cost = evt.newValue;
             });
+
+            _mainTargetDropdown.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.MainTarget = Enum.Parse<CardMainTargetType>(evt.newValue);
+            });
         }
         
         protected override void PostPrepare()
@@ -101,6 +122,44 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _iconPicker.value = InspectedElement.Sprite;
             _costField.value = InspectedElement.Cost;
             _actionList.Update();
+            UpdateMainTargetDropdown();
+        }
+
+        private void UpdateMainTargetDropdown()
+        {
+            _mainTargetDropdown.choices.Clear();
+            _mainTargetDropdown.choices.Add("No");
+
+            var mainAction = InspectedElement.Actions.FirstOrDefault(a => a.IsMain);
+
+            if (mainAction == null) return;
+            
+            if (mainAction.Type == ActionType.Aggression)
+            {
+                _mainTargetDropdown.choices.Add("Enemy");
+            }
+            else if (mainAction.Type == ActionType.Defense)
+            {
+                _mainTargetDropdown.choices.Add("Ally");
+            }
+            else if (mainAction.Type == ActionType.Support)
+            {
+                _mainTargetDropdown.choices.Add("Ally");
+            }
+
+            _mainTargetDropdown.index = _mainTargetDropdown.choices.IndexOf(InspectedElement.MainTarget.ToString());
+        }
+
+        private void OnMainActionChanged(string mainActionName)
+        {
+            foreach (var action in InspectedElement.Actions)
+            {
+                action.IsMain = action.Name == mainActionName;
+            }
+
+            InspectedElement.MainTarget = CardMainTargetType.No;
+
+            UpdateMainTargetDropdown();
         }
     }
 }
