@@ -29,6 +29,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
             {
                 _library.AddCard(card);
             }
+            _library.Shuffle();
         }
 
         public void DrawCardsAtBattleStart() => DrawCards(HandSize);
@@ -65,9 +66,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
 
         public void SetActive(bool active)
         {
-            _library.gameObject.SetActive(active);
-            _hand.gameObject.SetActive(active);
-            _graveyard.gameObject.SetActive(active);
+            gameObject.SetActive(active);
         }
     }
 }

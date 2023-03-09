@@ -51,12 +51,14 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             if (SelectedSpot != null) UnselectSpot();
             SelectedSpot = spot;
             SelectedSpot.SetSelectedState(true);
+            SelectedUnit.SetZonesActive(true);
         }
 
         public void UnselectSpot()
         {
             if (SelectedSpot == null) return;
             
+            SelectedUnit.SetZonesActive(false);
             SelectedSpot.SetSelectedState(false);
             SelectedSpot = null;
         }
@@ -66,14 +68,6 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             if (BattleManager.I.StateController.State < BattleState.TurnPlan ||
                 BattleManager.I.StateController.State > BattleState.TurnEnd) 
                 UnselectSpot();
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                UnselectSpot();
-            }
         }
     }
 }

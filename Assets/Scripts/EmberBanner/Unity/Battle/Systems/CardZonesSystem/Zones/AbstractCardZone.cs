@@ -18,6 +18,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones
         {
             Cards.Add(card);
             DoAddCard(card);
+            card.Entity.SetZone(Type);
             card.OnEnterZone(Type);
         }
         
