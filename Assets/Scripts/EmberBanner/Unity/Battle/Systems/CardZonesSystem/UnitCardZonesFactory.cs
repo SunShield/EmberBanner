@@ -1,4 +1,5 @@
-﻿using EmberBanner.Unity.Battle.Views.Factories.Impl;
+﻿using System.Linq;
+using EmberBanner.Unity.Battle.Views.Factories.Impl;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using UnityEngine;
@@ -28,10 +29,10 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
             zonesManager.Initialize(unit);
             unit.SetZonesManager(zonesManager);
 
-            foreach (var cardEntity in unit.Entity.EnumerateCards())
-            {
-                var cardView = BattleCardViewFactory.I.CreateView(cardEntity);
-            }
+            var cards = unit.Entity.EnumerateCards()
+                .Select(entity => BattleCardViewFactory.I.CreateView(entity))
+                .ToList();
+            zonesManager.AddCards(cards);
         }
     }
 }

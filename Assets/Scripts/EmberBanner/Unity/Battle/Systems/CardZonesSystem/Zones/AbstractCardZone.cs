@@ -10,8 +10,9 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones
     {
         [SerializeField] protected Transform CardsOrigin;
         public abstract BattleCardZone Type { get; }
-        
-        protected List<BattleCardView> Cards { get; private set; }
+
+        public List<BattleCardView> Cards { get; private set; } = new();
+        public int Count => Cards.Count;
 
         public void AddCard(BattleCardView card)
         {

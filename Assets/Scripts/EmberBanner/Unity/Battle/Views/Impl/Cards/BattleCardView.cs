@@ -19,6 +19,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         {
             _graphics.sprite = Model.Sprite;
             _nameText.text   = Model.Name;
+            gameObject.name = $"Card [{Entity.Id}, {Model.Name}]";
         }
 
         public void OnLeaveZone(BattleCardZone zone)

@@ -12,16 +12,27 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
 {
     public class BattleStarter : EBMonoBehaviour
     {
-        public void Start()
+        private static BattleStarter _instance;
+        public static BattleStarter I
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = FindObjectOfType<BattleStarter>();
+                return _instance;
+            }
+        }
+        
+        public void StartBattle()
         {
             var battle = BattleEntityFactory.I.CreateEntity("Test Battle");
             AddTestHeroes(battle);
             AddTestDecks(battle);
             BattleManager.I.InitializeBattle(battle);
-            StartBattle(battle);
+            PrepareBattle(battle);
         }
 
-        private void StartBattle(BattleEntity battle)
+        private void PrepareBattle(BattleEntity battle)
         {
             EBDebugger.Log(EBDebugContext.Battle, "Starting battle");
             BattleVisualsManager.I.SetVisuals(battle);
