@@ -34,6 +34,8 @@ namespace EmberBanner.Unity.Battle.Views.Factories.Impl
             }
             view.SetCrystals(crystals);
             
+            
+            
             BattleManager.I.AddUnit(view);
         }
 

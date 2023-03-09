@@ -34,5 +34,10 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             _graphics.transform.localScale =
                 new Vector3((Controller == UnitControllerType.Player ? 1f : -1f) * graphicsScale, graphicsScale, 1f);
         }
+
+        public void SetZonesManager(UnitCardZonesManager zonesManager)
+        {
+            _zonesManager = zonesManager;
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using EmberBanner.Core.Entities.Management.Factories.Impl.Battles;
+using EmberBanner.Core.Entities.Management.Factories.Impl.Cards;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Service.Debug;
 using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
 using EmberBanner.Unity.Battle.Systems.Visuals;
 using EmberBanner.Unity.Battle.Views.Factories.Impl;
 using EmberBanner.Unity.Service;
@@ -15,6 +17,7 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
         {
             var battle = BattleEntityFactory.I.CreateEntity("Test Battle");
             AddTestHeroes(battle);
+            AddTestDecks(battle);
             BattleManager.I.InitializeBattle(battle);
             StartBattle(battle);
         }
@@ -33,7 +36,40 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
             entity.Heroes.Add(hero);
         }
 
+        private void AddTestDecks(BattleEntity entity)
+        {
+            foreach (var hero in entity.Heroes)
+            {
+                foreach (var unitDefaultCardModel in hero.Model.DefaultCards)
+                {
+                    for (int i = 0; i < unitDefaultCardModel.Amount; i++)
+                    {
+                        var cardEntity = CardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, true);
+                        hero.AddCard(cardEntity);
+                    }
+                }
+            }
+
+            foreach (var enemy in entity.EnemiesByWaves[0].Values)
+            {
+                foreach (var unitDefaultCardModel in enemy.Model.DefaultCards)
+                {
+                    for (int i = 0; i < unitDefaultCardModel.Amount; i++)
+                    {
+                        var cardEntity = CardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, true);
+                        enemy.AddCard(cardEntity);
+                    }
+                }
+            }
+        }
+
         private void BuildViews(BattleEntity entity)
+        {
+            BuildUnitViews(entity);
+            BuildCardViews();
+        }
+
+        private void BuildUnitViews(BattleEntity entity)
         {
             foreach (var hero in entity.Heroes)
             {
@@ -43,6 +79,14 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
             foreach (var enemy in entity.EnemiesByWaves[0].Values)
             {
                 BattleUnitViewFactory.I.CreateView(enemy);
+            }
+        }
+
+        private void BuildCardViews()
+        {
+            foreach (var unit in BattleManager.I.Registry.Units.Values)
+            {
+                UnitCardZonesFactory.I.CreateCardZones(unit);
             }
         }
     }
