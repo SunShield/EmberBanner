@@ -1,5 +1,4 @@
 ﻿using EmberBanner.Core.Entities.Management.Factories.Impl.Battles;
-using EmberBanner.Core.Entities.Management.Factories.Impl.Cards;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Service.Debug;
@@ -44,7 +43,7 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
                 {
                     for (int i = 0; i < unitDefaultCardModel.Amount; i++)
                     {
-                        var cardEntity = CardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, true);
+                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName);
                         hero.AddCard(cardEntity);
                     }
                 }
@@ -56,7 +55,7 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
                 {
                     for (int i = 0; i < unitDefaultCardModel.Amount; i++)
                     {
-                        var cardEntity = CardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, true);
+                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName);
                         enemy.AddCard(cardEntity);
                     }
                 }

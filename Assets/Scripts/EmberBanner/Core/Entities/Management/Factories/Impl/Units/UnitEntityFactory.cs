@@ -23,7 +23,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
             foreach (var crystalModel in model.Crystals)
             {
                 var crystalEntity = UnitCrystalEntityFactory.I.CreateEntity(crystalModel, entity, NextEntityIsTemporary);
-                entity.Crystals.Add(crystalEntity);
+                entity.AddCrystal(crystalEntity);
             }
             
             var message = $"Unit Entity (id: {entity.Id} | model: {model.Name}) created";

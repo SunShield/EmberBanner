@@ -3,6 +3,7 @@ using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
+using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using UnityEngine;
 
@@ -38,6 +39,11 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         public void SetZonesManager(UnitCardZonesManager zonesManager)
         {
             _zonesManager = zonesManager;
+        }
+
+        public void AddCardView(BattleCardView cardView)
+        {
+            
         }
     }
 }

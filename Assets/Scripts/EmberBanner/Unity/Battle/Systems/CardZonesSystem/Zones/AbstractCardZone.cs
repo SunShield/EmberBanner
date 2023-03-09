@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Service;
 using UnityEngine;
@@ -8,20 +9,22 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones
     public abstract class AbstractCardZone : EBMonoBehaviour
     {
         [SerializeField] protected Transform CardsOrigin;
+        public abstract BattleCardZone Type { get; }
+        
         protected List<BattleCardView> Cards { get; private set; }
 
         public void AddCard(BattleCardView card)
         {
             Cards.Add(card);
             DoAddCard(card);
-            card.EnterZone();
+            card.OnEnterZone(Type);
         }
         
         protected abstract void DoAddCard(BattleCardView card);
 
         public void RemoveCard(BattleCardView card)
         {
-            card.LeaveZone();
+            card.OnLeaveZone(Type);
             Cards.Remove(card);
             DoRemoveCard(card);
         }

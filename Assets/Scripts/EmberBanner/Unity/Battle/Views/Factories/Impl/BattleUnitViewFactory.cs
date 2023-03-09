@@ -26,9 +26,9 @@ namespace EmberBanner.Unity.Battle.Views.Factories.Impl
         protected override void PostCreateView(BattleUnitView view)
         {
             var crystals = new List<BattleUnitCrystalView>();
-            foreach (var crystalEntity in view.Entity.Crystals)
+            foreach (var crystalEntity in view.Entity.EnumerateCrystals())
             {
-                var crystalEntityTyped = crystalEntity as BattleUnitCrystalEntity;
+                var crystalEntityTyped = crystalEntity;
                 var crystalView = BattleManager.I.CrystalViewFactory.CreateView(crystalEntityTyped);
                 crystals.Add(crystalView);
             }

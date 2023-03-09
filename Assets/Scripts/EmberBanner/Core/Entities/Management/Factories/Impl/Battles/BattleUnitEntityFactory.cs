@@ -23,7 +23,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
             foreach (var crystalModel in model.Crystals)
             {
                 var crystalEntity = BattleUnitCrystalEntityFactory.I.CreateEntity(crystalModel, null, true);
-                entity.Crystals.Add(crystalEntity);
+                entity.AddCrystal(crystalEntity);
             }
 
             var controllerString = entity.Controller.ToString();

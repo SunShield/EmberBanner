@@ -1,4 +1,5 @@
-﻿using EmberBanner.Unity.Battle.Views.Impl.Units;
+﻿using EmberBanner.Unity.Battle.Views.Factories.Impl;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
@@ -24,7 +25,13 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
         {
             var zonesManager = Instantiate(_zonesPrefab, _zonesOrigin.transform.position, Quaternion.identity, _zonesOrigin);
             zonesManager.gameObject.SetActive(false);
+            zonesManager.Initialize(unit);
             unit.SetZonesManager(zonesManager);
+
+            foreach (var cardEntity in unit.Entity.EnumerateCards())
+            {
+                var cardView = BattleCardViewFactory.I.CreateView(cardEntity);
+            }
         }
     }
 }

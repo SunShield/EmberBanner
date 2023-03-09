@@ -10,16 +10,15 @@ namespace EmberBanner.Core.Entities.Impl.Units
 {
     public class UnitEntity : SavableEntity<UnitModel, UnitSaveData>
     {
-        public ComplexValue StartingHealth { get; private set; }
-        public ComplexValue MaxHealth { get; private set; }
-        public ComplexValue StartingEnergy { get; private set; }
-        public ComplexValue MaxEnergy { get; private set; }
-        public ComplexValue HandSize { get; private set; }
-        public ComplexValue Draw { get; private set; }
-        public List<UnitCrystalEntity> Crystals { get; private set; } = new();
+        protected List<UnitCrystalEntity> Crystals { get; } = new();
+        protected Dictionary<int, CardEntity> Deck { get; } = new();
         
-        private Dictionary<int, CardEntity> _deck = new();
-        public IReadOnlyDictionary<int, CardEntity> Deck => _deck;
+        public ComplexValue StartingHealth { get; }
+        public ComplexValue MaxHealth      { get; }
+        public ComplexValue StartingEnergy { get; }
+        public ComplexValue MaxEnergy      { get; }
+        public ComplexValue HandSize       { get; }
+        public ComplexValue Draw           { get; }
 
         public UnitEntity(int id, UnitModel model) : base(id, model)
         {
@@ -36,9 +35,11 @@ namespace EmberBanner.Core.Entities.Impl.Units
             return saveData;
         }
 
+        public void AddCrystal(UnitCrystalEntity crystal) => Crystals.Add(crystal);
+
         public void AddCard(CardEntity card)
         {
-            _deck.Add(card.Id, card);
+            Deck.Add(card.Id, card);
             // On-Added-To-Deck card effects here
             // On-another-card-added-to-deck-effects here
         }
@@ -47,10 +48,10 @@ namespace EmberBanner.Core.Entities.Impl.Units
         {
             // On-Removed-From-Deck card effects here
             // On-another-card-removed-from-deck-effects here
-            _deck.Remove(card.Id);
+            Deck.Remove(card.Id);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Copying entity is needed to apply stuff to the copy without
         /// concerning on breaking original
         /// The main purpose of entity copies is using them in battle:
@@ -62,6 +63,6 @@ namespace EmberBanner.Core.Entities.Impl.Units
             var entity = new UnitEntity(Id, Model);
             entity.PostLoad(GenerateSaveData());
             return entity;
-        }
+        }*/
     }
 }

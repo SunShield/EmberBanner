@@ -12,7 +12,7 @@ namespace EmberBanner.Core.Ingame.Management.Cloners.Impl.Units
 
         protected override void ProcessEntityPostInitialize(UnitEntity originalEntity, UnitEntity entityClone)
         {
-            // cloning crystals
+            /*// cloning crystals
             foreach (var originalEntityCrystal in originalEntity.Crystals)
             {
                 var crystalClone = UnitCrystalEntityCloner.I.Clone(originalEntityCrystal);
@@ -25,7 +25,7 @@ namespace EmberBanner.Core.Ingame.Management.Cloners.Impl.Units
                 var originalEntityCard = originalEntity.Deck[originalEntityCardKey];
                 var entityCardClone = CardEntityCloner.I.Clone(originalEntityCard);
                 entityClone.AddCard(entityCardClone);
-            }
+            }*/
         }
     }
 }
