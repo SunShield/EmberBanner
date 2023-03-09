@@ -20,7 +20,7 @@ namespace EmberBanner.Unity.Battle.Systems.TurnOrder
             Crystals.Clear();
 
             var units = BattleManager.I.Registry.Units.Values.ToList();
-            var crystals = units.SelectMany(u => Crystals).ToList();
+            var crystals = units.SelectMany(u => u.UnitCrystals.Crystals).ToList();
             crystals.Sort((crystal1, crystal2) =>
             {
                 if (crystal1.CurrentRoll > crystal2.CurrentRoll) return 1;

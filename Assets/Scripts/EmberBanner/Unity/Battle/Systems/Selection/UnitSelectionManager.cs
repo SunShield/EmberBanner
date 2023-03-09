@@ -1,7 +1,5 @@
-﻿using System;
-using EmberBanner.Core.Enums.Battle.States;
+﻿using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
-using EmberBanner.Unity.Battle.Systems.StateSystem;
 using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
