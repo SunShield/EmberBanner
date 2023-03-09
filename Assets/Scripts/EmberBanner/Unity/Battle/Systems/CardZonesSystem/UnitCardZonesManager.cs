@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
@@ -68,6 +69,18 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
         public void SetActive(bool active)
         {
             gameObject.SetActive(active);
+        }
+        
+        public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal)
+        {
+            _hand.RemoveCard(card);
+            crystal.Zone.AddCard(card);
+        }
+
+        public void UnsetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal)
+        {
+            crystal.Zone.RemoveCard(card);
+            _hand.AddCard(card);
         }
     }
 }

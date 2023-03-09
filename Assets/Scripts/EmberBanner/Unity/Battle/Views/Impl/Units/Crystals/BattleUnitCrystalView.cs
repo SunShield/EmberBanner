@@ -2,6 +2,7 @@
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units.Crystals;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones;
+using EmberBanner.Unity.Battle.Systems.Selection;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 {
     public class BattleUnitCrystalView : BattleView<BattleUnitCrystalEntity, UnitCrystalModel>
     {
+        [SerializeField] private GameObject _selectedGraphics;
         [SerializeField] private TextMeshPro _rollText;
         [SerializeField] private PlayCardZone _zone;
         
@@ -17,23 +19,10 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         
         public int? CurrentRoll => Entity.CurrentRoll;
         public UnitControllerType Controller => Entity.Owner.Controller;
-        public BattleCardView Card => _zone.Cards[0];
+        public PlayCardZone Zone => _zone;
+        public BattleCardView Card => _zone.Cards.Count > 0 ? _zone.Cards[0] : null;
 
         public void SetOwnerView(BattleUnitView ownerView) => OwnerView = ownerView;
-
-        public void SetCard(BattleCardView card)
-        {
-            if (Card != null) UnsetCard();
-            _zone.AddCard(card);
-            card.SetCrystal(this);
-        }
-
-        public void UnsetCard()
-        {
-            if (Card == null) return;
-            _zone.RemoveCard(Card);
-            Card.SetCrystal(null);
-        }
 
         public void Roll()
         {
@@ -44,6 +33,25 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         public void Clear()
         {
             _rollText.text = "X";
+        }
+
+        private void OnMouseDown()
+        {
+            CrystalSelectionManager.I.ProcessCrystalClick(this);
+        }
+
+        public void SetSelected(bool selected) => _selectedGraphics.SetActive(selected);
+
+        public void SetCardPrePlayed(BattleCardView card)
+        {
+            if (Card != null) UnsetCardPrePlayed(card);
+            OwnerView.SetCardPrePlayed(card, this);
+        }
+
+        public void UnsetCardPrePlayed(BattleCardView card)
+        {
+            if (Card == null) return;
+            OwnerView.UnsetCardPrePlayed(card, this);
         }
     }
 }

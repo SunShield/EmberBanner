@@ -54,7 +54,7 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
                 {
                     for (int i = 0; i < unitDefaultCardModel.Amount; i++)
                     {
-                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName);
+                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, hero);
                         hero.AddCard(cardEntity);
                     }
                 }
@@ -66,7 +66,7 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
                 {
                     for (int i = 0; i < unitDefaultCardModel.Amount; i++)
                     {
-                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName);
+                        var cardEntity = BattleCardEntityFactory.I.CreateEntity(unitDefaultCardModel.CardName, enemy);
                         enemy.AddCard(cardEntity);
                     }
                 }

@@ -3,6 +3,7 @@ using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
+using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         [SerializeField] private BattleUnitCrystalsView _unitCrystals;
         private UnitCardZonesManager _zonesManager;
 
+        public UnitSpot Spot { get; private set; }
+        
         public UnitControllerType Controller => Entity.Controller;
         public BattleUnitCrystalsView UnitCrystals => _unitCrystals;
 
@@ -41,6 +44,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             _zonesManager = zonesManager;
         }
 
+        public void SetSpot(UnitSpot spot) => Spot = spot;
+
         public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
 
         public void DrawCards(bool isFirstTurn)
@@ -63,5 +68,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         {
             Entity.CurrentEnergy += card.Entity.Cost.CalculateValue();
         }
+
+        public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.SetCardPrePlayed(card, crystal);
+        public void UnsetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.UnsetCardPrePlayed(card, crystal);
     }
 }

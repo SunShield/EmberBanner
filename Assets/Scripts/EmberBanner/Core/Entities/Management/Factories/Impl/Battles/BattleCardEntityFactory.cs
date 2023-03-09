@@ -1,5 +1,4 @@
-﻿using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Ingame.Impl.Battles;
+﻿using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Ingame.Management.Factories;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Unity.Data;
@@ -11,10 +10,10 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
         private static BattleCardEntityFactory _instance;
         public static BattleCardEntityFactory I => _instance ??= new();
         
-        public BattleCardEntity CreateEntity(string modelName)
+        public BattleCardEntity CreateEntity(string modelName, BattleUnitEntity unitEntity)
         {
             var model = DataHolder.I.Data.Cards[modelName];
-            return CreateEntity(model, BattleCardZone.None, true);
+            return CreateEntity(model, unitEntity, true);
         }
     }
 }

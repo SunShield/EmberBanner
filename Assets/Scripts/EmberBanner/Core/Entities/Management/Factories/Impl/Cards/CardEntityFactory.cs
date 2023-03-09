@@ -25,6 +25,15 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Cards
                 var actionEntity = CardActionEntityFactory.I.CreateEntity(actionModel, null, NextEntityIsTemporary);
                 entity.Actions.Add(actionEntity);
             }
+
+            foreach (var entityAction in entity.Actions)
+            {
+                if (entityAction.Model.IsMain)
+                {
+                    entity.MainAction = entityAction;
+                    break;
+                }
+            }
             
             var message = $"Card Entity (id: {entity.Id} | model: {model.Name}) created";
             var tempMessage = "Temporary ";

@@ -1,5 +1,7 @@
-﻿using EmberBanner.Core.Enums.Battle.States;
+﻿using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Service;
 
@@ -23,10 +25,21 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
         public void SelectCard(BattleCardView card)
         {
             if (BattleManager.I.StateController.State != BattleState.TurnPlan) return;
+            if (card.Owner.Entity.Controller == UnitControllerType.Enemy) return;
             
-            if (SelectedCard != null) UnselectCard();
-            SelectedCard = card;
-            SelectedCard.SetSelected(true);
+            if (SelectedCard != null) return;
+
+            if (card.Entity.Model.MainTarget == CardMainTargetType.No)
+            {
+                if (!card.CanBePlayed()) return;
+                
+                CardPrePlayManager.I.SetCardPrePlayed(card, CrystalSelectionManager.I.CurrentCrystalWithCard);
+            }
+            else
+            {
+                SelectedCard = card;
+                SelectedCard.SetSelected(true);
+            }
         }
 
         public void UnselectCard()

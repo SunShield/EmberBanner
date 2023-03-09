@@ -1,6 +1,4 @@
-﻿using System;
-using EmberBanner.Unity.Battle.Systems.Mouseover;
-using EmberBanner.Unity.Battle.Systems.Selection;
+﻿using EmberBanner.Unity.Battle.Systems.Mouseover;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using UnityEngine;
@@ -20,10 +18,14 @@ namespace EmberBanner.Unity.Battle.Systems.UnitSpotSystem
             Unit = unit;
             unit.Tran.parent = Tran;
             unit.Tran.localPosition = Vector3.zero;
+            unit.SetSpot(this);
         }
 
         public void RemoveUnit()
         {
+            if (Unit == null) return;
+            
+            Unit.SetSpot(null);
             Unit = null;
         }
 
@@ -32,6 +34,5 @@ namespace EmberBanner.Unity.Battle.Systems.UnitSpotSystem
         private void OnMouseExit() => UnitSpotMouseoverManager.I.UnsetMouseoverSpot();
 
         public void SetSelectedState(bool state) => _selectedGraphics.SetActive(state);
-        private void OnMouseDown() => UnitSelectionManager.I.SelectSpot(this);
     }
 }

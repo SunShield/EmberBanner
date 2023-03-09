@@ -1,4 +1,5 @@
 ﻿using EmberBanner.Core.Entities.Impl.Cards;
+using EmberBanner.Core.Entities.Impl.Units;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Cards;
 
@@ -6,7 +7,7 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
 {
     public class BattleCardEntity : CardEntity
     {
-        public BattleCardZone Zone { get; private set; }
+        public BattleCardZone Zone { get; private set; } = BattleCardZone.None;
         
         public BattleCardEntity(int id, CardModel model) : base(id, model)
         {
@@ -20,7 +21,7 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
 
         public override void Initialize(object payload)
         {
-            Zone = (BattleCardZone)payload;
+            SetOwner((UnitEntity)payload);
         }
     }
 }

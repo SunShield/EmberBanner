@@ -1,8 +1,9 @@
-﻿using System;
-using EmberBanner.Core.Enums.Battle;
+﻿using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Cards;
+using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.Selection;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         [SerializeField] private TextMeshPro _nameText;
         [SerializeField] private TextMeshPro _costText;
 
+        public BattleUnitView Owner { get; private set; }
         public BattleUnitCrystalView Crystal { get; private set; }
 
         public BattleCardZone Zone => Entity.Zone;
@@ -30,6 +32,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
             
             _nameText.text   = Model.Name;
             gameObject.name = $"Card [{Entity.Id}, {Model.Name}]";
+
+            Owner = BattleManager.I.Registry.Units[Entity.Owner.Id];
         }
 
         public void OnLeaveZone(BattleCardZone zone)
@@ -61,6 +65,27 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
 
         public void SetSelected(bool selected) => _selectedGraphics.SetActive(selected);
 
-        public void SetCrystal(BattleUnitCrystalView crystal) => Crystal = crystal;
+        public bool CanBePlayed() => Owner.CanPlayCard(this);
+
+        public bool CanTarget(BattleUnitCrystalView potentialTarget)
+        {
+            return potentialTarget.OwnerView != Owner && // dont target self
+                   ((potentialTarget.Controller == UnitControllerType.Enemy && Model.MainTarget == CardMainTargetType.Enemy) ||
+                   (potentialTarget.Controller == UnitControllerType.Player && Model.MainTarget == CardMainTargetType.Ally));
+        }
+
+        public void SetPrePlayed(BattleUnitCrystalView crystal)
+        {
+            Owner.PayCard(this);
+            Crystal = crystal;
+            crystal.SetCardPrePlayed(this);
+        }
+
+        public void UnsetPrePlayed()
+        {
+            Owner.UnpayCard(this);
+            Crystal.UnsetCardPrePlayed(this);
+            Crystal = null;
+        }
     }
 }

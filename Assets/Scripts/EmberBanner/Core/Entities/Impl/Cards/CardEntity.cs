@@ -11,6 +11,7 @@ namespace EmberBanner.Core.Entities.Impl.Cards
     {
         public UnitEntity Owner { get; private set; }
         public ComplexValue Cost { get; private set; }
+        public CardActionEntity MainAction { get; set; }
         public List<CardActionEntity> Actions { get; private set; } = new();
 
         public CardEntity(int id, CardModel model) : base(id, model)
