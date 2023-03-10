@@ -21,7 +21,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
 
         public void UnsetCardPrePlayed(BattleCardView card)
         {
-            if (CardTargetsMatrix.I.HasAttack(card.Crystal))
+            if (CardTargetsMatrix.I.CrystalHasAttack(card.Crystal))
                 CardTargetsMatrix.I.RemoveAttack(card.Crystal);
             card.UnsetPrePlayed();
         }

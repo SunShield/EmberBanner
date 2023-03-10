@@ -22,6 +22,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         public UnitControllerType Controller => Entity.Owner.Controller;
         public PlayCardZone Zone => _zone;
         public BattleCardView Card => _zone.Cards.Count > 0 ? _zone.Cards[0] : null;
+        public bool IsEnemy => Controller == UnitControllerType.Enemy;
         
         public void SetOwnerView(BattleUnitView ownerView) => OwnerView = ownerView;
 

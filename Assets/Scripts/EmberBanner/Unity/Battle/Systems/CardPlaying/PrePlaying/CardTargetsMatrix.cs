@@ -40,15 +40,27 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
             if (!CanRedirect(initiator, newTarget) || !CanRedirectByRoll(initiator, newTarget))
                 return;
 
-            var oldTarget = AttackMatrix[newTarget];
+            var crystalAttackRedirectedFrom = GetTarget(newTarget);
             
             // Unit targeted by enemy before redirecting is not defending from him now
-            DefenseMatrix.Remove(oldTarget, newTarget);
+            RemoveAttackerFromDefenseMatrix(crystalAttackRedirectedFrom, newTarget);
             ChangeAttackTarget(newTarget, initiator);
             
             // tracking redirection
-            RedirectorsMatrix.Add(newTarget, initiator);
+            RegisterRedirection(newTarget, initiator);
         }
+
+        private BattleUnitCrystalView GetTarget(BattleUnitCrystalView newTarget) => AttackMatrix[newTarget];
+        private void RemoveAttackerFromDefenseMatrix(BattleUnitCrystalView target, BattleUnitCrystalView initiator) => DefenseMatrix.Remove(target, initiator);
+        
+        private void ChangeAttackTarget(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        {
+            AttackMatrix[initiator] = target;
+            DefenseMatrix.Add(target, initiator);
+        }
+        
+        private void RegisterRedirection(BattleUnitCrystalView redirectedCrystal, BattleUnitCrystalView redirectorCrystal) 
+            => RedirectorsMatrix.Add(redirectedCrystal, redirectorCrystal);
         
         private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
             => target.Card != null // cannot redirect empty die
@@ -67,29 +79,27 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
 
         public void RemoveAttack(BattleUnitCrystalView initiator)
         {
-            var target = AttackMatrix[initiator];
+            var target = GetTarget(initiator);
             RemoveAttackFromMatrix(initiator);
             RemoveDefenseFromMatrix(initiator, target);
-            if (RedirectorsMatrix.ContainsKey(target))
+            if (IsCrystalRedirected(target))
             {
-                if (RedirectorsMatrix[target].IndexOf(initiator) == RedirectorsMatrix[target].Count - 1)
-                {
-                    DefenseMatrix.Remove(initiator, target);
-                }
+                if (IsCrystalCurrentTargetsRedirector(target, initiator))
+                    RemoveAttackerFromDefenseMatrix(initiator, target);
                 
-                RedirectorsMatrix.Remove(target, initiator);
+                DeregisterRedirection(target, initiator);
             }
 
-            if (target.Controller == UnitControllerType.Enemy)
+            if (target.IsEnemy)
             {
-                if (RedirectorsMatrix.ContainsKey(target))
+                if (IsCrystalRedirected(target))
                 {
-                    var lastRedirector = RedirectorsMatrix[target][^1];
+                    var lastRedirector = GetCrystalLastRedirector(target);
                     ChangeAttackTarget(target, lastRedirector);
                 }
-                else if (DefaultAttackMatrix.ContainsKey(target))
+                else if (CheckCrystalHasDefaultAttack(target))
                 {
-                    ChangeAttackTarget(target, DefaultAttackMatrix[target]);
+                    ChangeAttackTarget(target, GetCrystalDefaultAttack(target));
                 }
             }
             
@@ -98,37 +108,42 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
 
         private void RemoveAttackFromMatrix(BattleUnitCrystalView initiator) => AttackMatrix.Remove(initiator);
         private void RemoveDefenseFromMatrix(BattleUnitCrystalView initiator, BattleUnitCrystalView target) => DefenseMatrix.Remove(target, initiator);
-
-        private void ChangeAttackTarget(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
-        {
-            AttackMatrix[initiator] = target;
-            DefenseMatrix.Add(target, initiator);
-        }
-
+        private bool IsCrystalRedirected(BattleUnitCrystalView target) => RedirectorsMatrix.ContainsKey(target);
+        private bool IsCrystalCurrentTargetsRedirector(BattleUnitCrystalView target, BattleUnitCrystalView crystal) => RedirectorsMatrix[target].IndexOf(crystal) == RedirectorsMatrix[target].Count - 1;
+        private void DeregisterRedirection(BattleUnitCrystalView redirectedCrystal, BattleUnitCrystalView redirectorCrystal) => RedirectorsMatrix.Remove(redirectedCrystal, redirectorCrystal);
+        private bool CheckCrystalHasDefaultAttack(BattleUnitCrystalView target) => DefaultAttackMatrix.ContainsKey(target);
+        private BattleUnitCrystalView GetCrystalLastRedirector(BattleUnitCrystalView crystal) => RedirectorsMatrix[crystal][^1];
+        private BattleUnitCrystalView GetCrystalDefaultAttack(BattleUnitCrystalView target) => DefaultAttackMatrix[target];
+        
         public BattleUnitCrystalView GetClashingCrystal(BattleUnitCrystalView initiator)
         {
-            if (initiator.Controller == UnitControllerType.Enemy)
+            if (initiator.IsEnemy)
             {
-                if (RedirectorsMatrix.ContainsKey(initiator)) return RedirectorsMatrix[initiator][^1];
-                if (DefaultAttackMatrix.ContainsKey(initiator))
+                if (IsCrystalRedirected(initiator)) return GetCrystalLastRedirector(initiator);
+                if (CheckCrystalHasDefaultAttack(initiator))
                 {
-                    var defaultTarget = DefaultAttackMatrix[initiator];
-                    if (!AttackMatrix.ContainsKey(defaultTarget)) return null;
-                    if (AttackMatrix[defaultTarget] == initiator) return defaultTarget;
+                    var defaultTarget = GetCrystalDefaultAttack(initiator);
+                    if (CheckCrystalAttacksTarget(defaultTarget, initiator)) return defaultTarget;
                 }
             }
             else
             {
-                if (!AttackMatrix.ContainsKey(initiator)) return null;
+                if (!CrystalHasAttack(initiator)) return null;
                     
-                var target = AttackMatrix[initiator];
+                var target = GetTarget(initiator);
                 if (GetClashingCrystal(target) == initiator) return target;
             }
 
             return null;
         }
 
-        public bool HasAttack(BattleUnitCrystalView initiator) => AttackMatrix.ContainsKey(initiator);
+        public bool CrystalHasAttack(BattleUnitCrystalView initiator) => AttackMatrix.ContainsKey(initiator);
+
+        private bool CheckCrystalAttacksTarget(BattleUnitCrystalView crystal, BattleUnitCrystalView target)
+        {
+            if (!CrystalHasAttack(crystal)) return false;
+            return AttackMatrix[crystal] == target;
+        }
 
         public event Action onAttackMatrixChanged;
     }
