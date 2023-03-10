@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Extensions;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
@@ -63,7 +65,15 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 
         private void CreateArrow(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
-            var actionType = initiator.Card.Entity.MainAction.Model.Type;
+            var actionsFittingTarget = new List<ActionModel>();
+            if (initiator.Controller != target.Controller)
+                actionsFittingTarget = initiator.Card.Entity.GetActionsTargetingEnemy();
+            else if (initiator == target)
+                actionsFittingTarget = initiator.Card.Entity.GetActionsTargetingSelf();
+            else if (initiator.Controller == target.Controller)
+                actionsFittingTarget = initiator.Card.Entity.GetActionsTargetingAlly();
+            
+            var actionType = actionsFittingTarget.First().Type;
             
             var arrow = new Arrow()
             {

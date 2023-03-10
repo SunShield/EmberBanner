@@ -51,7 +51,9 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -72,12 +74,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Unearth
       Sprite: {fileID: 21300000, guid: 235f0f13f717d1f4193404bf56261ab6, type: 3}
       Cost: 3
@@ -98,12 +102,14 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 0
+      Target: 0
     - <Name>k__BackingField: Deadly Swing
       Sprite: {fileID: 21300000, guid: 1e628cfead794b54497e5b31decbead4, type: 3}
       Cost: 1
@@ -124,12 +130,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Soulburn
       Sprite: {fileID: 21300000, guid: 1b448446426efce4a9d9847f21d8686f, type: 3}
       Cost: 2
@@ -150,7 +158,9 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -171,12 +181,14 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 1
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 6
     - <Name>k__BackingField: Noxious Claw
       Sprite: {fileID: 21300000, guid: 825598986a65a12469aa0b750bd2cf86, type: 3}
       Cost: 1
@@ -197,12 +209,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Mortify
       Sprite: {fileID: 21300000, guid: 2a19e8f09db10234387f0f674c2e84d7, type: 3}
       Cost: 3
@@ -223,7 +237,9 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -244,12 +260,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 0
     - <Name>k__BackingField: Sigil of the Dead
       Sprite: {fileID: 21300000, guid: 75c10760201749242b9cb79e738f3a17, type: 3}
       Cost: 2
@@ -270,7 +288,9 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 1
         IsAoE: 0
         Params:
           m_keys: []
@@ -291,12 +311,37 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 2
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 0
+      - <Name>k__BackingField: 3
+        RawDescription: 
+        Magnitude: 5
+        ClashingPower:
+          Min: 2
+          Max: 4
+        ClashingPowerGrowthRate:
+          Span: 2
+          Growth: 1
+        Threshold: 0
+        CoinsAmount: 0
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        DefenseType: 0
+        PossibleAggressionTargets: 1
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
+        IsAoE: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 2
     - <Name>k__BackingField: Withering Touch
       Sprite: {fileID: 21300000, guid: afe40ba4a57037746978aeb5394a5dd0, type: 3}
       Cost: 1
@@ -317,12 +362,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Emberwind
       Sprite: {fileID: 21300000, guid: f97682f2c8726094588758c025b194ad, type: 3}
       Cost: 1
@@ -343,12 +390,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Holy Slash
       Sprite: {fileID: 21300000, guid: c9abcbbbf53346b4bb79907fd85b7888, type: 3}
       Cost: 1
@@ -369,7 +418,9 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -390,12 +441,14 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 4
     - <Name>k__BackingField: Defence of the Stalwart
       Sprite: {fileID: 21300000, guid: 7dfb2d3247b59fe4b892e87c3099be2c, type: 3}
       Cost: 2
@@ -416,7 +469,9 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -437,7 +492,9 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -458,12 +515,14 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 0
+      Target: 0
     - <Name>k__BackingField: Smite
       Sprite: {fileID: 21300000, guid: a6d2256218f3bd44f8c9f2ae6101ce5a, type: 3}
       Cost: 3
@@ -484,12 +543,14 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3
     - <Name>k__BackingField: Benediction
       Sprite: {fileID: 21300000, guid: 5960d5251b724ba42b567c367f0bd9b3, type: 3}
       Cost: 2
@@ -510,7 +571,9 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 4
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -531,12 +594,14 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        IsMain: 0
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 1
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 4
     - <Name>k__BackingField: Shield of Faith
       Sprite: {fileID: 21300000, guid: 26cdf27540e77ef44a6751c9945a4529, type: 3}
       Cost: 1
@@ -557,12 +622,14 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 1
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 0
+      Target: 0
     - <Name>k__BackingField: Holy Beam
       Sprite: {fileID: 21300000, guid: 5e3e018ab0dfb944f893d797c7b396f4, type: 3}
       Cost: 2
@@ -583,12 +650,14 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 0
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: -1
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 1
+      Target: 2
     - <Name>k__BackingField: Darkness
       Sprite: {fileID: 21300000, guid: d0cc91c8ce2e5604a82238f6c93eeb8c, type: 3}
       Cost: 3
@@ -609,9 +678,11 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        IsMain: 1
+        PossibleAggressionTargets: 2
+        PossibleDefenseTargets: 0
+        PossibleSupportTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 2
+      Target: 3

@@ -1,7 +1,10 @@
 ﻿using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Cards;
+using EmberBanner.Core.Service.Extensions;
+using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.Selection;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
@@ -24,8 +27,6 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         public BattleUnitCrystalView Crystal { get; private set; }
 
         public BattleCardZone Zone => Entity.Zone;
-        public ActionType MainActionType => Entity.MainAction.Model.Type;
-        public bool IsAoE => Entity.MainAction.Model.IsAoE;
         
         protected override void PostInitialize()
         {
@@ -73,9 +74,9 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
 
         public bool CanTarget(BattleUnitCrystalView potentialTarget)
         {
-            return potentialTarget.OwnerView != Owner && // dont target self
-                   ((potentialTarget.Controller == UnitControllerType.Enemy && Model.MainTarget == CardMainTargetType.Enemy) ||
-                   (potentialTarget.Controller == UnitControllerType.Player && Model.MainTarget == CardMainTargetType.Ally));
+            return  potentialTarget.OwnerView == Owner && Model.TargetType.AllowsSelf() ||
+                   (potentialTarget.Controller == UnitControllerType.Enemy && Model.TargetType.AllowsEnemy()) ||
+                   (potentialTarget.Controller == UnitControllerType.Player && Model.TargetType.AllowsAlly());
         }
 
         public void SetPrePlayed(BattleUnitCrystalView crystal)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using EmberBanner.Core.Enums.Actions;
-using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions;
@@ -23,7 +22,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
         private IntegerField  _costField;
         private VisualElement _actionsContainer;
         private ActionList    _actionList;
-        private DropdownField _mainTargetDropdown;
+        private VisualElement _baseStatsContainer;
+        private DropdownField _possibleTargetsField;
 
         public CardInspector() : base()
         {
@@ -38,7 +38,10 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _iconPicker = Root.Q<ObjectField>("IconPicker");
             _costField = Root.Q<IntegerField>("CostField");
             _actionsContainer = Root.Q<VisualElement>("ActionsContainer");
-            _mainTargetDropdown = Root.Q<DropdownField>("MainTargetDropdown");
+            _baseStatsContainer = Root.Q<VisualElement>("BaseStatsContainer");
+            _possibleTargetsField = new DropdownField();
+            _possibleTargetsField.choices.AddRange(Enum.GetValues(typeof(CardTargetType)).Cast<CardTargetType>().Select(e => e.ToString()).ToList());
+            _baseStatsContainer.Add(_possibleTargetsField);
             
             AddActionsList();
         }
@@ -57,13 +60,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             void AddAction(string actionName)
             {
                 var action = new ActionModel(actionName, _actionList.CurrentActionType);
+                action.PossibleAggressionTargets = 0;
+                action.PossibleDefenseTargets = 0;
+                action.PossibleSupportTargets = 0;
                 
                 InspectedElement.Actions.Add(action);
-
-                if (InspectedElement.Actions.Count == 1)
-                    action.IsMain = true;
                 
-                UpdateMainTargetDropdown();
+                UpdatePossibleTargetsDropdown();
                 Database.Update();
             }
 
@@ -77,17 +80,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                         return;
                     }
                 }
-
-                if (InspectedElement.Actions.Count == 0)
-                    InspectedElement.MainTarget = CardMainTargetType.No;
                 
-                UpdateMainTargetDropdown();
+                UpdatePossibleTargetsDropdown();
                 Database.Update();
             }
             
             _actionList = new ActionList();
             _actionList.Initialize(actionListData);
-            _actionList.onMainActionSet += OnMainActionChanged;
             _actionsContainer.Add(_actionList);
         }
 
@@ -105,9 +104,9 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 InspectedElement.Cost = evt.newValue;
             });
 
-            _mainTargetDropdown.RegisterValueChangedCallback(evt =>
+            _possibleTargetsField.RegisterValueChangedCallback(evt =>
             {
-                InspectedElement.MainTarget = Enum.Parse<CardMainTargetType>(evt.newValue);
+                InspectedElement.Target = _possibleTargetsField.index;
             });
         }
         
@@ -121,46 +120,42 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _icon.style.backgroundImage = new StyleBackground(InspectedElement.Sprite);
             _iconPicker.value = InspectedElement.Sprite;
             _costField.value = InspectedElement.Cost;
+            _possibleTargetsField.index = (int)InspectedElement.Target;
             _actionList.Update();
-            UpdateMainTargetDropdown();
+            UpdatePossibleTargetsDropdown();
         }
 
-        private void UpdateMainTargetDropdown()
+        private void UpdatePossibleTargetsDropdown()
         {
-            _mainTargetDropdown.choices.Clear();
-            _mainTargetDropdown.choices.Add("No");
-
-            var mainAction = InspectedElement.Actions.FirstOrDefault(a => a.IsMain);
-
-            if (mainAction == null) return;
-            
-            if (mainAction.Type == ActionType.Aggression)
-            {
-                _mainTargetDropdown.choices.Add("Enemy");
-            }
-            else if (mainAction.Type == ActionType.Defense)
-            {
-                _mainTargetDropdown.choices.Add("Ally");
-                _mainTargetDropdown.choices.Add("Enemy");
-            }
-            else if (mainAction.Type == ActionType.Support)
-            {
-                _mainTargetDropdown.choices.Add("Ally");
-            }
-
-            _mainTargetDropdown.index = _mainTargetDropdown.choices.IndexOf(InspectedElement.MainTarget.ToString());
-        }
-
-        private void OnMainActionChanged(string mainActionName)
-        {
+            /*var choiceMask = new List<int>() { 0, 0, 0, 0, 0, 0, 0 };
             foreach (var action in InspectedElement.Actions)
             {
-                action.IsMain = action.Name == mainActionName;
+                if (action.Type == ActionType.Aggression)
+                {
+                    if (action.PossibleAggressionTargets.HasFlag(AggressionTargetType.Self))
+                        choiceMask[0] = (int)(CardTargetType.Self);
+                    if (action.PossibleAggressionTargets.HasFlag(AggressionTargetType.Enemy))
+                        choiceMask[3] = (int)(CardTargetType.Enemy);
+                }
+                else if (action.Type == ActionType.Defense)
+                {
+                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Self))
+                        choiceMask[0] = (int)(CardTargetType.Self);
+                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Ally))
+                        choiceMask[1] = (int)(CardTargetType.Ally);
+                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Enemy))
+                        choiceMask[3] = (int)(CardTargetType.Enemy);
+                }
+                else if (action.Type == ActionType.Support)
+                {
+                    if (action.PossibleSupportTargets.HasFlag(SupportTargetType.Self))
+                        choiceMask[0] = (int)(CardTargetType.Self);
+                    if (action.PossibleSupportTargets.HasFlag(SupportTargetType.Ally))
+                        choiceMask[1] = (int)(CardTargetType.Ally);
+                }
             }
-
-            InspectedElement.MainTarget = CardMainTargetType.No;
-
-            UpdateMainTargetDropdown();
+            
+            _possibleTargetsField.choicesMasks = choiceMask;*/
         }
     }
 }

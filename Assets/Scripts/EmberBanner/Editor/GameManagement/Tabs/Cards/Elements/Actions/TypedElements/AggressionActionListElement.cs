@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using EmberBanner.Core.Enums;
 using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle.Targeting;
+using UnityEngine.UIElements;
 
 namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.TypedElements
 {
@@ -12,6 +13,19 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.TypedEle
             base.PostInitialize();
             MagnitudeTypeDropdown.choices = Enum.GetValues(typeof(AggressionType)).Cast<AggressionType>().Select(e => e.ToString()).ToList();
             MagnitudeTypeDropdown.index = (int)Element.AggressionType;
+            
+            PossibleTargetsField.choices = Enum.GetValues(typeof(AggressionTargetType)).Cast<AggressionTargetType>().Select(e => e.ToString()).ToList();
+            PossibleTargetsField.index = (int)Element.PossibleAggressionTargets;
+        }
+        
+        protected override void PostAddEvents()
+        {
+            base.PostAddEvents();
+            PossibleTargetsField.RegisterValueChangedCallback(evt =>
+            {
+                Element.PossibleAggressionTargets = PossibleTargetsField.index;
+                FireOnPossibleTargetsChangedEvent();
+            });
         }
     }
 }

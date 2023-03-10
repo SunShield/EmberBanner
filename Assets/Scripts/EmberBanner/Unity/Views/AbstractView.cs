@@ -1,5 +1,7 @@
-﻿using EmberBanner.Core.Ingame;
+﻿using System.Collections.Generic;
+using EmberBanner.Core.Ingame;
 using EmberBanner.Core.Models;
+using EmberBanner.Core.Models.Actions;
 using EmberBanner.Unity.Service;
 
 namespace EmberBanner.Unity.Views

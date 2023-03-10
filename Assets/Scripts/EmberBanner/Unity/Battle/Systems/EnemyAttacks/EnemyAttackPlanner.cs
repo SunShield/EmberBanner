@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Enums.Battle.Targeting;
+using EmberBanner.Core.Service.Extensions;
+using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using UnityEngine;
 
@@ -30,11 +34,11 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
                     var randomCardIndex = Random.Range(0, availableCards.Count);
                     var randomCard = availableCards[randomCardIndex];
                     
-                    if (randomCard.Model.MainTarget == CardMainTargetType.No)
+                    if (randomCard.Model.TargetType == CardTargetType.Self)
                         CardPrePlayManager.I.SetCardPrePlayed(randomCard, enemyCrystal);
                     else
                     {
-                        var legalTargets = GetCardLegalTargets(randomCard);
+                        var legalTargets = GetCardLegalTargets(enemy, randomCard);
                         var randomTargetIndex = Random.Range(0, legalTargets.Count);
                         var legalTarget = legalTargets[randomTargetIndex];
                         CardPrePlayManager.I.SetCardPrePlayedWithTarget(randomCard, enemyCrystal, legalTarget, true);
@@ -45,8 +49,8 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
 
         private bool CheckCardHasLegalTargets(BattleCardView card)
         {
-            if (card.Model.MainTarget == CardMainTargetType.No) return true;
-            if (card.Model.MainTarget == CardMainTargetType.Enemy)
+            if (card.Model.TargetType.AllowsSelf()) return true;
+            if (card.Model.TargetType.AllowsEnemy())
             {
                 foreach (var playerUnit in BattleManager.I.Registry.PlayerUnits.Values)
                 {
@@ -56,7 +60,7 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
                     }
                 }
             }
-            else
+            if (card.Model.TargetType.AllowsAlly())
             {
                 foreach (var enemyUnit in BattleManager.I.Registry.EnemyUnits.Values)
                 {
@@ -70,22 +74,26 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
             return false;
         }
 
-        private List<BattleUnitCrystalView> GetCardLegalTargets(BattleCardView card)
+        private List<BattleUnitCrystalView> GetCardLegalTargets(BattleUnitView enemy, BattleCardView card)
         {
             var legalTargets = new List<BattleUnitCrystalView>();
-            if (card.Model.MainTarget == CardMainTargetType.Enemy)
+            if (card.Model.TargetType.AllowsEnemy())
             {
                 foreach (var playerUnit in BattleManager.I.Registry.PlayerUnits.Values)
                 {
                     legalTargets.AddRange(playerUnit.UnitCrystals.Crystals.Where(c => c.CanBeTargeted(card)));
                 }
             }
-            else
+            if (card.Model.TargetType.AllowsAlly())
             {
                 foreach (var enemyUnit in BattleManager.I.Registry.EnemyUnits.Values)
                 {
                     legalTargets.AddRange(enemyUnit.UnitCrystals.Crystals.Where(c => c.CanBeTargeted(card)));
                 }
+            }
+            if (card.Model.TargetType.AllowsSelf())
+            {
+                legalTargets.AddRange(enemy.UnitCrystals.Crystals.Where(c => c.CanBeTargeted(card)));
             }
 
             return legalTargets;

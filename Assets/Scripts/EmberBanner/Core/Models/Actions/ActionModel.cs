@@ -1,5 +1,6 @@
 ﻿using System;
 using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Classes.Fundamental;
 
@@ -19,9 +20,15 @@ namespace EmberBanner.Core.Models.Actions
         public ActionType Type;
         public AggressionType AggressionType;
         public DefenseType DefenseType;
-        public bool IsMain;
+        public int PossibleAggressionTargets;
+        public int PossibleDefenseTargets;
+        public int PossibleSupportTargets;
         public bool IsAoE;
         public StringToActionParamModelDictionary Params;
+
+        public AggressionTargetType AggressionTargetType => (AggressionTargetType)PossibleAggressionTargets;
+        public DefenseTargetType DefenseTargetType       => (DefenseTargetType)PossibleDefenseTargets;
+        public SupportTargetType SupportTargetType       => (SupportTargetType)PossibleSupportTargets;
 
         public ActionModel(string name, ActionType type)
         {

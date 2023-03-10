@@ -31,8 +31,6 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         protected override void PostAddElement(string elementKey)
         {
             _currentHighestKey++;
-            var element = Elements[elementKey];
-            element.actionSetMain += OnMainActionChanged;
         }
 
         protected override ActionListElement CreateListElementInstance(ActionModel element)
@@ -44,24 +42,10 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ActionType.Support => new SupportActionListElement(),
                 _ => null
             };
-
-            listElement.actionSetMain += OnMainActionChanged;
+            listElement.onPossibleTargetsChanged += FireOnPossibleTargetsChangedEvent;
 
             return listElement;
         }
-
-        private void OnMainActionChanged(string newMainActionName)
-        {
-            foreach (var actionName in Elements.Keys)
-            {
-                var action = Elements[actionName];
-                action.SetMainActionToggle(actionName == newMainActionName);
-            }
-            
-            FireOnMainActionSetEvent(newMainActionName);
-        }
-
-        private void FireOnMainActionSetEvent(string actionName) => onMainActionSet?.Invoke(actionName);
 
         protected override string GetElementKey() => (_currentHighestKey + 1).ToString();
         protected override string GetStringKey(ActionModel value) => value.Name;
@@ -75,6 +59,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 : 0;
         }
 
-        public event Action<string> onMainActionSet;
+        private void FireOnPossibleTargetsChangedEvent() => onPossibleTargetsChanged?.Invoke();
+        
+        public event Action onPossibleTargetsChanged;
     }
 }

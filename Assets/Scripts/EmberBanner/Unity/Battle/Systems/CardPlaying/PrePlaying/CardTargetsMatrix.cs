@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Service.Classes.Fundamental;
+using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
@@ -65,14 +67,12 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
             => target.Card != null // cannot redirect empty die
                && target.Controller == UnitControllerType.Enemy // only enemy attacks can be redirected
-               && initiator.Card.Model.MainTarget == CardMainTargetType.Enemy; // only attacks attacking allies can be redirected
-
+               && initiator.Card.Model.TargetType.AllowsEnemy() // only attacks able to attack you or allies can be redirected
+               && target.Card.CanTarget(initiator); 
+        
         private bool CanRedirectByRoll(BattleUnitCrystalView initiator, BattleUnitCrystalView newTarget)
         {
-            // aggressions can redirect attacks if their magnitude is higher
-            if (newTarget.CurrentRoll >= initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Aggression) return false;
-            // defenses, however, can redirect if magnitudes are tied
-            if (newTarget.CurrentRoll >  initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Defense) return false;
+            if (newTarget.CurrentRoll >= initiator.CurrentRoll ) return false;
             
             return true;
         }

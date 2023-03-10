@@ -147,8 +147,5 @@ MonoBehaviour:
       DefaultCards:
       - <Name>k__BackingField: 1
         CardName: Sigil of the Dead
-        Amount: 3
-      - <Name>k__BackingField: 3
-        CardName: Noxious Claw
-        Amount: 3
+        Amount: 6
       Sprite: {fileID: 21300000, guid: 739f8d3321bbbf54aaa7e22e949767b6, type: 3}

@@ -30,7 +30,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private   TextField       _descriptionField;
         private   VisualElement   _listContainer;
         private   ActionParamList _paramsList;
-        private   Toggle          _isMainActionToggle;
+        private   VisualElement   _topRowContainer;
+        protected DropdownField   PossibleTargetsField;
         
         protected override void PostGatherElements()
         {
@@ -50,13 +51,14 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _cpMaxField    = Root.Q<IntegerField>("CpMaxField");
 
             _descriptionField = Root.Q<TextField>("DescriptionField");
+            _topRowContainer = Root.Q<VisualElement>("TopRowContainer");
+            PossibleTargetsField = new DropdownField();
+            PossibleTargetsField.label = "Targets";
+            _topRowContainer.Insert(1, PossibleTargetsField);
 
             _listContainer = Root.Q<VisualElement>("ListContainer");
             _paramsList = CreateActionParamsList();
             _listContainer.Add(_paramsList);
-
-            _isMainActionToggle = Root.Q<Toggle>("IsMainActionToggle");
-            _isMainActionToggle.value = Element.IsMain;
         }
 
         private ActionParamList CreateActionParamsList()
@@ -159,12 +161,6 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             {
                 Element.RawDescription = evt.newValue;
             });
-
-            _isMainActionToggle.RegisterValueChangedCallback(evt =>
-            {
-                Element.IsMain = evt.newValue;
-                actionSetMain?.Invoke(Element.Name);
-            });
         }
 
         private void ToggleHiddenState()
@@ -178,8 +174,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 : "Hide";
         }
 
-        public void SetMainActionToggle(bool value) => _isMainActionToggle.SetValueWithoutNotify(value);
+        protected void FireOnPossibleTargetsChangedEvent() => onPossibleTargetsChanged?.Invoke();
 
-        public event Action<string> actionSetMain;
+        public event Action onPossibleTargetsChanged;
     }
 }
