@@ -13,10 +13,10 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
             card.SetPrePlayed(owner);
         }
 
-        public void SetCardPrePlayedWithTarget(BattleCardView card, BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        public void SetCardPrePlayedWithTarget(BattleCardView card, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
         {
             SetCardPrePlayed(card, initiator);
-            CardTargetsMatrix.I.AddAttack(initiator, target);
+            CardTargetsMatrix.I.AddAttack(initiator, target, defaultAttack);
         }
 
         public void UnsetCardPrePlayed(BattleCardView card)

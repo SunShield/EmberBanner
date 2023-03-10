@@ -4,7 +4,6 @@ using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
-using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using UnityEngine;
 
@@ -38,7 +37,7 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
                         var legalTargets = GetCardLegalTargets(randomCard);
                         var randomTargetIndex = Random.Range(0, legalTargets.Count);
                         var legalTarget = legalTargets[randomTargetIndex];
-                        CardPrePlayManager.I.SetCardPrePlayedWithTarget(randomCard, enemyCrystal, legalTarget);
+                        CardPrePlayManager.I.SetCardPrePlayedWithTarget(randomCard, enemyCrystal, legalTarget, true);
                     }
                 }
             }
