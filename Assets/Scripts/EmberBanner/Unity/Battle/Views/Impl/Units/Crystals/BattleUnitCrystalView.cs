@@ -53,5 +53,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
             if (Card == null) return;
             OwnerView.UnsetCardPrePlayed(card, this);
         }
+
+        // will be used later
+        public bool CanBeTargeted(BattleCardView card) => true;
     }
 }

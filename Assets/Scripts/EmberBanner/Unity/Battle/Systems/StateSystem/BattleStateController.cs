@@ -1,6 +1,7 @@
 ﻿using System;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Service;
 using TMPro;
@@ -38,6 +39,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 TurnNumber++;
                 DrawCards();
                 RollCrystals();
+                EnemyAttackPlanner.I.SetEnemyAttacks();
                 BattleManager.I.TurnOrderController.DetermineTurnOrder();
                 State = BattleState.TurnPlan;
             }

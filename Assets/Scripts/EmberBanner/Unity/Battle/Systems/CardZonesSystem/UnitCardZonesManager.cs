@@ -17,6 +17,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
         [SerializeField] private GraveyardCardZone _graveyard;
 
         private BattleUnitView _owner;
+        public List<BattleCardView> CardsInHand => _hand.Cards;
         public int Draw     => _owner.Entity.Draw.CalculateValue();
         public int HandSize => _owner.Entity.HandSize.CalculateValue();
 
