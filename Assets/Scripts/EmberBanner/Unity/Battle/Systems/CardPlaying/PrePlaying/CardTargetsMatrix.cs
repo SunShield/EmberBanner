@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
+using EmberBanner.Core.Service.Classes.Fundamental;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
@@ -11,17 +12,9 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         private static CardTargetsMatrix _instance;
         public static CardTargetsMatrix I => _instance ??= new();
 
-        /// <summary>
-        /// Key is a crystal holding attack, Value is a list of defenders. Non-AoE attacks always have ONE defender
-        /// </summary>
         public Dictionary<BattleUnitCrystalView, BattleUnitCrystalView> AttackMatrix = new();
-        
-        /// <summary>
-        /// Key is a crystal targeted by an attack, Value is a list of crystals targeting this crystal
-        /// </summary>
-        public Dictionary<BattleUnitCrystalView, List<BattleUnitCrystalView>> DefenseMatrix = new();
-
-        public Dictionary<BattleUnitCrystalView, List<BattleUnitCrystalView>> RedirectorsMatrix = new();
+        public NonEmptyListDictionary<BattleUnitCrystalView, BattleUnitCrystalView> DefenseMatrix = new();
+        public NonEmptyListDictionary<BattleUnitCrystalView, BattleUnitCrystalView> RedirectorsMatrix = new();
         public Dictionary<BattleUnitCrystalView, BattleUnitCrystalView> DefaultAttackMatrix = new();
 
         public void AddAttack(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
@@ -35,12 +28,8 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         private void AddToMatrix(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
         {
             AttackMatrix.Add(initiator, target);
+            DefenseMatrix.Add(target, initiator);
             if (defaultAttack) DefaultAttackMatrix.Add(initiator, target);
-
-            if (!DefenseMatrix.ContainsKey(target))
-                DefenseMatrix.Add(target, new());
-
-            DefenseMatrix[target].Add(initiator);
         }
         
         private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
@@ -58,35 +47,28 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
             AttackMatrix[newTarget] = initiator;
             
             // Unit targeted by enemy before redirecting is not defending from him now
-            DefenseMatrix[oldTarget].Remove(newTarget);
-            if (DefenseMatrix[oldTarget].Count == 0) DefenseMatrix.Remove(oldTarget);
+            DefenseMatrix.Remove(oldTarget, newTarget);
             
             // initiator of redirection now defends from enemy
-            if (!DefenseMatrix.ContainsKey(initiator)) DefenseMatrix.Add(initiator, new());
-            DefenseMatrix[initiator].Add(newTarget);
+            DefenseMatrix.Add(initiator, newTarget);
             
             // tracking redirection
-            if (!RedirectorsMatrix.ContainsKey(newTarget)) RedirectorsMatrix.Add(newTarget, new());
-            RedirectorsMatrix[newTarget].Add(initiator);
+            RedirectorsMatrix.Add(newTarget, initiator);
         }
 
         public void RemoveAttack(BattleUnitCrystalView initiator)
         {
             var target = AttackMatrix[initiator];
             AttackMatrix.Remove(initiator);
-            DefenseMatrix[target].Remove(initiator);
-            if (DefenseMatrix[target].Count == 0) DefenseMatrix.Remove(target);
-
+            DefenseMatrix.Remove(target, initiator);
             if (RedirectorsMatrix.ContainsKey(target))
             {
                 if (RedirectorsMatrix[target].IndexOf(initiator) == RedirectorsMatrix[target].Count - 1)
                 {
-                    DefenseMatrix[initiator].Remove(target);
-                    if (DefenseMatrix[initiator].Count == 0) DefenseMatrix.Remove(initiator);
+                    DefenseMatrix.Remove(initiator, target);
                 }
                 
-                RedirectorsMatrix[target].Remove(initiator);
-                if (RedirectorsMatrix[target].Count == 0) RedirectorsMatrix.Remove(target);
+                RedirectorsMatrix.Remove(target, initiator);
             }
 
             if (target.Controller == UnitControllerType.Enemy)
@@ -96,14 +78,12 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
                     var lastRedirector = RedirectorsMatrix[target][^1];
                     AttackMatrix[target] = lastRedirector;
                     
-                    if (!DefenseMatrix.ContainsKey(lastRedirector)) DefenseMatrix.Add(lastRedirector, new());
-                    DefenseMatrix[lastRedirector].Add(target);
+                    DefenseMatrix.Add(lastRedirector, target);
                 }
                 else if (DefaultAttackMatrix.ContainsKey(target))
                 {
                     AttackMatrix[target] = DefaultAttackMatrix[target];
-                    if (!DefenseMatrix.ContainsKey(DefaultAttackMatrix[target])) DefenseMatrix.Add(DefaultAttackMatrix[target], new());
-                    DefenseMatrix[DefaultAttackMatrix[target]].Add(target);
+                    DefenseMatrix.Add(DefaultAttackMatrix[target], target);
                 }
             }
             
