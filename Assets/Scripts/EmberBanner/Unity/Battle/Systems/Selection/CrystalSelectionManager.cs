@@ -1,8 +1,6 @@
-﻿using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Enums.Battle.States;
+﻿using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
-using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;

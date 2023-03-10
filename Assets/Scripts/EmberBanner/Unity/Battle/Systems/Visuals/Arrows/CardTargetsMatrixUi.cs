@@ -28,11 +28,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 
         private void RedrawArrows()
         {
-            _arrows.Clear();
-            foreach (Transform arrowElement in _arrowsOrigin)
-            {
-                Destroy(arrowElement.gameObject);
-            }
+            ClearArrows();
+            DestroyPreviousArrowGos();
 
             var attackMatrix = CardTargetsMatrix.I.AttackMatrix;
             var attackersToSkip = new HashSet<BattleUnitCrystalView>();
@@ -51,6 +48,16 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
                 {
                     CreateArrow(initiator, attackMatrix[initiator]);
                 }
+            }
+        }
+
+        private void ClearArrows() => _arrows.Clear();
+
+        private void DestroyPreviousArrowGos()
+        {
+            foreach (Transform arrowElement in _arrowsOrigin)
+            {
+                Destroy(arrowElement.gameObject);
             }
         }
 
