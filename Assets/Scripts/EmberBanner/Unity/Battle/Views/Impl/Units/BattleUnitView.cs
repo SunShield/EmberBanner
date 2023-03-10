@@ -7,6 +7,7 @@ using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using UnityEngine;
+using BattleUnitCrystalView = EmberBanner.Unity.Battle.Views.Impl.Units.Crystals.BattleUnitCrystalView;
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Units
 {

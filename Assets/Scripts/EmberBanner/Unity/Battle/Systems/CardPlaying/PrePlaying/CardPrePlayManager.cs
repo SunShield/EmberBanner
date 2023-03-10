@@ -8,21 +8,21 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         private static CardPrePlayManager _instance;
         public static CardPrePlayManager I => _instance ??= new();
 
-        public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView potentialOwner)
+        public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView owner)
         {
-            card.SetPrePlayed(potentialOwner);
+            card.SetPrePlayed(owner);
         }
 
-        public void SetCardPrePlayedWithTarget(BattleCardView card, BattleUnitCrystalView potentialOwner, BattleUnitCrystalView potentialTarget)
+        public void SetCardPrePlayedWithTarget(BattleCardView card, BattleUnitCrystalView initiator, BattleUnitCrystalView target)
         {
-           
-
-            SetCardPrePlayed(card, potentialOwner);
-            // add to matrix
+            SetCardPrePlayed(card, initiator);
+            CardTargetsMatrix.I.AddAttack(initiator, target);
         }
 
         public void UnsetCardPrePlayed(BattleCardView card)
         {
+            if (CardTargetsMatrix.I.HasAttack(card.Crystal))
+                CardTargetsMatrix.I.RemoveAttack(card.Crystal);
             card.UnsetPrePlayed();
         }
     }

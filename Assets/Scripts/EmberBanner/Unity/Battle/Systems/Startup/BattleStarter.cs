@@ -44,6 +44,9 @@ namespace EmberBanner.Unity.Battle.Systems.Startup
         {
             var hero = BattleUnitEntityFactory.I.CreateEntity("Sir Calvus", UnitControllerType.Player);
             entity.Heroes.Add(hero);
+            
+            var hero2 = BattleUnitEntityFactory.I.CreateEntity("Sir Calvus", UnitControllerType.Player);
+            entity.Heroes.Add(hero2);
         }
 
         private void AddTestDecks(BattleEntity entity)

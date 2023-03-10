@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Views.Factories.Impl
 {
-    public class BattleUnitCrystalViewFactory : ViewFactory<BattleUnitCrystalView, BattleUnitCrystalEntity, UnitCrystalModel>
+    public class BattleUnitCrystalViewFactory : ViewFactory<Views.Impl.Units.Crystals.BattleUnitCrystalView, BattleUnitCrystalEntity, UnitCrystalModel>
     {
-        [SerializeField] private BattleUnitCrystalView _prefab;
+        [SerializeField] private Views.Impl.Units.Crystals.BattleUnitCrystalView _prefab;
 
-        protected override BattleUnitCrystalView GetPrefab(BattleUnitCrystalEntity entity) => _prefab;
+        protected override Views.Impl.Units.Crystals.BattleUnitCrystalView GetPrefab(BattleUnitCrystalEntity entity) => _prefab;
     }
 }
