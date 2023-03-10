@@ -19,23 +19,21 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
 
         public void AddAttack(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
         {
-            AddToMatrix(initiator, target, defaultAttack);
+            if (defaultAttack) RegisterDefaultAttack(initiator, target);
+            
+            AddAttackToMatrix(initiator, target);
             TryRedirectAttack(initiator, target);
 
             onAttackMatrixChanged?.Invoke();
         }
 
-        private void AddToMatrix(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
+        private void RegisterDefaultAttack(BattleUnitCrystalView initiator, BattleUnitCrystalView target) => DefaultAttackMatrix.Add(initiator, target);
+
+        private void AddAttackToMatrix(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
         {
             AttackMatrix.Add(initiator, target);
             DefenseMatrix.Add(target, initiator);
-            if (defaultAttack) DefaultAttackMatrix.Add(initiator, target);
         }
-        
-        private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
-            => target.Card != null // cannot redirect empty die
-               && target.Controller == UnitControllerType.Enemy // only enemy attacks can be redirected
-               && initiator.Card.Model.MainTarget == CardMainTargetType.Enemy; // only attacks attacking allies can be redirected
 
         private void TryRedirectAttack(BattleUnitCrystalView initiator, BattleUnitCrystalView newTarget)
         {
@@ -43,24 +41,35 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
                 return;
 
             var oldTarget = AttackMatrix[newTarget];
-            // enemy targets redirection initiator now
-            AttackMatrix[newTarget] = initiator;
             
             // Unit targeted by enemy before redirecting is not defending from him now
             DefenseMatrix.Remove(oldTarget, newTarget);
-            
-            // initiator of redirection now defends from enemy
-            DefenseMatrix.Add(initiator, newTarget);
+            ChangeAttackTarget(newTarget, initiator);
             
             // tracking redirection
             RedirectorsMatrix.Add(newTarget, initiator);
+        }
+        
+        private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
+            => target.Card != null // cannot redirect empty die
+               && target.Controller == UnitControllerType.Enemy // only enemy attacks can be redirected
+               && initiator.Card.Model.MainTarget == CardMainTargetType.Enemy; // only attacks attacking allies can be redirected
+
+        private bool CanRedirectByRoll(BattleUnitCrystalView initiator, BattleUnitCrystalView newTarget)
+        {
+            // aggressions can redirect attacks if their magnitude is higher
+            if (newTarget.CurrentRoll >= initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Aggression) return false;
+            // defenses, however, can redirect if magnitudes are tied
+            if (newTarget.CurrentRoll >  initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Defense) return false;
+            
+            return true;
         }
 
         public void RemoveAttack(BattleUnitCrystalView initiator)
         {
             var target = AttackMatrix[initiator];
-            AttackMatrix.Remove(initiator);
-            DefenseMatrix.Remove(target, initiator);
+            RemoveAttackFromMatrix(initiator);
+            RemoveDefenseFromMatrix(initiator, target);
             if (RedirectorsMatrix.ContainsKey(target))
             {
                 if (RedirectorsMatrix[target].IndexOf(initiator) == RedirectorsMatrix[target].Count - 1)
@@ -76,28 +85,24 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
                 if (RedirectorsMatrix.ContainsKey(target))
                 {
                     var lastRedirector = RedirectorsMatrix[target][^1];
-                    AttackMatrix[target] = lastRedirector;
-                    
-                    DefenseMatrix.Add(lastRedirector, target);
+                    ChangeAttackTarget(target, lastRedirector);
                 }
                 else if (DefaultAttackMatrix.ContainsKey(target))
                 {
-                    AttackMatrix[target] = DefaultAttackMatrix[target];
-                    DefenseMatrix.Add(DefaultAttackMatrix[target], target);
+                    ChangeAttackTarget(target, DefaultAttackMatrix[target]);
                 }
             }
             
             onAttackMatrixChanged?.Invoke();
         }
 
-        private bool CanRedirectByRoll(BattleUnitCrystalView initiator, BattleUnitCrystalView newTarget)
+        private void RemoveAttackFromMatrix(BattleUnitCrystalView initiator) => AttackMatrix.Remove(initiator);
+        private void RemoveDefenseFromMatrix(BattleUnitCrystalView initiator, BattleUnitCrystalView target) => DefenseMatrix.Remove(target, initiator);
+
+        private void ChangeAttackTarget(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
         {
-            // aggressions can redirect attacks if their magnitude is higher
-            if (newTarget.CurrentRoll >= initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Aggression) return false;
-            // defenses, however, can redirect if magnitudes are tied
-            if (newTarget.CurrentRoll >  initiator.CurrentRoll && initiator.Card.MainActionType == ActionType.Defense) return false;
-            
-            return true;
+            AttackMatrix[initiator] = target;
+            DefenseMatrix.Add(target, initiator);
         }
 
         public BattleUnitCrystalView GetClashingCrystal(BattleUnitCrystalView initiator)
