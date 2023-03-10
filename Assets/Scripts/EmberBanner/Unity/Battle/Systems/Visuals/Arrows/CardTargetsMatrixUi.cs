@@ -11,6 +11,11 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 {
     public class CardTargetsMatrixUi : EBMonoBehaviour
     {
+        private const float OneSidedArrowLengthMultiplier = 1f;
+        private const float ClashingArrowLengthMultiplier = 0.5f;
+        private const float ArrowSideLength = 0.32f;
+        private const float WeirdConstantToRuleTheUniverse = 0.08f;
+        
         [SerializeField] private ActionTypeToArrowSpritesDictionary _arrowSprites;
         [SerializeField] private Transform _arrowsOrigin;
         
@@ -49,68 +54,74 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
             }
         }
 
-        private void CreateArrow(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
+        private void CreateArrow(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
             var actionType = initiator.Card.Entity.MainAction.Model.Type;
             
             var arrow = new Arrow()
             {
-                Head = SpawnArrowHeads(actionType, initiator, target, clashingArrow).head,
-                Tail = SpawnArrowTail(actionType, initiator, target, clashingArrow)
+                Head = SpawnArrowHeads(actionType, initiator, target, isClashingArrow),
+                Tail = SpawnArrowTail(actionType, initiator, target, isClashingArrow)
             };
 
             _arrows[(initiator, target)] = arrow;
         }
         
-        private GameObject SpawnArrowTail(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
+        private GameObject SpawnArrowTail(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
-            var multiplier = !clashingArrow ? 1f : 0.5f;
-            var distance = (target.Tran.position - initiator.Tran.position) * multiplier;
-            var tail = Instantiate(_arrowSprites[type].ArrowBody, initiator.Tran.position + (distance / 2), Quaternion.identity, _arrowsOrigin);
-            tail.transform.LookAt2D(target.Tran.position, true);
-            tail.transform.localScale = new Vector3(distance.magnitude / 0.32f * 2 - (!clashingArrow ? 0f : 0.64f), 1f, 1f);
+            var lengthMultiplier = GetClashingArrowLengthMultiplier(isClashingArrow);
+            var distanceBetweenCrystals = GetDistanceBetweenCrystals(initiator, target, lengthMultiplier);
+            var arrowPosition = GetArrowPosition(initiator, distanceBetweenCrystals);
+            var tail = InstantiateArrow(type, arrowPosition);
+            RotateTransformOntoTargetCrystal(target, tail);
+            tail.transform.localScale = CalculateFinalArrowLength(isClashingArrow, distanceBetweenCrystals);
 
             return tail;
         }
+
+        private float GetClashingArrowLengthMultiplier(bool isClashingArrow) 
+            => !isClashingArrow 
+                ? OneSidedArrowLengthMultiplier 
+                : ClashingArrowLengthMultiplier;
+
+        private Vector3 GetDistanceBetweenCrystals(BattleUnitCrystalView initiator, BattleUnitCrystalView target, float lengthMultiplier)
+                    => (target.Tran.position - initiator.Tran.position) * lengthMultiplier;
         
-        private (GameObject head, GameObject secondHead) SpawnArrowHeads(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
+        private Vector3 GetArrowPosition(BattleUnitCrystalView initiator, Vector3 distanceBetweenCrystals) 
+            => initiator.Tran.position + (distanceBetweenCrystals / 2);
+
+        private GameObject InstantiateArrow(ActionType type, Vector3 arrowPosition)
+            => Instantiate(_arrowSprites[type].ArrowBody, arrowPosition, Quaternion.identity, _arrowsOrigin);
+
+        private void RotateTransformOntoTargetCrystal(BattleUnitCrystalView target, GameObject tran)
+            => tran.transform.LookAt2D(target.Tran.position, true);
+        
+        private Vector3 CalculateFinalArrowLength(bool isClashingArrow, Vector3 distanceBetweenCrystals)
+            => new (distanceBetweenCrystals.magnitude / ArrowSideLength * 2 - (!isClashingArrow ? 0f : ArrowSideLength * 2), 1f, 1f);
+
+        private GameObject SpawnArrowHeads(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
-            var multiplier = !clashingArrow ? 1f : 0.5f;
-            var distance = (target.Tran.position - initiator.Tran.position) * multiplier;
-            if (clashingArrow)
-                distance = distance + distance.normalized * 0.08f;
-            var head = Instantiate(_arrowSprites[type].ArrowHead, initiator.Tran.position + ((distance) / 2), Quaternion.identity, transform);
+            var lengthMultiplier = GetClashingArrowLengthMultiplier(isClashingArrow);
+            var distanceBetweenCrystals = GetDistanceBetweenCrystals(initiator, target, lengthMultiplier);
+            ShiftArrowHeadForClashingArrow(isClashingArrow, ref distanceBetweenCrystals);
+            var head = InstantiateHead(type, initiator, distanceBetweenCrystals);
 
-            GameObject secondHead = null;
-            /*if (isClash)
-            {
-                secondHead = Instantiate(!isClash ? _arrowHeadPrototypes[0] : _arrowHeadPrototypes[1], start.transform.position + distance / 2, Quaternion.identity, transform);
-                secondHead.transform.LookAt2D(start.transform.position, true);
-                secondHead.transform.position = start.transform.position;
-            }*/
-            head.transform.LookAt2D(target.Tran.position, true);
-            head.transform.position = !clashingArrow ? target.Tran.position : target.Tran.position - distance;
+            RotateTransformOntoTargetCrystal(target, head);
+            head.transform.position = GetHeadPosition(target, isClashingArrow, distanceBetweenCrystals);
 
-            return (head, secondHead);
+            return head;
         }
 
-        private void RemoveArrow(BattleUnitCrystalView initiator)
+        private void ShiftArrowHeadForClashingArrow(bool isClashingArrow, ref Vector3 distanceBetweenCrystals)
         {
-            var keysToRemove = new List<(BattleUnitCrystalView initiator, BattleUnitCrystalView target)>();
-            foreach (var arrowKey in _arrows.Keys)
-            {
-                if (arrowKey.initiator != initiator) continue;
-                
-                var arrow = _arrows[(initiator, arrowKey.target)];
-                Destroy(arrow.Head);
-                Destroy(arrow.Tail);
-                keysToRemove.Add((initiator, arrowKey.target));
-            }
-
-            foreach (var keyToRemove in keysToRemove)
-            {
-                _arrows.Remove(keyToRemove);
-            }
+            if (isClashingArrow)
+                distanceBetweenCrystals += distanceBetweenCrystals.normalized * WeirdConstantToRuleTheUniverse;
         }
+
+        private GameObject InstantiateHead(ActionType type, BattleUnitCrystalView initiator, Vector3 distanceBetweenCrystals)
+            => Instantiate(_arrowSprites[type].ArrowHead, initiator.Tran.position + ((distanceBetweenCrystals) / 2), Quaternion.identity, transform);
+
+        private Vector3 GetHeadPosition(BattleUnitCrystalView target, bool isClashingArrow, Vector3 distanceBetweenCrystals)
+            => !isClashingArrow ? target.Tran.position : target.Tran.position - distanceBetweenCrystals;
     }
 }

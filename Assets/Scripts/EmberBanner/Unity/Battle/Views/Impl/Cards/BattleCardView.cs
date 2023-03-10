@@ -5,7 +5,6 @@ using EmberBanner.Core.Models.Cards;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.Selection;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
-using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using TMPro;
 using UnityEngine;
 using BattleUnitCrystalView = EmberBanner.Unity.Battle.Views.Impl.Units.Crystals.BattleUnitCrystalView;
