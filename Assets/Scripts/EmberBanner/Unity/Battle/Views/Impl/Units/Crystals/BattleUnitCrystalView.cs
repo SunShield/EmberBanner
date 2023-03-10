@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Enums.Battle;
+﻿using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units.Crystals;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 {
-    public class BattleUnitCrystalView : BattleView<Core.Ingame.Impl.Battles.BattleUnitCrystalEntity, UnitCrystalModel>
+    public class BattleUnitCrystalView : BattleView<BattleUnitCrystalEntity, UnitCrystalModel>
     {
         [SerializeField] private GameObject _selectedGraphics;
         [SerializeField] private TextMeshPro _rollText;
@@ -21,7 +22,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         public UnitControllerType Controller => Entity.Owner.Controller;
         public PlayCardZone Zone => _zone;
         public BattleCardView Card => _zone.Cards.Count > 0 ? _zone.Cards[0] : null;
-
+        
         public void SetOwnerView(BattleUnitView ownerView) => OwnerView = ownerView;
 
         public void Roll()

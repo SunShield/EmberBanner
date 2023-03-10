@@ -141,6 +141,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             else if (mainAction.Type == ActionType.Defense)
             {
                 _mainTargetDropdown.choices.Add("Ally");
+                _mainTargetDropdown.choices.Add("Enemy");
             }
             else if (mainAction.Type == ActionType.Support)
             {

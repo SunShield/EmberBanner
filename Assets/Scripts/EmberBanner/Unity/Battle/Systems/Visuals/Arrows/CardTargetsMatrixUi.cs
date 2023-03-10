@@ -18,47 +18,68 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 
         private void Awake()
         {
-            CardTargetsMatrix.I.onAttackAdded   += OnAttackAdded;
-            CardTargetsMatrix.I.onAttackRemoved += OnAttackRemoved;
+            CardTargetsMatrix.I.onAttackMatrixChanged += RedrawArrows;
         }
 
-        private void OnAttackAdded(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        private void RedrawArrows()
         {
-            CreateArrow(initiator, target);
+            _arrows.Clear();
+            foreach (Transform arrowElement in _arrowsOrigin)
+            {
+                Destroy(arrowElement.gameObject);
+            }
+
+            var attackMatrix = CardTargetsMatrix.I.AttackMatrix;
+            var attackersToSkip = new HashSet<BattleUnitCrystalView>();
+            foreach (var initiator in attackMatrix.Keys)
+            {
+                if (attackersToSkip.Contains(initiator)) continue;
+                
+                var clashingCrystal = CardTargetsMatrix.I.GetClashingCrystal(initiator);
+                if (clashingCrystal != null)
+                {
+                    attackersToSkip.Add(attackMatrix[initiator]);
+                    CreateArrow(initiator, clashingCrystal, true);
+                    CreateArrow(clashingCrystal, initiator, true);
+                }
+                else
+                {
+                    CreateArrow(initiator, attackMatrix[initiator]);
+                }
+            }
         }
 
-        private void OnAttackRemoved(BattleUnitCrystalView initiator)
-        {
-            RemoveArrow(initiator);
-        }
-
-        private void CreateArrow(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        private void CreateArrow(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
         {
             var actionType = initiator.Card.Entity.MainAction.Model.Type;
             
             var arrow = new Arrow()
             {
-                Head = SpawnArrowHeads(actionType, initiator, target).head,
-                Tail = SpawnArrowTail(actionType, initiator, target)
+                Head = SpawnArrowHeads(actionType, initiator, target, clashingArrow).head,
+                Tail = SpawnArrowTail(actionType, initiator, target, clashingArrow)
             };
 
             _arrows[(initiator, target)] = arrow;
         }
         
-        private GameObject SpawnArrowTail(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        private GameObject SpawnArrowTail(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
         {
-            var distance = target.Tran.position - initiator.Tran.position;
-            var tail = Instantiate(_arrowSprites[type].ArrowBody, initiator.Tran.position + distance / 2, Quaternion.identity, _arrowsOrigin);
+            var multiplier = !clashingArrow ? 1f : 0.5f;
+            var distance = (target.Tran.position - initiator.Tran.position) * multiplier;
+            var tail = Instantiate(_arrowSprites[type].ArrowBody, initiator.Tran.position + (distance / 2), Quaternion.identity, _arrowsOrigin);
             tail.transform.LookAt2D(target.Tran.position, true);
-            tail.transform.localScale = new Vector3(distance.magnitude / 0.32f * 2, 1f, 1f);
+            tail.transform.localScale = new Vector3(distance.magnitude / 0.32f * 2 - (!clashingArrow ? 0f : 0.64f), 1f, 1f);
 
             return tail;
         }
         
-        private (GameObject head, GameObject secondHead) SpawnArrowHeads(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        private (GameObject head, GameObject secondHead) SpawnArrowHeads(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool clashingArrow = false)
         {
-            var distance = target.Tran.position - initiator.Tran.position;
-            var head = Instantiate(_arrowSprites[type].ArrowHead, initiator.Tran.position + distance / 2, Quaternion.identity, transform);
+            var multiplier = !clashingArrow ? 1f : 0.5f;
+            var distance = (target.Tran.position - initiator.Tran.position) * multiplier;
+            if (clashingArrow)
+                distance = distance + distance.normalized * 0.08f;
+            var head = Instantiate(_arrowSprites[type].ArrowHead, initiator.Tran.position + ((distance) / 2), Quaternion.identity, transform);
 
             GameObject secondHead = null;
             /*if (isClash)
@@ -68,7 +89,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
                 secondHead.transform.position = start.transform.position;
             }*/
             head.transform.LookAt2D(target.Tran.position, true);
-            head.transform.position = target.Tran.position;
+            head.transform.position = !clashingArrow ? target.Tran.position : target.Tran.position - distance;
 
             return (head, secondHead);
         }

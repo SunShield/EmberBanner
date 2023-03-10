@@ -52,6 +52,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -72,6 +73,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -97,6 +99,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -122,6 +125,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -147,6 +151,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -167,6 +172,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -192,6 +198,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -217,6 +224,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -237,6 +245,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -262,6 +271,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -282,6 +292,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -307,6 +318,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -332,6 +344,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -357,6 +370,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -377,6 +391,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -402,6 +417,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -422,6 +438,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -442,6 +459,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -467,6 +485,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -492,6 +511,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -512,10 +532,11 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 0
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      MainTarget: 0
+      MainTarget: 2
     - <Name>k__BackingField: Shield of Faith
       Sprite: {fileID: 21300000, guid: 26cdf27540e77ef44a6751c9945a4529, type: 3}
       Cost: 1
@@ -537,6 +558,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -562,6 +584,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []
@@ -587,6 +610,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         IsMain: 1
+        IsAoE: 0
         Params:
           m_keys: []
           m_values: []

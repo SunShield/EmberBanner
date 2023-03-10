@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Enums.Battle;
+﻿using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Unity.Battle.Management;
@@ -24,6 +25,9 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
         public BattleUnitCrystalView Crystal { get; private set; }
 
         public BattleCardZone Zone => Entity.Zone;
+        public ActionType MainActionType => Entity.MainAction.Model.Type;
+        public bool IsAoE => Entity.MainAction.Model.IsAoE;
+        
         protected override void PostInitialize()
         {
             var spriteSize = Entity.Model.Sprite.texture.width;
