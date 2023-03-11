@@ -36,7 +36,10 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             {
                 if (SelectedCard.CanTarget(crystalView))
                 {
-                    CardPrePlayManager.I.SetCardPrePlayedWithTarget(SelectedCard, CurrentCrystalWithCard, crystalView);
+                    if (SelectedCard.IsLegallyTargetingSelf(crystalView))
+                        CardPrePlayManager.I.SetCardPrePlayed(SelectedCard, CurrentCrystalWithCard);
+                    else
+                        CardPrePlayManager.I.SetCardPrePlayedWithTarget(SelectedCard, CurrentCrystalWithCard, crystalView);
                     CardSelectionManager.I.UnselectCard();
                 }
                 else

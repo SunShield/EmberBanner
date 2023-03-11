@@ -96,7 +96,7 @@ MonoBehaviour:
           Span: 4
           Growth: 1
         Threshold: 2
-        CoinsAmount: 0
+        CoinsAmount: 1
         IsFast: 0
         TargetsCount: 0
         Type: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
         Params:
           m_keys: []
           m_values: []
-      Target: 6
+      Target: 4
     - <Name>k__BackingField: Noxious Claw
       Sprite: {fileID: 21300000, guid: 825598986a65a12469aa0b750bd2cf86, type: 3}
       Cost: 1
@@ -209,7 +209,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
+        PossibleAggressionTargets: 1
         PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
         Params:
           m_keys: []
           m_values: []
-      Target: 0
+      Target: 5
     - <Name>k__BackingField: Sigil of the Dead
       Sprite: {fileID: 21300000, guid: 75c10760201749242b9cb79e738f3a17, type: 3}
       Cost: 2
@@ -341,7 +341,7 @@ MonoBehaviour:
         Params:
           m_keys: []
           m_values: []
-      Target: 2
+      Target: 4
     - <Name>k__BackingField: Withering Touch
       Sprite: {fileID: 21300000, guid: afe40ba4a57037746978aeb5394a5dd0, type: 3}
       Cost: 1
@@ -362,7 +362,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
+        PossibleAggressionTargets: 1
         PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
+        PossibleAggressionTargets: 1
         PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
+        PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
         Params:
@@ -470,7 +470,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
+        PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
         Params:
@@ -493,7 +493,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
+        PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
         Params:
@@ -516,7 +516,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
+        PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
         Params:
@@ -537,13 +537,13 @@ MonoBehaviour:
           Span: 6
           Growth: 1
         Threshold: 0
-        CoinsAmount: 0
+        CoinsAmount: 1
         IsFast: 0
         TargetsCount: 0
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
+        PossibleAggressionTargets: 1
         PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
         AggressionType: 0
         DefenseType: 0
         PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
+        PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0
         Params:
@@ -652,7 +652,7 @@ MonoBehaviour:
         DefenseType: 0
         PossibleAggressionTargets: 0
         PossibleDefenseTargets: 0
-        PossibleSupportTargets: -1
+        PossibleSupportTargets: 2
         IsAoE: 0
         Params:
           m_keys: []
@@ -678,7 +678,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
+        PossibleAggressionTargets: 1
         PossibleDefenseTargets: 0
         PossibleSupportTargets: 0
         IsAoE: 0

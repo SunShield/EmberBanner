@@ -74,10 +74,13 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Cards
 
         public bool CanTarget(BattleUnitCrystalView potentialTarget)
         {
-            return  potentialTarget.OwnerView == Owner && Model.TargetType.AllowsSelf() ||
-                   (potentialTarget.Controller == UnitControllerType.Enemy && Model.TargetType.AllowsEnemy()) ||
-                   (potentialTarget.Controller == UnitControllerType.Player && Model.TargetType.AllowsAlly());
+            return  IsLegallyTargetingSelf(potentialTarget) ||
+                    (Owner.Controller.Enemy() == potentialTarget.Controller && Model.TargetType.AllowsEnemy()) ||
+                    (Owner.Controller.Ally()  == potentialTarget.Controller && Model.TargetType.AllowsAlly());
         }
+
+        public bool IsLegallyTargetingSelf(BattleUnitCrystalView potentialTarget) 
+            => potentialTarget.OwnerView == Owner && Model.TargetType.AllowsSelf();
 
         public void SetPrePlayed(BattleUnitCrystalView crystal)
         {

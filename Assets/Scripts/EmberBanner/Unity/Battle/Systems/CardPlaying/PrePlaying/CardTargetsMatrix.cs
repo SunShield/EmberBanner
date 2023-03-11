@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Service.Classes.Fundamental;
 using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
@@ -64,12 +62,14 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         private void RegisterRedirection(BattleUnitCrystalView redirectedCrystal, BattleUnitCrystalView redirectorCrystal) 
             => RedirectorsMatrix.Add(redirectedCrystal, redirectorCrystal);
         
-        private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target) 
-            => target.Card != null // cannot redirect empty die
-               && target.Controller == UnitControllerType.Enemy // only enemy attacks can be redirected
-               && initiator.Card.Model.TargetType.AllowsEnemy() // only attacks able to attack you or allies can be redirected
-               && target.Card.CanTarget(initiator); 
-        
+        private bool CanRedirect(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        {
+            return target.Card != null // cannot redirect empty die
+                   && target.Controller == UnitControllerType.Enemy // only enemy attacks can be redirected
+                   && initiator.Card.Model.TargetType.AllowsEnemy() // only attacks able to attack you or allies can be redirected
+                   && target.Card.CanTarget(initiator);
+        }
+
         private bool CanRedirectByRoll(BattleUnitCrystalView initiator, BattleUnitCrystalView newTarget)
         {
             if (newTarget.CurrentRoll >= initiator.CurrentRoll ) return false;
@@ -131,6 +131,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
                 if (!CrystalHasAttack(initiator)) return null;
                     
                 var target = GetTarget(initiator);
+                if (target == initiator) return null; // self-targeting actions
                 if (GetClashingCrystal(target) == initiator) return target;
             }
 

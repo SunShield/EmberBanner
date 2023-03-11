@@ -1,4 +1,5 @@
-﻿using EmberBanner.Unity.Battle.Views.Impl.Cards;
+﻿using System;
+using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
@@ -11,6 +12,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
         public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView owner)
         {
             card.SetPrePlayed(owner);
+            onCardSetPrePlay?.Invoke(owner);
         }
 
         public void SetCardPrePlayedWithTarget(BattleCardView card, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool defaultAttack = false)
@@ -21,9 +23,13 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
 
         public void UnsetCardPrePlayed(BattleCardView card)
         {
+            onCardUnsetPrePlay?.Invoke(card.Crystal);
             if (CardTargetsMatrix.I.CrystalHasAttack(card.Crystal))
                 CardTargetsMatrix.I.RemoveAttack(card.Crystal);
             card.UnsetPrePlayed();
         }
+
+        public event Action<BattleUnitCrystalView> onCardSetPrePlay;
+        public event Action<BattleUnitCrystalView> onCardUnsetPrePlay;
     }
 }
