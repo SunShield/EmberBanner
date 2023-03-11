@@ -42,7 +42,6 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ActionType.Support => new SupportActionListElement(),
                 _ => null
             };
-            listElement.onPossibleTargetsChanged += FireOnPossibleTargetsChangedEvent;
 
             return listElement;
         }
@@ -58,9 +57,5 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ? elements.Select(e => int.Parse(e.Name)).Max() 
                 : 0;
         }
-
-        private void FireOnPossibleTargetsChangedEvent() => onPossibleTargetsChanged?.Invoke();
-        
-        public event Action onPossibleTargetsChanged;
     }
 }

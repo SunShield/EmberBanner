@@ -51,9 +51,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -74,9 +72,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -102,9 +98,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
-        PossibleSupportTargets: 0
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -130,9 +124,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -158,9 +150,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -181,9 +171,7 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 1
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -209,9 +197,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -237,9 +223,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 1
-        PossibleSupportTargets: 0
+        PossibleTargets: 6
         IsAoE: 0
         Params:
           m_keys: []
@@ -260,9 +244,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 4
         IsAoE: 0
         Params:
           m_keys: []
@@ -288,9 +270,7 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 1
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -311,9 +291,7 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 2
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -334,9 +312,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 4
         IsAoE: 0
         Params:
           m_keys: []
@@ -362,9 +338,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -390,9 +364,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -418,9 +390,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 2
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -441,14 +411,12 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 1
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      Target: 4
+      Target: 5
     - <Name>k__BackingField: Defence of the Stalwart
       Sprite: {fileID: 21300000, guid: 7dfb2d3247b59fe4b892e87c3099be2c, type: 3}
       Cost: 2
@@ -469,9 +437,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -492,9 +458,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -515,9 +479,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -543,9 +505,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []
@@ -571,9 +531,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 4
-        PossibleSupportTargets: 0
+        PossibleTargets: 4
         IsAoE: 0
         Params:
           m_keys: []
@@ -594,9 +552,7 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 1
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -622,9 +578,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
@@ -650,9 +604,7 @@ MonoBehaviour:
         Type: 2
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 0
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 2
+        PossibleTargets: 2
         IsAoE: 0
         Params:
           m_keys: []
@@ -678,9 +630,7 @@ MonoBehaviour:
         Type: 0
         AggressionType: 0
         DefenseType: 0
-        PossibleAggressionTargets: 1
-        PossibleDefenseTargets: 0
-        PossibleSupportTargets: 0
+        PossibleTargets: 3
         IsAoE: 0
         Params:
           m_keys: []

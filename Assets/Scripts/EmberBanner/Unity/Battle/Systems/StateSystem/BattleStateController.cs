@@ -1,8 +1,10 @@
 ﻿using System;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
+using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
 using EmberBanner.Unity.Service;
 using TMPro;
 using UnityEngine;
@@ -45,6 +47,12 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.TurnPlan)
             {
+                State = BattleState.PostTurnPlan;
+            }
+            else if (State == BattleState.PostTurnPlan)
+            {
+                PrePlayedCardsUiManager.I.Clear();
+                CrystalActionsFiller.I.AddActionsToCrystals();
                 State = BattleState.CrustalTurn;
             }
             else if (State == BattleState.CrystalTurnStart)

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EmberBanner.Core.Entities.Impl.Units;
 using EmberBanner.Core.Entities.Management.SaveLoad.Data.Impl.Cards;
-using EmberBanner.Core.Enums.Actions;
-using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Ingame.Management.SaveLoad;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Cards;
@@ -30,43 +29,12 @@ namespace EmberBanner.Core.Entities.Impl.Cards
         }
 
         public List<ActionModel> GetActionsTargetingEnemy()
-        {
-            var result = new List<ActionModel>();
-            foreach (var actionModel in Model.Actions)
-            {
-                if (actionModel.Type == ActionType.Aggression && actionModel.AggressionTargetType.AllowsEnemy() ||
-                    actionModel.Type == ActionType.Defense && actionModel.DefenseTargetType.AllowsEnemy())
-                    result.Add(actionModel);
-            }
-
-            return result;
-        }
+            => Model.Actions.Where(actionModel => actionModel.TargetType.AllowsEnemy()).ToList();
         
         public List<ActionModel> GetActionsTargetingAlly()
-        {
-            var result = new List<ActionModel>();
-            foreach (var actionModel in Model.Actions)
-            {
-                if (actionModel.Type == ActionType.Defense && actionModel.DefenseTargetType.AllowsAlly() ||
-                    actionModel.Type == ActionType.Support && actionModel.SupportTargetType.AllowsAlly())
-                    result.Add(actionModel);
-            }
-
-            return result;
-        }
+            => Model.Actions.Where(actionModel => actionModel.TargetType.AllowsAlly()).ToList();
         
         public List<ActionModel> GetActionsTargetingSelf()
-        {
-            var result = new List<ActionModel>();
-            foreach (var actionModel in Model.Actions)
-            {
-                if (actionModel.Type == ActionType.Aggression && actionModel.AggressionTargetType.AllowsSelf() ||
-                    actionModel.Type == ActionType.Defense && actionModel.DefenseTargetType.AllowsSelf() ||
-                    actionModel.Type == ActionType.Support && actionModel.SupportTargetType.AllowsSelf())
-                    result.Add(actionModel);
-            }
-
-            return result;
-        }
+            => Model.Actions.Where(actionModel => actionModel.TargetType.AllowsSelf()).ToList();
     }
 }

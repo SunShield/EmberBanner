@@ -5,7 +5,7 @@ using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Service.Extensions;
 using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Management;
-using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
@@ -20,6 +20,7 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
 
         public void SetEnemyAttacks()
         {
+            return;
             // By default, random units are targeted
             // But, possibly, later some enemies will have primitive AI
 
@@ -34,7 +35,7 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
                     var randomCardIndex = Random.Range(0, availableCards.Count);
                     var randomCard = availableCards[randomCardIndex];
                     
-                    if (randomCard.Model.TargetType == CardTargetType.Self)
+                    if (randomCard.Model.TargetType == TargetType.Self)
                         CardPrePlayManager.I.SetCardPrePlayed(randomCard, enemyCrystal);
                     else
                     {

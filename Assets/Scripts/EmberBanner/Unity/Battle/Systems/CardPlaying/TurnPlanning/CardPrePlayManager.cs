@@ -2,7 +2,7 @@
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
-namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
+namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
 {
     public class CardPrePlayManager
     {

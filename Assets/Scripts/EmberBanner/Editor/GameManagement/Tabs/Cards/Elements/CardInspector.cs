@@ -40,7 +40,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _actionsContainer = Root.Q<VisualElement>("ActionsContainer");
             _baseStatsContainer = Root.Q<VisualElement>("BaseStatsContainer");
             _possibleTargetsField = new DropdownField();
-            _possibleTargetsField.choices.AddRange(Enum.GetValues(typeof(CardTargetType)).Cast<CardTargetType>().Select(e => e.ToString()).ToList());
+            _possibleTargetsField.choices.AddRange(Enum.GetValues(typeof(TargetType)).Cast<TargetType>().Select(e => e.ToString()).ToList());
             _baseStatsContainer.Add(_possibleTargetsField);
             
             AddActionsList();
@@ -60,9 +60,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             void AddAction(string actionName)
             {
                 var action = new ActionModel(actionName, _actionList.CurrentActionType);
-                action.PossibleAggressionTargets = 0;
-                action.PossibleDefenseTargets = 0;
-                action.PossibleSupportTargets = 0;
+                action.PossibleTargets = 0;
                 
                 InspectedElement.Actions.Add(action);
                 

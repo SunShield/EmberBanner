@@ -2,7 +2,7 @@
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Unity.Battle.Management;
-using EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Service;
 
@@ -30,7 +30,7 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             
             if (SelectedCard != null) return;
 
-            if (card.Entity.Model.TargetType == CardTargetType.Self)
+            if (card.Entity.Model.TargetType == TargetType.Self)
             {
                 if (!card.CanBePlayed()) return;
                 

@@ -8,7 +8,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards
 {
     public class PrePlayedCardActionUi : EBMonoBehaviour
     {
-        private const float DistanceBetweenCoinCenters = 0.25f;
+        private const float DistanceBetweenCoinCenters = 0.125f;
+        private readonly Color CancelledActionColor = new(0.3f, 0.3f, 0.3f, 1f);
         
         private readonly Dictionary<ActionType, Color> _actionColors = new()
         {
@@ -22,10 +23,12 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards
         [SerializeField] private Transform _coinsOrigin;
 
         private List<PrePlayedCoinUi> _coins = new();
+        private CardActionEntity _action;
 
         public void Initialize(CardActionEntity action)
         {
-            _graphics.color = _actionColors[action.Model.Type];
+            _action = action;
+            SetColorByType();
 
             var coinPosition = _coinsOrigin.position;
             for (int i = 0; i < action.Model.CoinsAmount; i++)
@@ -35,5 +38,15 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards
                 _coins.Add(coin);
             }
         }
+
+        public void SetCancelled(bool cancelled)
+        {
+            if (cancelled)
+                _graphics.color = CancelledActionColor;
+            else
+                SetColorByType();
+        }
+        
+        private void SetColorByType() => _graphics.color = _actionColors[_action.Model.Type];
     }
 }

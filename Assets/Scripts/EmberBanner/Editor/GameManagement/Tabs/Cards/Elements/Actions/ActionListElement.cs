@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Actions.Params;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params;
@@ -106,6 +107,9 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _cpMaxField.value       = Element.ClashingPower.Max;
             _descriptionField.value = Element.RawDescription;
             
+            PossibleTargetsField.choices = Enum.GetValues(typeof(TargetType)).Cast<TargetType>().Select(e => e.ToString()).ToList();
+            PossibleTargetsField.index = (int)Element.PossibleTargets;
+            
             ToggleHiddenState();
             _paramsList.Update();
         }
@@ -161,6 +165,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             {
                 Element.RawDescription = evt.newValue;
             });
+            
+            PossibleTargetsField.RegisterValueChangedCallback(evt =>
+            {
+                Element.PossibleTargets = PossibleTargetsField.index;
+            });
         }
 
         private void ToggleHiddenState()
@@ -173,9 +182,5 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ? "Show"
                 : "Hide";
         }
-
-        protected void FireOnPossibleTargetsChangedEvent() => onPossibleTargetsChanged?.Invoke();
-
-        public event Action onPossibleTargetsChanged;
     }
 }

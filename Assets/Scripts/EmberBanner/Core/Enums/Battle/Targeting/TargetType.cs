@@ -1,6 +1,6 @@
 ﻿namespace EmberBanner.Core.Enums.Battle.Targeting
 {
-    public enum CardTargetType
+    public enum TargetType
     {
         Self,
         Ally,

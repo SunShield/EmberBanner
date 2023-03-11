@@ -6,6 +6,7 @@
         Start,
         TurnStart,
         TurnPlan, // selecting cards and targets here
+        PostTurnPlan, // pre-execution battlefield state is calculated here
         
         //// Player repeatedly for each unit
         /**/ CrystalTurnStart,

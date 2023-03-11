@@ -16,7 +16,7 @@ namespace EmberBanner.Core.Models.Cards
         public int Cost;
         public List<ActionModel> Actions = new();
         public int Target;
-        public CardTargetType TargetType => (CardTargetType)Target;
+        public TargetType TargetType => (TargetType)Target;
 
         public CardModel(string name) => base.Name = name;
     }

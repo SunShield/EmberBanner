@@ -5,7 +5,7 @@ using EmberBanner.Core.Service.Classes.Fundamental;
 using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
-namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
+namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
 {
     public class CardTargetsMatrix
     {
@@ -50,7 +50,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PrePlaying
             RegisterRedirection(newTarget, initiator);
         }
 
-        private BattleUnitCrystalView GetTarget(BattleUnitCrystalView newTarget) => AttackMatrix[newTarget];
+        public BattleUnitCrystalView GetTarget(BattleUnitCrystalView newTarget) => AttackMatrix[newTarget];
         private void RemoveAttackerFromDefenseMatrix(BattleUnitCrystalView target, BattleUnitCrystalView initiator) => DefenseMatrix.Remove(target, initiator);
         
         private void ChangeAttackTarget(BattleUnitCrystalView initiator, BattleUnitCrystalView target)

@@ -1,9 +1,10 @@
-﻿using EmberBanner.Core.Enums.Actions;
+﻿using System.Collections.Generic;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units.Crystals;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones;
 using EmberBanner.Unity.Battle.Systems.Selection;
+using EmberBanner.Unity.Battle.Systems.Visuals.CrystalActions;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         [SerializeField] private GameObject _selectedGraphics;
         [SerializeField] private TextMeshPro _rollText;
         [SerializeField] private PlayCardZone _zone;
+        [SerializeField] private CrystalActionsUi _actionsUi;
         
         public BattleUnitView OwnerView { get; private set; }
         
@@ -58,5 +60,18 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 
         // will be used later
         public bool CanBeTargeted(BattleCardView card) => true;
+
+        public void AddActions(List<BattlePlayingActionEntity> actions)
+        {
+            _actionsUi.SetActive(true);
+            _actionsUi.AddActions(actions);
+            
+        }
+
+        public void OnTurnEnd()
+        {
+            _actionsUi.SetActive(false);
+            _actionsUi.ClearActions();
+        }
     }
 }
