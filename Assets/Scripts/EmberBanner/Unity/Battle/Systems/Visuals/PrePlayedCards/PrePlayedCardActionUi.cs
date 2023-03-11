@@ -8,6 +8,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards
 {
     public class PrePlayedCardActionUi : EBMonoBehaviour
     {
+        private const float DistanceBetweenCoinCenters = 0.25f;
+        
         private readonly Dictionary<ActionType, Color> _actionColors = new()
         {
             { ActionType.Aggression, new(0.9f, 0.2f, 0.2f, 1f) },
@@ -29,6 +31,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards
             for (int i = 0; i < action.Model.CoinsAmount; i++)
             {
                 var coin = Instantiate(_coinPrefab, coinPosition, Quaternion.identity, _coinsOrigin);
+                coin.Tran.localPosition = new Vector3(DistanceBetweenCoinCenters * i, 0f, 0f);
                 _coins.Add(coin);
             }
         }
