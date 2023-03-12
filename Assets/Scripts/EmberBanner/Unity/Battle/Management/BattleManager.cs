@@ -27,7 +27,6 @@ namespace EmberBanner.Unity.Battle.Management
         [SerializeField] private BattleUnitViewFactory _unitViewFactory;
         [SerializeField] private BattleUnitCrystalViewFactory _crystalViewFactory;
         
-        public TurnOrderController TurnOrderController { get; private set; } = new();
         public BattleRegistry Registry { get; private set; } = new();
         public BattleEntity Entity { get; private set; }
         

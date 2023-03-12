@@ -50,7 +50,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
             RegisterRedirection(newTarget, initiator);
         }
 
-        public BattleUnitCrystalView GetTarget(BattleUnitCrystalView newTarget) => AttackMatrix[newTarget];
+        public BattleUnitCrystalView GetTarget(BattleUnitCrystalView newTarget) => AttackMatrix.ContainsKey(newTarget) ? AttackMatrix[newTarget] : null;
         private void RemoveAttackerFromDefenseMatrix(BattleUnitCrystalView target, BattleUnitCrystalView initiator) => DefenseMatrix.Remove(target, initiator);
         
         private void ChangeAttackTarget(BattleUnitCrystalView initiator, BattleUnitCrystalView target)

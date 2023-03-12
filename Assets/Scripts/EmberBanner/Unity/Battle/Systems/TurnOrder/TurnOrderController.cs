@@ -8,11 +8,15 @@ namespace EmberBanner.Unity.Battle.Systems.TurnOrder
 {
     public class TurnOrderController
     {
+        private static TurnOrderController _instance;
+        public static TurnOrderController I => _instance ??= new();
+        
         private const int NoCrystalTurn = -1;
         
         public List<BattleUnitCrystalView> Crystals { get; private set; } = new();
         public int CurrentCrystalIndex { get; private set; } = NoCrystalTurn;
         public bool AllCrystalsEndedTurns => CurrentCrystalIndex == Crystals.Count;
+        public BattleUnitCrystalView CurrentCrystal => Crystals[CurrentCrystalIndex];
 
         public void DetermineTurnOrder()
         {

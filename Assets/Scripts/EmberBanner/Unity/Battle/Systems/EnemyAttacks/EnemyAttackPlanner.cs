@@ -20,7 +20,6 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
 
         public void SetEnemyAttacks()
         {
-            return;
             // By default, random units are targeted
             // But, possibly, later some enemies will have primitive AI
 

@@ -50,7 +50,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -71,7 +73,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -97,7 +101,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -123,7 +129,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -149,7 +157,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -170,7 +180,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 2
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -196,7 +208,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -222,7 +236,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 6
         IsAoE: 0
         Params:
@@ -243,7 +259,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -269,7 +287,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 2
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -290,7 +310,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 2
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -311,7 +333,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -337,7 +361,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -363,7 +389,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -389,7 +417,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -410,13 +440,38 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 1
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      Target: 5
+      - <Name>k__BackingField: 3
+        RawDescription: 
+        Magnitude: 3
+        ClashingPower:
+          Min: 2
+          Max: 2
+        ClashingPowerGrowthRate:
+          Span: 3
+          Growth: 1
+        Threshold: 0
+        CoinsAmount: 1
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportTags: 
+        PossibleTargets: 0
+        IsAoE: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 6
     - <Name>k__BackingField: Defence of the Stalwart
       Sprite: {fileID: 21300000, guid: 7dfb2d3247b59fe4b892e87c3099be2c, type: 3}
       Cost: 2
@@ -436,7 +491,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -457,7 +514,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -478,7 +537,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -504,7 +565,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -530,7 +593,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -551,7 +616,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 2
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -577,7 +644,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 1
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -603,7 +672,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 2
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 2
         IsAoE: 0
         Params:
@@ -629,7 +700,9 @@ MonoBehaviour:
         TargetsCount: 0
         Type: 0
         AggressionType: 0
+        HarmTags: 
         DefenseType: 0
+        SupportTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:

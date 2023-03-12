@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 
 namespace Plugins.ComplexValue
 {
@@ -26,6 +27,7 @@ namespace Plugins.ComplexValue
         public Dictionary<ulong, ComplexValueModifier> MoreMultipliers = new();
         public Dictionary<ulong, ComplexValueModifier> LessMultipliers = new();
 
+        public HashSet<string> Tags = new();
         private bool _isAlwaysPositive;
         
         /// <summary>
@@ -41,7 +43,6 @@ namespace Plugins.ComplexValue
         }
 
         public void SetFilter(ComplexValueFilterDelegate filter) => _filter = filter;
-
         public void SetBaseValue(int baseValue) => BaseValue = baseValue;
 
         public int CalculateNewValue(int newValue)
@@ -111,6 +112,9 @@ namespace Plugins.ComplexValue
                     break;
             }
         }
+
+        public void AddTag(string tag) => Tags.Add(tag);
+        public void AddTags(List<string> tags) => Tags.AddRange(tags);
 
         public int CalculateValue(ComplexValueFilterDelegate filter = null)
         {

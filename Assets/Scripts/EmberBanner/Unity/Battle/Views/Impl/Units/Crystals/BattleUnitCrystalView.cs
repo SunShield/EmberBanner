@@ -25,6 +25,9 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         public PlayCardZone Zone => _zone;
         public BattleCardView Card => _zone.Cards.Count > 0 ? _zone.Cards[0] : null;
         public bool IsEnemy => Controller == UnitControllerType.Enemy;
+        public bool IsDead => OwnerView.IsDead;
+
+        public List<BattlePlayingActionEntity> Actions { get; private set; } = new();
         
         public void SetOwnerView(BattleUnitView ownerView) => OwnerView = ownerView;
 
@@ -63,9 +66,9 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 
         public void AddActions(List<BattlePlayingActionEntity> actions)
         {
+            Actions = actions;
             _actionsUi.SetActive(true);
-            _actionsUi.AddActions(actions);
-            
+            _actionsUi.AddActions(Actions);
         }
 
         public void OnTurnEnd()

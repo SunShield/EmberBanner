@@ -4,6 +4,7 @@ using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
+using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
 using EmberBanner.Unity.Service;
 using TMPro;
@@ -42,7 +43,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 DrawCards();
                 RollCrystals();
                 EnemyAttackPlanner.I.SetEnemyAttacks();
-                BattleManager.I.TurnOrderController.DetermineTurnOrder();
+                TurnOrderController.I.DetermineTurnOrder();
                 State = BattleState.TurnPlan;
             }
             else if (State == BattleState.TurnPlan)
@@ -65,11 +66,11 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.CrystalTurnEnd)
             {
-                if (BattleManager.I.TurnOrderController.AllCrystalsEndedTurns)
+                if (TurnOrderController.I.AllCrystalsEndedTurns)
                     State = BattleState.TurnEnd;
                 else
                 {
-                    BattleManager.I.TurnOrderController.AdvanceOrder();
+                    TurnOrderController.I.AdvanceOrder();
                     State = BattleState.CrystalTurnStart;
                 }
             }

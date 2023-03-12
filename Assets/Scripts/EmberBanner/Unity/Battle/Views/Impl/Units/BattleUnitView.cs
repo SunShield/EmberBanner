@@ -24,6 +24,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         public UnitControllerType Controller => Entity.Controller;
         public BattleUnitCrystalsView UnitCrystals => _unitCrystals;
         public List<BattleCardView> CardsInHand => _zonesManager.CardsInHand;
+        
+        public bool IsDead { get; private set; }
 
         public void SetCrystals(List<BattleUnitCrystalView> crystals) => _unitCrystals.SetCrystals(crystals);
 

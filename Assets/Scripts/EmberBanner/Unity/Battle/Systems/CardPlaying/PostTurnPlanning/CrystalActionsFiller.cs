@@ -6,6 +6,7 @@ using EmberBanner.Core.Service.Extensions.Targeting;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
+using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
 {
@@ -29,7 +30,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
 
         private BattlePlayingActionEntity CreatePlayingAction(BattleCardView card, CardActionEntity action)
         {
-            var playingAction = new BattlePlayingActionEntity(action)
+            var playingAction = new BattlePlayingActionEntity(action, card.Crystal)
             {
                 IsCancelled = DetermineIfActionIsCancelled(card, action)
             };
@@ -51,10 +52,17 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
             
             var initiatorCrystal = card.Crystal;
             var cardTarget = CardTargetsMatrix.I.GetTarget(initiatorCrystal);
+            if (cardTarget == null) return true; // card targets self but action is not allowed to target self
             if (cardTarget.Controller == initiatorCrystal.Controller         && actionTargetType.AllowsAlly())  return false;
             if (cardTarget.Controller == initiatorCrystal.Controller.Enemy() && actionTargetType.AllowsEnemy()) return false;
 
             return true;
         }
+
+        /*private BattleUnitCrystalView DetermineActionTarget(BattlePlayingActionEntity action)
+        {
+            var crystalTarget = CardTargetsMatrix.I.GetTarget(action.Holder);
+            if (crystalTarget == action.Holder) return action.Holder; // targeting self
+        }*/
     }
 }
