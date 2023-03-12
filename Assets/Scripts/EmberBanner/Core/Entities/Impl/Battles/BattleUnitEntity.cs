@@ -12,6 +12,7 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
     /// </summary>
     public class BattleUnitEntity : UnitEntity
     {
+        public int CurrentHealth { get; set; }
         public int CurrentEnergy { get; set; }
         
         public UnitControllerType Controller { get; private set; }
@@ -23,6 +24,7 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         public override void Initialize(object payload)
         {
             Controller = (UnitControllerType)payload;
+            CurrentHealth = StartingHealth.CalculateValue();
             CurrentEnergy = StartingEnergy.CalculateValue();
         }
 

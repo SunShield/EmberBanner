@@ -35,7 +35,8 @@ namespace EmberBanner.Unity.Battle.Systems.EnemyAttacks
                     var randomCard = availableCards[randomCardIndex];
                     
                     if (randomCard.Model.TargetType == TargetType.Self)
-                        CardPrePlayManager.I.SetCardPrePlayed(randomCard, enemyCrystal);
+                        //CardPrePlayManager.I.SetCardPrePlayed(randomCard, enemyCrystal);
+                        CardPrePlayManager.I.SetCardPrePlayedWithTarget(randomCard, enemyCrystal, enemyCrystal, true);
                     else
                     {
                         var legalTargets = GetCardLegalTargets(enemy, randomCard);

@@ -34,7 +34,8 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
             {
                 if (!card.CanBePlayed()) return;
                 
-                CardPrePlayManager.I.SetCardPrePlayed(card, CrystalSelectionManager.I.CurrentCrystalWithCard);
+                //CardPrePlayManager.I.SetCardPrePlayed(card, CrystalSelectionManager.I.CurrentCrystalWithCard);
+                CardPrePlayManager.I.SetCardPrePlayedWithTarget(SelectedCard, CrystalSelectionManager.I.CurrentCrystalWithCard, CrystalSelectionManager.I.CurrentCrystalWithCard);
             }
             else
             {

@@ -5,7 +5,7 @@ using EmberBanner.Core.Models.Units;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
 using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
-using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
+using TMPro;
 using UnityEngine;
 using BattleUnitCrystalView = EmberBanner.Unity.Battle.Views.Impl.Units.Crystals.BattleUnitCrystalView;
 
@@ -13,10 +13,12 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 {
     public class BattleUnitView : BattleView<BattleUnitEntity, UnitModel>
     {
-        private const float SpotSize = 64f;
-        
         [SerializeField] private SpriteRenderer _graphics;
         [SerializeField] private BattleUnitCrystalsView _unitCrystals;
+        [SerializeField] private Transform _unitHealthBar;
+        [SerializeField] private TextMeshPro _unitHealthText;
+        [SerializeField] private TextMeshPro _unitEnergyText;
+        
         private UnitCardZonesManager _zonesManager;
 
         public UnitSpot Spot { get; private set; }
@@ -37,10 +39,6 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         private void SetGraphics()
         {
             _graphics.sprite = Entity.Model.Sprite;
-            var spriteSize = Entity.Model.Sprite.texture.width;
-            var graphicsScale = SpotSize / spriteSize * 2;
-            _graphics.transform.localScale =
-                new Vector3((Controller == UnitControllerType.Player ? 1f : -1f) * graphicsScale, graphicsScale, 1f);
         }
 
         public void SetZonesManager(UnitCardZonesManager zonesManager)
@@ -75,5 +73,12 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 
         public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.SetCardPrePlayed(card, crystal);
         public void UnsetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.UnsetCardPrePlayed(card, crystal);
+
+        private void Update()
+        {
+            _unitHealthBar.localScale = new Vector3((float)Entity.CurrentHealth / Entity.MaxHealth.CalculateValue(), 1f, 1f);
+            _unitHealthText.text = $"{Entity.CurrentHealth}/{Entity.MaxHealth.CalculateValue()}";
+            _unitEnergyText.text = Entity.CurrentEnergy.ToString();
+        }
     }
 }

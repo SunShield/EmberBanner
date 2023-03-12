@@ -9,7 +9,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
         private static CardPrePlayManager _instance;
         public static CardPrePlayManager I => _instance ??= new();
 
-        public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView owner)
+        private void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView owner)
         {
             card.SetPrePlayed(owner);
             onCardSetPrePlay?.Invoke(owner);

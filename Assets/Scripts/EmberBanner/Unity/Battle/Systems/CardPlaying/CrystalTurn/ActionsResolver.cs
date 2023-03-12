@@ -27,11 +27,6 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         /// </summary>
         public void CrystalsPreTurn()
         {
-            
-        }
-
-        public void ProcessCurrentCrystalTurn()
-        {
             GetCurrentCrystal();
         }
 

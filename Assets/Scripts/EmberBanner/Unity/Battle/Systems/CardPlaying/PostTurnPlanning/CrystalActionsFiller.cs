@@ -34,6 +34,8 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
             {
                 IsCancelled = DetermineIfActionIsCancelled(card, action)
             };
+            if (!playingAction.IsCancelled)
+                playingAction.Target = DetermineActionTarget(playingAction);
 
             return playingAction;
         }
@@ -52,17 +54,23 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
             
             var initiatorCrystal = card.Crystal;
             var cardTarget = CardTargetsMatrix.I.GetTarget(initiatorCrystal);
-            if (cardTarget == null) return true; // card targets self but action is not allowed to target self
+            if (cardTarget == initiatorCrystal) return true; // card targets self but action is not allowed to target self
             if (cardTarget.Controller == initiatorCrystal.Controller         && actionTargetType.AllowsAlly())  return false;
             if (cardTarget.Controller == initiatorCrystal.Controller.Enemy() && actionTargetType.AllowsEnemy()) return false;
 
             return true;
         }
 
-        /*private BattleUnitCrystalView DetermineActionTarget(BattlePlayingActionEntity action)
+        private BattleUnitCrystalView DetermineActionTarget(BattlePlayingActionEntity action)
         {
+            var actionTargetType = action.Model.TargetType;
             var crystalTarget = CardTargetsMatrix.I.GetTarget(action.Holder);
-            if (crystalTarget == action.Holder) return action.Holder; // targeting self
-        }*/
+            if (crystalTarget == action.Holder && actionTargetType.AllowsSelf() ||
+                crystalTarget.Controller == action.Holder.Controller.Enemy() || actionTargetType.AllowsEnemy() ||
+                crystalTarget.Controller == action.Holder.Controller.Ally() || actionTargetType.AllowsAlly())
+                return crystalTarget;
+            
+            return null;
+        }
     }
 }
