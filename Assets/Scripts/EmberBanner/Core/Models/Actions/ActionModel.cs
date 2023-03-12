@@ -23,7 +23,8 @@ namespace EmberBanner.Core.Models.Actions
         public AggressionType AggressionType;
         public string HarmTags;
         public DefenseType DefenseType;
-        public string SupportTags;
+        public SupportType SupportType;
+        public string AidTags;
         public int PossibleTargets;
         public bool IsAoE;
         public StringToActionParamModelDictionary Params;

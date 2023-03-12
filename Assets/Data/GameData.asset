@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60345d3552f14cb0a1ce2014cb2f13a3, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  ActionTypeIcons:
+    m_keys:
+    - Damage
+    - Harm
+    - Block
+    - Shield
+    - Barrier
+    - Field
+    - Healing
+    - Stabilization
+    - Aid
+    m_values:
+    - {fileID: 21300000, guid: bdfc447137445054686ddc983c53570b, type: 3}
+    - {fileID: 21300000, guid: e55e51b038e91f04c9e5977cda827014, type: 3}
+    - {fileID: 21300000, guid: b42da08bdb1f5b24bab3d2039c276f3f, type: 3}
+    - {fileID: 21300000, guid: 7189368e099eede4e9b8655b3800bb4d, type: 3}
+    - {fileID: 21300000, guid: 3097f6216baacb94182370e3cf03f2d0, type: 3}
+    - {fileID: 21300000, guid: e7ace5b13c90a4c478af20a46fc574eb, type: 3}
+    - {fileID: 21300000, guid: 410a7521702b5424db26ffaa3af47a29, type: 3}
+    - {fileID: 21300000, guid: d03a41c6a29c58b4f9f5cc51a6ee4efb, type: 3}
+    - {fileID: 21300000, guid: f3f13fda53a38b74b9843ebc3dd73c73, type: 3}

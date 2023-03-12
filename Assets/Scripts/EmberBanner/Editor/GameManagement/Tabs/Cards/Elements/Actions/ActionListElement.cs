@@ -20,6 +20,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private   Button          _showHideButton;
         private   VisualElement   _typeColorElement;
         private   VisualElement   _paramsContainer;
+        protected VisualElement   MagnitudeTypeSpriteElement;
         private   IntegerField    _magnitudeField;
         protected DropdownField   MagnitudeTypeDropdown { get; private set; }
         private   IntegerField    _coinsField;
@@ -40,6 +41,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             
             _typeColorElement     = Root.Q<VisualElement>("TypeColorElement");
             _showHideButton       = Root.Q<Button>("ShowHideButton");
+            MagnitudeTypeSpriteElement = Root.Q<VisualElement>("MagnitudeTypeSpriteElement");
             _magnitudeField       = Root.Q<IntegerField>("MagnitudeField");
             _magnitudeField.style.fontSize = 32f;
             MagnitudeTypeDropdown = Root.Q<DropdownField>("MagnitudeTypeDropdown");

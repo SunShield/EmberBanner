@@ -7,6 +7,6 @@ namespace EmberBanner.Core.Entities.Management.Databases.Impl
 {
     public class UnitEntitiesDatabase : EntityDatabase<UnitEntity, UnitModel, UnitSaveData>
     {
-        protected override UnitModel GetModel(string name) => DataHolder.I.Data.Units.Elements[name];
+        protected override UnitModel GetModel(string name) => DataHolder.I.Databases.Units.Elements[name];
     }
 }

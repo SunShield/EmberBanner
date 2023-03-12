@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EmberBanner.Editor.GameManagement.Tabs.Battles;
 using EmberBanner.Editor.GameManagement.Tabs.Cards;
+using EmberBanner.Editor.GameManagement.Tabs.General;
 using EmberBanner.Editor.GameManagement.Tabs.Units;
 using TabbedWindow.Tabs;
 using TabbedWindow.Windows;
@@ -22,6 +23,8 @@ namespace EmberBanner.Editor.GameManagement.Windows
         
         protected override List<IAbstractTab> GetTabs()
         {
+            var gameDataTab = new GameDataTab(this, "Game Data", @"Assets/Data/GameData.asset");
+            
             var cardsTab = new CardsManagementTab(this, "Cards", @"Assets/Data/Databases/GeneralDatabase.asset");
             cardsTab.Prepare();
 
@@ -37,7 +40,7 @@ namespace EmberBanner.Editor.GameManagement.Windows
             unitsTab.onUnitAdded += battlesTab.OnUnitAdded;
             unitsTab.onUnitRemoved += battlesTab.OnUnitRemoved;
 
-            return new() { cardsTab, unitsTab, battlesTab };
+            return new() { gameDataTab, cardsTab, unitsTab, battlesTab };
         }
     }
 }

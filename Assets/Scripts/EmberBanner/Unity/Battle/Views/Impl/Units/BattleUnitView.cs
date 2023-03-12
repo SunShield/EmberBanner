@@ -39,6 +39,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         private void SetGraphics()
         {
             _graphics.sprite = Entity.Model.Sprite;
+            if (Controller == UnitControllerType.Enemy)
+                _graphics.transform.localScale = new(-1f, 1f, 1f);
         }
 
         public void SetZonesManager(UnitCardZonesManager zonesManager)

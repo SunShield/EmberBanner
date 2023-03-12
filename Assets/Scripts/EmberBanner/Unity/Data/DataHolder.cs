@@ -1,4 +1,5 @@
-﻿using EmberBanner.Unity.Data.ScriptableObjects.Databases;
+﻿using EmberBanner.Unity.Data.ScriptableObjects;
+using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using EmberBanner.Unity.Service;
 using UnityEngine;
 
@@ -18,7 +19,9 @@ namespace EmberBanner.Unity.Data
         }
         
         [SerializeField] private GeneralDatabase _database;
-        public GeneralDatabase Data => _database;
+        [SerializeField] private GameData _gameData;
+        public GeneralDatabase Databases => _database;
+        public GameData GameData => _gameData;
 
         private void Awake()
         {

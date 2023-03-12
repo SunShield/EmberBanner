@@ -7,6 +7,6 @@ namespace EmberBanner.Core.Entities.Management.Databases.Impl
 {
     public class CardEntitiesDatabase : EntityDatabase<CardEntity, CardModel, CardSaveData>
     {
-        protected override CardModel GetModel(string name) => DataHolder.I.Data.Cards.Elements[name];
+        protected override CardModel GetModel(string name) => DataHolder.I.Databases.Cards.Elements[name];
     }
 }

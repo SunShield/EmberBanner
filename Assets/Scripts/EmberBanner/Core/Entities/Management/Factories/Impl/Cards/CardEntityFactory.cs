@@ -14,7 +14,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Cards
         
         public CardEntity CreateEntity(string modelName, bool temporaryEntity = false)
         {
-            var model = DataHolder.I.Data.Cards[modelName];
+            var model = DataHolder.I.Databases.Cards[modelName];
             return CreateEntity(model, null, temporaryEntity);
         }
 

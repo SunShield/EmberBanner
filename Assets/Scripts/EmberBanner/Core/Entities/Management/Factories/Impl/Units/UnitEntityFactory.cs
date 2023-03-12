@@ -14,7 +14,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Units
 
         public UnitEntity CreateEntity(string modelName, object payload, bool temporaryEntity = false)
         {
-            var model = DataHolder.I.Data.Units[modelName];
+            var model = DataHolder.I.Databases.Units[modelName];
             return CreateEntity(model, null, temporaryEntity);
         }
 

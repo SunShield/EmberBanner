@@ -52,7 +52,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -75,7 +76,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -103,7 +105,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -131,7 +134,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -159,7 +163,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -182,7 +187,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 2
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -210,7 +216,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -238,7 +245,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 6
         IsAoE: 0
         Params:
@@ -261,7 +269,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -289,7 +298,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -312,7 +322,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -335,7 +346,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -363,7 +375,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -391,7 +404,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -419,7 +433,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -442,7 +457,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 1
         IsAoE: 0
         Params:
@@ -465,7 +481,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -493,7 +510,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -516,7 +534,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -539,7 +558,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -567,7 +587,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:
@@ -595,7 +616,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 4
         IsAoE: 0
         Params:
@@ -618,7 +640,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -646,7 +669,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
@@ -674,7 +698,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 2
         IsAoE: 0
         Params:
@@ -702,7 +727,8 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportTags: 
+        SupportType: 0
+        AidTags: 
         PossibleTargets: 3
         IsAoE: 0
         Params:

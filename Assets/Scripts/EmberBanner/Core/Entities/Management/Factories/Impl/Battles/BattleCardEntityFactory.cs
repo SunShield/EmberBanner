@@ -14,7 +14,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
         
         public BattleCardEntity CreateEntity(string modelName, BattleUnitEntity unitEntity)
         {
-            var model = DataHolder.I.Data.Cards[modelName];
+            var model = DataHolder.I.Databases.Cards[modelName];
             return CreateEntity(model, unitEntity, true);
         }
 

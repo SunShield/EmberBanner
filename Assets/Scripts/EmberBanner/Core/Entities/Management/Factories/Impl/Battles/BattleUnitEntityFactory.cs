@@ -14,7 +14,7 @@ namespace EmberBanner.Core.Entities.Management.Factories.Impl.Battles
 
         public BattleUnitEntity CreateEntity(string modelName, UnitControllerType controller)
         {
-            var model = DataHolder.I.Data.Units[modelName];
+            var model = DataHolder.I.Databases.Units[modelName];
             return CreateEntity(model, controller, true);
         }
 

@@ -65,7 +65,9 @@ namespace EmberBanner.Core.Entities.Impl.Cards
             else if (Model.Type == ActionType.Defense) typeTag = Model.DefenseType.ToString();
             else if (Model.Type == ActionType.Support)
             {
-                secondaryTags = Model.SupportTags.Replace(" ", "").Split(",").ToList();
+                typeTag = Model.SupportType.ToString();
+                if (Model.SupportType == SupportType.Aid)
+                    secondaryTags = Model.AidTags.Replace(" ", "").Split(",").ToList();
             }
             
             if (!string.IsNullOrEmpty(typeTag)) magnitudeParam.AddTag(typeTag);

@@ -1,10 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Scripts/EmberBanner/Editor/Uxml/Uss/Defaults.uss?fileID=7433441132597879392&amp;guid=cfdb7865d99ff9f4dbbc5eaffcc2eee9&amp;type=3#Defaults" />
     <ui:VisualElement name="Root" style="flex-grow: 0; background-color: rgb(58, 58, 58); height: 320%; flex-direction: column; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px;">
-        <ui:VisualElement name="ContentContainer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 86px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%;">
+        <ui:VisualElement name="ContentContainer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 99px; border-bottom-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%;">
             <ui:VisualElement name="TypeColorElement" style="flex-grow: 0; background-color: rgb(96, 96, 96); width: 21px; border-left-width: 0; border-right-width: 2px; border-top-width: 0; border-bottom-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); height: 100%;" />
             <ui:VisualElement name="MagnitudeContainer" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); width: 87px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 2px;">
-                <uie:IntegerField value="42" name="MagnitudeField" class="magnitude-integer-field" style="height: 67px;" />
+                <ui:VisualElement name="MagnitudeTypeSpriteElement" style="height: 79px;">
+                    <uie:IntegerField value="42" name="MagnitudeField" class="magnitude-integer-field" style="height: 100%; background-color: rgba(0, 0, 0, 0); margin-left: -2px;" />
+                </ui:VisualElement>
                 <ui:DropdownField index="-1" choices="System.Collections.Generic.List`1[System.String]" name="MagnitudeTypeDropdown" style="height: 13px; margin-top: 1px; margin-right: 1px; margin-left: 1px; margin-bottom: 1px;" />
             </ui:VisualElement>
             <ui:VisualElement name="StatsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 446px; border-right-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
