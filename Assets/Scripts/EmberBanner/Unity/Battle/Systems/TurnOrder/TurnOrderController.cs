@@ -11,16 +11,14 @@ namespace EmberBanner.Unity.Battle.Systems.TurnOrder
         private static TurnOrderController _instance;
         public static TurnOrderController I => _instance ??= new();
         
-        private const int NoCrystalTurn = -1;
-        
         public List<BattleUnitCrystalView> Crystals { get; private set; } = new();
-        public int CurrentCrystalIndex { get; private set; } = NoCrystalTurn;
+        public int CurrentCrystalIndex { get; private set; } = 0;
         public bool AllCrystalsEndedTurns => CurrentCrystalIndex == Crystals.Count;
         public BattleUnitCrystalView CurrentCrystal => Crystals[CurrentCrystalIndex];
 
         public void DetermineTurnOrder()
         {
-            CurrentCrystalIndex = NoCrystalTurn;
+            CurrentCrystalIndex = 0;
             Crystals.Clear();
 
             var units = BattleManager.I.Registry.Units.Values.ToList();
@@ -41,8 +39,11 @@ namespace EmberBanner.Unity.Battle.Systems.TurnOrder
                 // TODO: implement spot order logic later
             });
 
+            crystals.Reverse();
             Crystals = crystals;
         }
+
+        public void ClearNonActingCrystals() => Crystals = Crystals.Where(c => c.Card != null).ToList();
 
         public void AdvanceOrder()
         {

@@ -48,3 +48,7 @@
     background-color: rgba(0, 0, 0, 0);
     -unity-font-style: bold;
 }
+
+.EB-dropdown .unity-base-field__label {
+    min-width: 0;
+}

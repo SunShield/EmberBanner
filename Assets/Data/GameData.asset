@@ -33,3 +33,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 410a7521702b5424db26ffaa3af47a29, type: 3}
     - {fileID: 21300000, guid: d03a41c6a29c58b4f9f5cc51a6ee4efb, type: 3}
     - {fileID: 21300000, guid: f3f13fda53a38b74b9843ebc3dd73c73, type: 3}
+  ActionTypeColors:
+    m_keys: 000000000100000002000000
+    m_values:
+    - {r: 0.7735849, g: 0.09122462, b: 0.09122462, a: 1}
+    - {r: 0.022917405, g: 0.47591627, b: 0.9716981, a: 1}
+    - {r: 0.32079923, g: 0.8396226, b: 0.34605175, a: 1}

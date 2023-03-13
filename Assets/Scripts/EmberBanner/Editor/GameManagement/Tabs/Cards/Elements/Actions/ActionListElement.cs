@@ -25,8 +25,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         protected DropdownField   MagnitudeTypeDropdown { get; private set; }
         private   IntegerField    _coinsField;
         protected IntegerField    ThresholdField { get; private set; }
-        private   IntegerField    _spanField;
-        private   IntegerField    _growthField;
+        private   IntegerField    _clashLoseHandicapField;
         private   IntegerField    _cpMinField;
         private   IntegerField    _cpMaxField;
         private   TextField       _descriptionField;
@@ -37,29 +36,25 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         
         protected override void PostGatherElements()
         {
-            _paramsContainer      = Root.Q<VisualElement>("ParamsContainer");
-            
-            _typeColorElement     = Root.Q<VisualElement>("TypeColorElement");
-            _showHideButton       = Root.Q<Button>("ShowHideButton");
+            _paramsContainer           = Root.Q<VisualElement>("ParamsContainer");
+            _typeColorElement          = Root.Q<VisualElement>("TypeColorElement");
+            _showHideButton            = Root.Q<Button>("ShowHideButton");
             MagnitudeTypeSpriteElement = Root.Q<VisualElement>("MagnitudeTypeSpriteElement");
-            _magnitudeField       = Root.Q<IntegerField>("MagnitudeField");
+            _magnitudeField            = Root.Q<IntegerField>("MagnitudeField");
+            MagnitudeTypeDropdown      = Root.Q<DropdownField>("MagnitudeTypeDropdown");
+            _coinsField                = Root.Q<IntegerField>("CoinsField");
+            _clashLoseHandicapField    = Root.Q<IntegerField>("ClashLoseHandicapField");
+            ThresholdField             = Root.Q<IntegerField>("ThresholdField");
+            _cpMinField                = Root.Q<IntegerField>("CpMinField");
+            _cpMaxField                = Root.Q<IntegerField>("CpMaxField");
+            _descriptionField          = Root.Q<TextField>("DescriptionField");
+            _topRowContainer           = Root.Q<VisualElement>("TopRowContainer");
+            _listContainer             = Root.Q<VisualElement>("ListContainer");
+            PossibleTargetsField       = Root.Q<DropdownField>("PossibleTargetsField");
+            
             _magnitudeField.style.fontSize = 32f;
-            MagnitudeTypeDropdown = Root.Q<DropdownField>("MagnitudeTypeDropdown");
-
-            _coinsField    = Root.Q<IntegerField>("CoinsField");
-            _spanField     = Root.Q<IntegerField>("GrowSpanField");
-            _growthField   = Root.Q<IntegerField>("GrowGrowthField");
-            ThresholdField = Root.Q<IntegerField>("ThresholdField");
-            _cpMinField    = Root.Q<IntegerField>("CpMinField");
-            _cpMaxField    = Root.Q<IntegerField>("CpMaxField");
-
-            _descriptionField = Root.Q<TextField>("DescriptionField");
-            _topRowContainer = Root.Q<VisualElement>("TopRowContainer");
-            PossibleTargetsField = new DropdownField();
-            PossibleTargetsField.label = "Targets";
             _topRowContainer.Insert(1, PossibleTargetsField);
 
-            _listContainer = Root.Q<VisualElement>("ListContainer");
             _paramsList = CreateActionParamsList();
             _listContainer.Add(_paramsList);
         }
@@ -100,14 +95,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         {
             _typeColorElement.style.backgroundColor = GetTypeColor();
             
-            _magnitudeField.value   = Element.Magnitude;
-            _coinsField.value       = Element.CoinsAmount;
-            _spanField.value        = Element.ClashingPowerGrowthRate.Span;
-            _growthField.value      = Element.ClashingPowerGrowthRate.Growth;
-            ThresholdField.value    = Element.Threshold;
-            _cpMinField.value       = Element.ClashingPower.Min;
-            _cpMaxField.value       = Element.ClashingPower.Max;
-            _descriptionField.value = Element.RawDescription;
+            _magnitudeField.value         = Element.Magnitude;
+            _coinsField.value             = Element.CoinsAmount;
+            _clashLoseHandicapField.value = Element.ClashLoseHandicap;
+            ThresholdField.value          = Element.Threshold;
+            _cpMinField.value             = Element.ClashingPower.Min;
+            _cpMaxField.value             = Element.ClashingPower.Max;
+            _descriptionField.value       = Element.RawDescription;
             
             PossibleTargetsField.choices = Enum.GetValues(typeof(TargetType)).Cast<TargetType>().Select(e => e.ToString()).ToList();
             PossibleTargetsField.index = (int)Element.PossibleTargets;
@@ -138,14 +132,9 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 Element.CoinsAmount = evt.newValue;
             });
 
-            _spanField.RegisterValueChangedCallback(evt =>
+            _clashLoseHandicapField.RegisterValueChangedCallback(evt =>
             {
-                Element.ClashingPowerGrowthRate.Span = evt.newValue;
-            });
-
-            _growthField.RegisterValueChangedCallback(evt =>
-            {
-                Element.ClashingPowerGrowthRate.Growth = evt.newValue;
+                Element.ClashLoseHandicap = evt.newValue;
             });
 
             ThresholdField.RegisterValueChangedCallback(evt =>

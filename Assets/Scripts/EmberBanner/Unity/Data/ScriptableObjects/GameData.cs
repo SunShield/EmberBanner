@@ -23,5 +23,6 @@ namespace EmberBanner.Unity.Data.ScriptableObjects
 #endif
         
         public StringToSpriteDictionary ActionTypeIcons;
+        public ActionTypeToColorDictionary ActionTypeColors;
     }
 }

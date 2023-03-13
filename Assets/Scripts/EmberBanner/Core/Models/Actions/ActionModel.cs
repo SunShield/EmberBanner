@@ -3,8 +3,6 @@ using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Classes.Fundamental;
-using EmberBanner.Core.Service.Extensions.Targeting;
-using UnityEngine.Serialization;
 
 namespace EmberBanner.Core.Models.Actions
 {
@@ -15,6 +13,7 @@ namespace EmberBanner.Core.Models.Actions
         public int Magnitude;
         public IntSpan ClashingPower = new();
         public IntGrowthRate ClashingPowerGrowthRate = new();
+        public int ClashLoseHandicap;
         public int Threshold;
         public int CoinsAmount;
         public bool IsFast;

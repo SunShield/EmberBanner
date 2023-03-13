@@ -1,9 +1,11 @@
-﻿using EmberBanner.Core.Entities.Impl.Cards;
+﻿using System;
+using System.Collections.Generic;
+using EmberBanner.Core.Entities.Impl.Cards;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Service.Classes.Fundamental;
-using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
+using Random = UnityEngine.Random;
 
 namespace EmberBanner.Core.Ingame.Impl.Battles
 {
@@ -39,35 +41,25 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         /// some events during gameplay may un-cancel actions
         /// </summary>
         public bool IsCancelled { get; set; }
-        
-        /// <summary>
-        /// Distraction is a special state action suffers
-        /// losing clashed or receiving one-sided attack
-        /// </summary>
-        public bool IsDistracted { get; set; }
-        
-        /// <summary>
-        /// Coins amount persists between different action activations during the same turn
-        /// </summary>
-        public int CurrentCoinsAmount { get; set; }
 
         /// <summary>
-        /// Final clashing bounds are affected by crystal's speed
+        /// Previous coin results
         /// </summary>
-        public IntSpan FinalClashingBounds { get; set; }
+        public List<bool> CoinResults { get; set; } = new();
 
-        public BattlePlayingActionEntity(CardActionEntity entity, BattleUnitCrystalView boundCrystal) : this(entity.Id, entity.Model)
+        public int CurrentCoinsAmount => CoinsAmount.CalculateValue() - CoinResults.Count;
+
+        public int? CurrentRoll { get; set; }
+
+        public BattlePlayingActionEntity(CardActionEntity entity, BattleUnitCrystalView holder) : this(entity.Id, entity.Model)
         {
-            var clashingBoundsIncreasement = (boundCrystal.CurrentRoll.Value / entity.ClashingPowerGrowthSpan.CalculateValue()) * entity.ClashingPowerGrowthRate.CalculateValue();
-            FinalClashingBounds = new IntSpan();
-            FinalClashingBounds.Min = entity.MinClashingPower.CalculateValue() + clashingBoundsIncreasement;
-            FinalClashingBounds.Max = entity.MaxClashingPower.CalculateValue() + clashingBoundsIncreasement;
-            
-            CurrentCoinsAmount = CoinsAmount.CalculateValue();
+            Holder = holder;
         }
         
         public BattlePlayingActionEntity(int id, ActionModel model) : base(id, model)
         {
         }
+
+        public void Roll() => CurrentRoll = Random.Range(MinClashingPower.CalculateValue(), MaxClashingPower.CalculateValue() + 1);
     }
 }

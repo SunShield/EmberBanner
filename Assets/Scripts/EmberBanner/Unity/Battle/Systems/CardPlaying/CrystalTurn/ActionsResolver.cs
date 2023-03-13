@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
+using EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
 namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
@@ -15,30 +17,57 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         private static ActionsResolver _instance;
         public static ActionsResolver I => _instance ??= new();
         
-        public BattleUnitCrystalView CurrentCrystal { get; private set; }
+        public BattleUnitCrystalView InitiatorCrystal { get; private set; }
         public List<BattlePlayingActionEntity> CurrentActions { get; private set; } = new();
         private bool CrystalHasAction => CurrentActions.Count > 0;
         private BattlePlayingActionEntity _currentAction;
+        
+        public ActionsResolveState State { get; private set; }
 
-        /// <summary>
-        /// Empty for now
-        ///
-        /// Fast actions are resolved here
-        /// </summary>
-        public void CrystalsPreTurn()
+        public void PickCrystal()
         {
-            GetCurrentCrystal();
+            InitiatorCrystal = TurnOrderController.I.CurrentCrystal;
+            CurrentActions = InitiatorCrystal.Actions;
+            ActionsResolveUi.I.SetMainCrystal(InitiatorCrystal);
+
+            State = ActionsResolveState.GetCurrentAction;
         }
 
-        private void GetCurrentCrystal()
+        public void GetCurrentAction()
         {
-            CurrentCrystal = TurnOrderController.I.CurrentCrystal;
-            CurrentActions = CurrentCrystal.Actions;
+            _currentAction = InitiatorCrystal.GetFirstNonCancelledAction();
+            ActionsResolveUi.I.SetCurrentMainAction(_currentAction);
+            State = ActionsResolveState.GetOpposedAction;
         }
 
-        private void ProcessNextAction()
+        public void GetOpposingAction()
         {
-            _currentAction = CurrentActions[0];
+            var target = _currentAction.Target;
+            if (target != InitiatorCrystal) 
+                ActionsResolveUi.I.SetTargetCrystal(target);
+            else
+                ActionsResolveUi.I.HideTargetUi(); // If we are targeting self, no need in target uis
+            State = ActionsResolveState.RollCurrentActions;
+        }
+
+        public void RollCurrentActions()
+        {
+            State = ActionsResolveState.ResolveCurrentActions;
+        }
+
+        public void ResolveCurrentActions()
+        {
+            State = ActionsResolveState.PostResolveActions;
+        }
+
+        public void PostResolveCurrentActions()
+        {
+            State = ActionsResolveState.AllActionsResolved;
+        }
+
+        public void DoOnAllActionsResolved()
+        {
+            State = ActionsResolveState.FinishResolvingActions;
         }
     }
 }

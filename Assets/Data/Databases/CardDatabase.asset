@@ -30,6 +30,7 @@ MonoBehaviour:
     - Shield of Faith
     - Holy Beam
     - Darkness
+    - Fortify Bones
     m_values:
     - <Name>k__BackingField: Ray of Death
       Sprite: {fileID: 21300000, guid: 6dc44e475e482144585be7eeb022e1be, type: 3}
@@ -44,6 +45,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 2
         Threshold: 0
         CoinsAmount: 3
         IsFast: 0
@@ -68,6 +70,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 8
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -97,6 +100,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 4
           Growth: 1
+        ClashLoseHandicap: 4
         Threshold: 2
         CoinsAmount: 1
         IsFast: 0
@@ -126,6 +130,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 1
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -155,6 +160,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 2
+        ClashLoseHandicap: 6
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -179,6 +185,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 1
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -208,6 +215,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -237,6 +245,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 2
+        ClashLoseHandicap: 5
         Threshold: 2
         CoinsAmount: 1
         IsFast: 0
@@ -261,6 +270,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 2
         Threshold: 0
         CoinsAmount: 4
         IsFast: 0
@@ -290,6 +300,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 7
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -314,6 +325,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 5
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -322,7 +334,7 @@ MonoBehaviour:
         AggressionType: 0
         HarmTags: 
         DefenseType: 0
-        SupportType: 0
+        SupportType: 2
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
@@ -338,8 +350,9 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 5
         Threshold: 0
-        CoinsAmount: 0
+        CoinsAmount: 1
         IsFast: 0
         TargetsCount: 0
         Type: 0
@@ -367,6 +380,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -396,6 +410,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 5
           Growth: 2
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 3
         IsFast: 0
@@ -425,6 +440,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 3
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -449,6 +465,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 3
         Threshold: 4
         CoinsAmount: 1
         IsFast: 0
@@ -473,6 +490,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -502,6 +520,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 2
         Threshold: 3
         CoinsAmount: 1
         IsFast: 0
@@ -526,6 +545,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 5
         Threshold: 4
         CoinsAmount: 1
         IsFast: 0
@@ -550,6 +570,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 10
         Threshold: 4
         CoinsAmount: 1
         IsFast: 0
@@ -579,6 +600,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 6
           Growth: 1
+        ClashLoseHandicap: 15
         Threshold: 0
         CoinsAmount: 1
         IsFast: 0
@@ -608,6 +630,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 3
         Threshold: 4
         CoinsAmount: 2
         IsFast: 0
@@ -632,6 +655,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
+        ClashLoseHandicap: 3
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -661,6 +685,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 1
+        ClashLoseHandicap: 1
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -690,6 +715,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 3
           Growth: 2
+        ClashLoseHandicap: 4
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -719,6 +745,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 1
           Growth: 1
+        ClashLoseHandicap: 10
         Threshold: 0
         CoinsAmount: 2
         IsFast: 0
@@ -735,3 +762,58 @@ MonoBehaviour:
           m_keys: []
           m_values: []
       Target: 3
+    - <Name>k__BackingField: Fortify Bones
+      Sprite: {fileID: 21300000, guid: 3be38f94257aad546900d4cd6b8c76e8, type: 3}
+      Cost: 1
+      Actions:
+      - <Name>k__BackingField: 1
+        RawDescription: 
+        Magnitude: 5
+        ClashingPower:
+          Min: 3
+          Max: 9
+        ClashingPowerGrowthRate:
+          Span: 2
+          Growth: 2
+        ClashLoseHandicap: 2
+        Threshold: 5
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 1
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 4
+        IsAoE: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 2
+        RawDescription: 
+        Magnitude: 1
+        ClashingPower:
+          Min: 2
+          Max: 5
+        ClashingPowerGrowthRate:
+          Span: 3
+          Growth: 1
+        ClashLoseHandicap: 1
+        Threshold: 0
+        CoinsAmount: 3
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 0
+        IsAoE: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 4

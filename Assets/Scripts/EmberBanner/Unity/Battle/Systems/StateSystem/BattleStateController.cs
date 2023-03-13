@@ -1,6 +1,7 @@
 ﻿using System;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
@@ -53,26 +54,55 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             else if (State == BattleState.PostTurnPlan)
             {
                 PrePlayedCardsUiManager.I.Clear();
+                TurnOrderController.I.ClearNonActingCrystals();
                 CrystalActionsFiller.I.AddActionsToCrystals();
-                State = BattleState.CrustalTurn;
+                State = BattleState.CrystalTurnStart;
             }
             else if (State == BattleState.CrystalTurnStart)
             {
+                ActionsResolver.I.PickCrystal();
                 State = BattleState.CrustalTurn;
             }
             else if (State == BattleState.CrustalTurn)
             {
-                State = BattleState.CrystalTurnEnd;
+                if (ActionsResolver.I.State == ActionsResolveState.GetCurrentAction)
+                {
+                    ActionsResolver.I.GetCurrentAction();
+                } 
+                else if (ActionsResolver.I.State == ActionsResolveState.GetOpposedAction)
+                {
+                    ActionsResolver.I.GetOpposingAction();
+                } 
+                else if (ActionsResolver.I.State == ActionsResolveState.RollCurrentActions)
+                {
+                    ActionsResolver.I.RollCurrentActions();
+                }  
+                else if (ActionsResolver.I.State == ActionsResolveState.ResolveCurrentActions)
+                {
+                    ActionsResolver.I.ResolveCurrentActions();
+                    State = BattleState.CrystalTurnEnd;
+                } 
             }
             else if (State == BattleState.CrystalTurnEnd)
             {
-                if (TurnOrderController.I.AllCrystalsEndedTurns)
-                    State = BattleState.TurnEnd;
-                else
+                if (ActionsResolver.I.State == ActionsResolveState.PostResolveActions)
                 {
-                    TurnOrderController.I.AdvanceOrder();
-                    State = BattleState.CrystalTurnStart;
-                }
+                    ActionsResolver.I.PostResolveCurrentActions();
+                } 
+                else if (ActionsResolver.I.State == ActionsResolveState.FinishResolvingActions)
+                {
+                    ActionsResolver.I.DoOnAllActionsResolved();
+                } 
+                else if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                {
+                    if (TurnOrderController.I.AllCrystalsEndedTurns)
+                        State = BattleState.TurnEnd;
+                    else
+                    {
+                        TurnOrderController.I.AdvanceOrder();
+                        State = BattleState.CrystalTurnStart;
+                    }
+                } 
             }
             else if (State == BattleState.TurnEnd)
             {

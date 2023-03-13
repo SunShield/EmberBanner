@@ -76,5 +76,19 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
             _actionsUi.SetActive(false);
             _actionsUi.ClearActions();
         }
+
+        public BattlePlayingActionEntity GetFirstNonCancelledAction()
+        {
+            for (int i = 0; i < Actions.Count; i++)
+            {
+                var action = Actions[i];
+                if (action.IsCancelled) continue;
+
+                Actions.RemoveAt(i);
+                return action;
+            }
+
+            return null;
+        }
     }
 }

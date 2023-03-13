@@ -36,5 +36,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
                 Crystals[i].Tran.localPosition = new Vector3(-(Crystals.Count / 2f) * CrystalWidth + CrystalWidth / 2 + CrystalWidth * i, 0f, 0f);
             }
         }
+        
+        
     }
 }
