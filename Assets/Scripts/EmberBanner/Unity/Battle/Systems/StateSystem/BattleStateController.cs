@@ -7,10 +7,10 @@ using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
+using EmberBanner.Unity.Battle.Systems.Visuals.Arrows;
 using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
 using EmberBanner.Unity.Service;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Systems.StateSystem
@@ -18,6 +18,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
     public class BattleStateController : EBMonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _stateText;
+        [SerializeField] private TextMeshProUGUI _resolveState;
         public BattleState State { get; private set; } = BattleState.PreStart;
         public int TurnNumber { get; private set; } = 0;
 
@@ -136,6 +137,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
 
             onStateChanged?.Invoke(State);
             _stateText.text = State.ToString();
+            _resolveState.text = ActionsResolver.I.State.ToString();
         }
 
         private void DrawCards()
@@ -162,6 +164,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
         {
             CardTargetsMatrix.I.Clear();
             ActionsResolver.I.ClearAll();
+            CardTargetsMatrixUi.I.OnTurnEnd();
             
             foreach (var unit in BattleManager.I.Registry.Units.Values)
             {

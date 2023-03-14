@@ -43,6 +43,22 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
 
         public void GetCurrentActions()
         {
+            if (_currentAction is { IsFullyResolved: true })
+            {
+                ActionsResolveUi.I.ClearInitiatorMainAction();
+                InitiatorCrystal.PickAction(_currentAction);
+                _currentAction = null;
+            }
+
+            if (_currentTargetAction is { IsFullyResolved: true })
+            {
+                ActionsResolveUi.I.ClearTargetMainAction();
+                TargetCrystal.PickAction(_currentTargetAction);
+                _currentTargetAction = null;
+            }
+            
+            ActionsResolveUi.I.UpdateActions();
+            
             var actions = CrystalProperActionSelector.I.FindProperActions(InitiatorCrystal, TargetCrystal);
             _currentAction = actions.initiatorAction;
             _currentTargetAction = actions.targetAction;
@@ -88,6 +104,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             }
             
             ActionsResolveUi.I.SetRolls(_currentAction?.CurrentRoll, _currentTargetAction?.CurrentRoll);
+            ActionsResolveUi.I.UpdateActions();
             State = ActionsResolveState.ResolveCurrentActions;
         }
 
@@ -112,30 +129,9 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
 
         public void PostResolveCurrentActions()
         {
-            if (_currentAction != null)
-            {
-                if (_currentAction.IsFullyResolved)
-                {
-                    ActionsResolveUi.I.ClearInitiatorMainAction();
-                    InitiatorCrystal.PickAction(_currentAction);
-                    _currentAction = null;
-                }
-                else
-                    _currentAction.PostSingleResolve();
-            }
+            if (_currentAction       is { IsFullyResolved: false }) _currentAction.PostSingleResolve();
+            if (_currentTargetAction is { IsFullyResolved: false }) _currentTargetAction.PostSingleResolve();
 
-            if (_currentTargetAction != null)
-            {
-                if (_currentTargetAction.IsFullyResolved)
-                {
-                    ActionsResolveUi.I.ClearTargetMainAction();
-                    TargetCrystal.PickAction(_currentTargetAction);
-                    _currentTargetAction = null;
-                }
-                else
-                    _currentTargetAction.PostSingleResolve();
-            }
-            
             State = ActionsResolveState.GetCurrentActions;
         }
 

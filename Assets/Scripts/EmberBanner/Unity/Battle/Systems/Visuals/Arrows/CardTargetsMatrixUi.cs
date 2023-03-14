@@ -13,6 +13,17 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 {
     public class CardTargetsMatrixUi : EBMonoBehaviour
     {
+        private static CardTargetsMatrixUi _instance;
+        public static CardTargetsMatrixUi I
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = FindObjectOfType<CardTargetsMatrixUi>(true);
+                return _instance;
+            }
+        }
+        
         private const float OneSidedArrowLengthMultiplier = 1f;
         private const float ClashingArrowLengthMultiplier = 0.5f;
         private const float ArrowSideLength = 0.32f;
@@ -142,5 +153,11 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
 
         private Vector3 GetHeadPosition(BattleUnitCrystalView target, bool isClashingArrow, Vector3 distanceBetweenCrystals)
             => !isClashingArrow ? target.Tran.position : target.Tran.position - distanceBetweenCrystals;
+
+        public void OnTurnEnd()
+        {
+            ClearArrows();
+            DestroyPreviousArrowGos();
+        }
     }
 }

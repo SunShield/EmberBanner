@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
-using EmberBanner.Core.Service.Extensions;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
@@ -58,6 +56,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
 
         public void SetInitiatorMainAction(BattlePlayingActionEntity action)
         {
+            ClearInitiatorMainAction();
             InitiatorCrystalUis.currentActionUi.SetAction(action);
             InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
         }
@@ -71,6 +70,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         
         public void SetTargetMainAction(BattlePlayingActionEntity action)
         {
+            ClearTargetMainAction();
             TargetCrystalUis.currentActionUi.SetAction(action);
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
         }
