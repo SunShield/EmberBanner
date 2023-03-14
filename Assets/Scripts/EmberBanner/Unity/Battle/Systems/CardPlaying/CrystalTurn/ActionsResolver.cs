@@ -31,6 +31,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         public void PickCrystal()
         {
             InitiatorCrystal = TurnOrderController.I.CurrentCrystal;
+            
             ActionsResolveUi.I.SetMainCrystal(InitiatorCrystal);
             TargetCrystal = CardTargetsMatrix.I.GetTarget(InitiatorCrystal);
             if (TargetCrystal != InitiatorCrystal)
@@ -98,7 +99,8 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             }
             else
             {
-                SetClashLoserMagnitude();
+                if (_currentAction != null && _currentTargetAction != null)
+                    SetClashLoserMagnitude();
 
                 // Resolve actions here
             }
@@ -143,12 +145,6 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             State = ActionsResolveState.FinishResolvingActions;
         }
 
-        private BattlePlayingActionEntity GetClashLoserAction(ClashState state) => state switch
-        {
-            ClashState.InitiatorWon => _currentTargetAction,
-            ClashState.TargetWon    => _currentAction,
-        };
-
         private void FlipCoins()
         {
             _currentAction?.FlipCoin();
@@ -162,6 +158,21 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             var loser = GetClashLoserAction(_clashState);
             loser.SetLosingMagnitude();
             ActionsResolveUi.I.SetLosingMagnitude(_clashState);
+        }
+
+        private BattlePlayingActionEntity GetClashLoserAction(ClashState state) => state switch
+        {
+            ClashState.InitiatorWon => _currentTargetAction,
+            ClashState.TargetWon    => _currentAction,
+        };
+
+        public void ClearAll()
+        {
+            InitiatorCrystal = null;
+            TargetCrystal = null;
+            _currentAction = null;
+            _currentTargetAction = null;
+            _isClash = false;
         }
     }
 }

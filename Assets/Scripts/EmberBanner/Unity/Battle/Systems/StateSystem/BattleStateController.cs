@@ -3,12 +3,14 @@ using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
 using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
 using EmberBanner.Unity.Service;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Systems.StateSystem
@@ -60,6 +62,25 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.CrystalTurnStart)
             {
+                while (true)
+                {
+                    if (TurnOrderController.I.AllCrystalsEndedTurns)
+                    {
+                        ActionsResolver.I.DoOnAllActionsResolved();
+                        State = BattleState.TurnEnd;
+                        return;
+                    }
+                    
+                    if (!TurnOrderController.I.CurrentCrystal.HasNonCancelledActions)
+                    {
+                        TurnOrderController.I.AdvanceOrder();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
                 ActionsResolver.I.PickCrystal();
                 State = BattleState.CrustalTurn;
             }
@@ -139,12 +160,16 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
 
         private void ClearTurn()
         {
+            CardTargetsMatrix.I.Clear();
+            ActionsResolver.I.ClearAll();
+            
             foreach (var unit in BattleManager.I.Registry.Units.Values)
             {
                 foreach (var crystal in unit.UnitCrystals.Crystals)
                 {
-                    crystal.Clear();
+                    crystal.OnTurnEnd();
                 }
+                unit.OnTurnEnd();
             }
         }
 

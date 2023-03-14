@@ -21,9 +21,11 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
             {
                 foreach (var crystal in unit.UnitCrystals.Crystals)
                 {
+                    crystal.SetNonCancelledActionsAmount(0);
                     if (crystal.Card == null) continue;
                     
                     crystal.AddActions(crystal.Card.Entity.Actions.Select(action => CreatePlayingAction(crystal.Card, action)).ToList());
+                    crystal.SetNonCancelledActionsAmount(crystal.Actions.Count(a => !a.IsCancelled));
                 }
             }
         }

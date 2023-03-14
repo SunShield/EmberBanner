@@ -151,6 +151,14 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
         public bool CheckClash(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
             => initiator != target && GetClashingCrystal(initiator) == target;
 
+        public void Clear()
+        {
+            AttackMatrix.Clear();
+            DefenseMatrix.Clear();
+            RedirectorsMatrix.Clear();
+            DefaultAttackMatrix.Clear();
+        }
+
         public event Action onAttackMatrixChanged;
     }
 }

@@ -20,6 +20,8 @@ namespace EmberBanner.Core.Service.Classes.Fundamental
 
         public bool ContainsKey(TKey key) => _elements.ContainsKey(key);
 
+        public void Clear() => _elements.Clear();
+
         public List<TValue> this[TKey key] => _elements[key];
     }
 }

@@ -28,6 +28,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         public bool IsDead => OwnerView.IsDead;
 
         public List<BattlePlayingActionEntity> Actions { get; private set; } = new();
+        private int _nonCancelledActionsCount;
+        public bool HasNonCancelledActions => _nonCancelledActionsCount > 0;
         
         public void SetOwnerView(BattleUnitView ownerView) => OwnerView = ownerView;
 
@@ -35,11 +37,6 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
         {
             Entity.DoRoll();
             _rollText.text = CurrentRoll.ToString();
-        }
-
-        public void Clear()
-        {
-            _rollText.text = "X";
         }
 
         private void OnMouseDown()
@@ -73,10 +70,20 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 
         public void OnTurnEnd()
         {
+            _rollText.text = "X";
             _actionsUi.SetActive(false);
             _actionsUi.ClearActions();
+            Actions = new();
+            _nonCancelledActionsCount = 0;
         }
 
-        public void PickAction(BattlePlayingActionEntity action) => Actions.Remove(action);
+        public void SetNonCancelledActionsAmount(int nonCancelledActionsAmount) =>
+            _nonCancelledActionsCount = nonCancelledActionsAmount;
+        
+        public void PickAction(BattlePlayingActionEntity action)
+        {
+            _nonCancelledActionsCount--;
+            Actions.Remove(action);
+        }
     }
 }
