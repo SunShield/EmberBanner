@@ -5,6 +5,7 @@ using EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
+using EmberBanner.Unity.Battle.Systems.Selection;
 using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Systems.Visuals.Arrows;
@@ -56,6 +57,10 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.PostTurnPlan)
             {
+                CardSelectionManager.I.UnselectCard();
+                CrystalSelectionManager.I.UnselectCrystal();
+                UnitSelectionManager.I.UnselectSpot();
+                
                 PrePlayedCardsUiManager.I.Clear();
                 TurnOrderController.I.ClearNonActingCrystals();
                 CrystalActionsFiller.I.AddActionsToCrystals();
@@ -168,10 +173,6 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             
             foreach (var unit in BattleManager.I.Registry.Units.Values)
             {
-                foreach (var crystal in unit.UnitCrystals.Crystals)
-                {
-                    crystal.OnTurnEnd();
-                }
                 unit.OnTurnEnd();
             }
         }

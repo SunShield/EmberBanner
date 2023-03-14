@@ -46,6 +46,8 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
 
         public void UnselectCard()
         {
+            if (SelectedCard == null) return;
+            
             SelectedCard.SetSelected(false);
             SelectedCard = null;
         }

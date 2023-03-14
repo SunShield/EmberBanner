@@ -89,6 +89,8 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         {
             _currentAction?.Roll();
             _currentTargetAction?.Roll();
+            
+            ActionsResolveUi.I.SetRolls(_currentAction?.CurrentRoll, _currentTargetAction?.CurrentRoll);
 
             if (!_isClash)
             {
@@ -102,10 +104,11 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
                     FlipCoins();
                 }
             }
-            
-            ActionsResolveUi.I.SetRolls(_currentAction?.CurrentRoll, _currentTargetAction?.CurrentRoll);
             ActionsResolveUi.I.UpdateActions();
-            State = ActionsResolveState.ResolveCurrentActions;
+
+            State = _clashState == ClashState.Tie 
+                ? ActionsResolveState.RollCurrentActions 
+                : ActionsResolveState.ResolveCurrentActions;
         }
 
         public void ResolveCurrentActions()

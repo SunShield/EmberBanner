@@ -30,6 +30,13 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem.Zones
             Cards.Remove(card);
             DoRemoveCard(card);
         }
+
+        public BattleCardView RemoveCard(int index)
+        {
+            var card = Cards[index];
+            RemoveCard(card);
+            return card;
+        }
         
         protected virtual void DoRemoveCard(BattleCardView card) { }
     }

@@ -61,11 +61,13 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
 
         private void ShuffleGraveyardInLibrary()
         {
-            foreach (var card in _graveyard.Cards)
+            while (_graveyard.Count > 0)
             {
-                _graveyard.RemoveCard(card);
+                var card = _graveyard.RemoveCard(0);
                 _library.AddCard(card);
             }
+            
+            _library.Shuffle();
         }
 
         public void SetActive(bool active)
@@ -83,6 +85,12 @@ namespace EmberBanner.Unity.Battle.Systems.CardZonesSystem
         {
             crystal.Zone.RemoveCard(card);
             _hand.AddCard(card);
+        }
+
+        public void MoveToGraveyard(BattleCardView card)
+        {
+            _hand.RemoveCard(card);
+            _graveyard.AddCard(card);
         }
     }
 }

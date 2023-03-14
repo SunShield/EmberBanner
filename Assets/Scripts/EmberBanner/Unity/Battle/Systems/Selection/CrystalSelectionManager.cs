@@ -62,6 +62,8 @@ namespace EmberBanner.Unity.Battle.Systems.Selection
         public void UnselectCrystal()
         {
             UnitSelectionManager.I.UnselectSpot();
+            
+            if (CurrentCrystalWithCard == null) return;
             CurrentCrystalWithCard.SetSelected(false);
             CurrentCrystalWithCard = null;
         }

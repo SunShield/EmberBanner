@@ -78,7 +78,15 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 
         public void OnTurnEnd()
         {
-            
+            foreach (var crystal in _unitCrystals.Crystals)
+            {
+                crystal.OnTurnEnd();
+                if (crystal.Card == null) continue;
+
+                var card = crystal.Card;
+                _zonesManager.UnsetCardPrePlayed(crystal.Card, crystal);
+                _zonesManager.MoveToGraveyard(card);
+            }
         }
 
         private void Update()
