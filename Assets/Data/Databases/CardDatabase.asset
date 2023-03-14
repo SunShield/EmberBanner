@@ -476,37 +476,12 @@ MonoBehaviour:
         DefenseType: 0
         SupportType: 0
         AidTags: 
-        PossibleTargets: 1
-        IsAoE: 0
-        Params:
-          m_keys: []
-          m_values: []
-      - <Name>k__BackingField: 3
-        RawDescription: 
-        Magnitude: 3
-        ClashingPower:
-          Min: 2
-          Max: 2
-        ClashingPowerGrowthRate:
-          Span: 3
-          Growth: 1
-        ClashLoseHandicap: 1
-        Threshold: 0
-        CoinsAmount: 1
-        IsFast: 0
-        TargetsCount: 0
-        Type: 2
-        AggressionType: 0
-        HarmTags: 
-        DefenseType: 0
-        SupportType: 0
-        AidTags: 
         PossibleTargets: 0
         IsAoE: 0
         Params:
           m_keys: []
           m_values: []
-      Target: 6
+      Target: 3
     - <Name>k__BackingField: Defence of the Stalwart
       Sprite: {fileID: 21300000, guid: 7dfb2d3247b59fe4b892e87c3099be2c, type: 3}
       Cost: 2
@@ -775,7 +750,7 @@ MonoBehaviour:
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 2
-        ClashLoseHandicap: 2
+        ClashLoseHandicap: 5
         Threshold: 5
         CoinsAmount: 2
         IsFast: 0

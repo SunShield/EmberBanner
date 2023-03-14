@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using EmberBanner.Core.Entities.Impl.Cards;
+using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Models.Actions;
-using EmberBanner.Core.Service.Classes.Fundamental;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
+using Plugins.ComplexValue;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EmberBanner.Core.Ingame.Impl.Battles
@@ -47,8 +49,16 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         /// </summary>
         public List<bool> CoinResults { get; set; } = new();
 
+        /// <summary>
+        /// Full amount of coins minus coins already rolled
+        /// </summary>
         public int CurrentCoinsAmount => CoinsAmount.CalculateValue() - CoinResults.Count;
 
+        public bool IsFullyResolved => CurrentCoinsAmount == 0;
+
+        /// <summary>
+        /// Clashing roll of an action
+        /// </summary>
         public int? CurrentRoll { get; set; }
 
         public BattlePlayingActionEntity(CardActionEntity entity, BattleUnitCrystalView holder) : this(entity.Id, entity.Model)
@@ -61,5 +71,55 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         }
 
         public void Roll() => CurrentRoll = Random.Range(MinClashingPower.CalculateValue(), MaxClashingPower.CalculateValue() + 1);
+
+        public bool IsSelfPlayable()
+        {
+            if (IsReactive()) return false;
+            if (Model.Type == ActionType.Aggression) return false;
+            return true;
+        }
+        
+        public bool IsReactive()
+        {
+            // Field and Shield defenses are never reactive
+            if (Model.Type == ActionType.Defense && (Model.DefenseType == DefenseType.Barrier || Model.DefenseType == DefenseType.Block)) return true;
+            
+            // Targeted Aggressions are never reactive
+            if (Model.Type == ActionType.Aggression && IsTargetingSelf) return true;
+
+            return false;
+        }
+        
+        public bool IsNotReactiveAgainstTarget(BattleUnitCrystalView initiator)
+        {
+            // Supports are never reactive
+            if (Model.Type == ActionType.Support) return false;
+            
+            // Field and Shield defenses are never reactive
+            if (Model.Type == ActionType.Defense && (Model.DefenseType == DefenseType.Shield || Model.DefenseType == DefenseType.Field)) return false;
+            
+            // Targeted Aggressions are never reactive
+            if (Model.Type == ActionType.Aggression && !IsTargetingSelf) return false;
+            
+            // Block and Barrier defenses are reactive if targeting self or initiator of an attack
+            if (Model.Type == ActionType.Defense && (IsTargetingSelf || Target != initiator)) return false;
+
+            return true;
+        }
+
+        public int GetLosingMagnitude()
+        {
+            Magnitude.AddModifier(0, ValueModifierType.BaseFlatRemove, ClashLoseHandicap.CalculateValue());
+            return Magnitude.CalculateValue();
+        }
+
+        public bool FlipCoin()
+        {
+            var randomSeed = Random.Range(0, 2);
+            var result = randomSeed == 1;
+            CoinResults.Add(result);
+
+            return result;
+        }
     }
 }

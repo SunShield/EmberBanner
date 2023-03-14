@@ -595,7 +595,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.1
+  m_fontSize: 51.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.1
+  m_fontSize: 51.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -985,7 +985,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.75
+  m_fontSize: 12.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1534,6 +1534,9 @@ MonoBehaviour:
       ArrowBody: {fileID: 1082714783899445771, guid: 82f73ee7dce824b41ac1f24d5d492feb, type: 3}
     - ArrowHead: {fileID: 679292677723526136, guid: 701ddea294913c5458797aa45508e1c8, type: 3}
       ArrowBody: {fileID: 3466821658566511507, guid: ac2ec0efa348aaf4492618a8b7c46365, type: 3}
+  _voidedArrowSprites:
+    ArrowHead: {fileID: 679292677723526136, guid: 8e7a11c705920f642a39650fbf26aacb, type: 3}
+    ArrowBody: {fileID: 3466821658566511507, guid: 04d8eb7d5e04f7440887568b56818df5, type: 3}
   _arrowsOrigin: {fileID: 1133820521}
 --- !u!4 &1134613664 stripped
 Transform:
@@ -2167,7 +2170,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.1
+  m_fontSize: 48.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

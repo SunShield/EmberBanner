@@ -2,8 +2,7 @@
 {
     public enum ActionsResolveState
     {
-        GetCurrentAction,
-        GetOpposedAction,
+        GetCurrentActions,
         RollCurrentActions,
         ResolveCurrentActions,
         PostResolveActions,

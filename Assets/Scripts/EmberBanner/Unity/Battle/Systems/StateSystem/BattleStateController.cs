@@ -65,14 +65,10 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.CrustalTurn)
             {
-                if (ActionsResolver.I.State == ActionsResolveState.GetCurrentAction)
+                if (ActionsResolver.I.State == ActionsResolveState.GetCurrentActions)
                 {
-                    ActionsResolver.I.GetCurrentAction();
-                } 
-                else if (ActionsResolver.I.State == ActionsResolveState.GetOpposedAction)
-                {
-                    ActionsResolver.I.GetOpposingAction();
-                } 
+                    ActionsResolver.I.GetCurrentActions();
+                }
                 else if (ActionsResolver.I.State == ActionsResolveState.RollCurrentActions)
                 {
                     ActionsResolver.I.RollCurrentActions();

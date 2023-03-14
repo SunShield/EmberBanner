@@ -58,7 +58,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
         }
 
-        public void SetCurrentMainAction(BattlePlayingActionEntity action)
+        public void SetInitiatorMainAction(BattlePlayingActionEntity action)
         {
             InitiatorCrystalUis.currentActionUi.gameObject.SetActive(true);
             InitiatorCrystalUis.currentActionUi.SetAction(action);
@@ -73,12 +73,39 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             TargetCrystalUis.unitUi.SetUnit(_targetCrystal.OwnerView);
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
         }
+        
+        public void SetTargetMainAction(BattlePlayingActionEntity action)
+        {
+            TargetCrystalUis.currentActionUi.gameObject.SetActive(action != null);
+            TargetCrystalUis.currentActionUi.SetAction(action);
+            TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
+        }
 
         public void HideTargetUi()
         {
             TargetCrystalUis.unitUi.gameObject.SetActive(false);
             TargetCrystalUis.actionsUi.gameObject.SetActive(false);
             TargetCrystalUis.currentActionUi.gameObject.SetActive(false);
+        }
+
+        public void SetRolls(int initiatorRoll, int targetRoll)
+        {
+            InitiatorCrystalUis.currentActionUi.SetRoll(initiatorRoll);
+            TargetCrystalUis.currentActionUi.SetRoll(targetRoll);
+        }
+
+        public void SetLosingMagnitude(int magnitude, ClashState state)
+        {
+            if      (state == ClashState.InitiatorWon) TargetCrystalUis.currentActionUi.SetLosingMagnitude(magnitude);
+            else if (state == ClashState.TargetWon) InitiatorCrystalUis.currentActionUi.SetLosingMagnitude(magnitude);
+        }
+
+        public void UpdateActions()
+        {
+            InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
+            TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
+            _playerCurrentAction.UpdateAction();
+            _enemyCurrentAction.UpdateAction();
         }
     }
 }

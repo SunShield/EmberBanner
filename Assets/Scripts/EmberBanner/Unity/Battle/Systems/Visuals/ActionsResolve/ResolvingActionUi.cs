@@ -31,7 +31,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             _magnitudeTypeSprite.sprite = typeSprite;
             
             _coinsText.text = (action.CoinsAmount.CalculateValue() - action.CoinResults.Count).ToString();
-            _rollBoundsText.text = $"{action.MinClashingPower.CalculateValue()}~{action.MinClashingPower.CalculateValue()}";
+            _rollBoundsText.text = $"{action.MinClashingPower.CalculateValue()}~{action.MaxClashingPower.CalculateValue()}";
             if (action.Model.Type != ActionType.Defense)
                 _thresholdBlock.SetActive(false);
             else

@@ -19,6 +19,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
         private const float WeirdConstantToRuleTheUniverse = 0.08f;
         
         [SerializeField] private ActionTypeToArrowSpritesDictionary _arrowSprites;
+        [SerializeField] private ActionArrowSprites _voidedArrowSprites;
         [SerializeField] private Transform _arrowsOrigin;
         
         private Dictionary<(BattleUnitCrystalView initiator, BattleUnitCrystalView target), Arrow> _arrows = new();
@@ -72,8 +73,9 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
                 actionsFittingTarget = initiator.Card.Entity.GetActionsTargetingSelf();
             else if (initiator.Controller == target.Controller)
                 actionsFittingTarget = initiator.Card.Entity.GetActionsTargetingAlly();
-            
-            var actionType = actionsFittingTarget.First().Type;
+
+            var action = actionsFittingTarget.FirstOrDefault();
+            var actionType = action?.Type;
             
             var arrow = new Arrow()
             {
@@ -84,7 +86,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
             _arrows[(initiator, target)] = arrow;
         }
         
-        private GameObject SpawnArrowTail(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
+        private GameObject SpawnArrowTail(ActionType? type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
             var lengthMultiplier = GetClashingArrowLengthMultiplier(isClashingArrow);
             var distanceBetweenCrystals = GetDistanceBetweenCrystals(initiator, target, lengthMultiplier);
@@ -107,8 +109,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
         private Vector3 GetArrowPosition(BattleUnitCrystalView initiator, Vector3 distanceBetweenCrystals) 
             => initiator.Tran.position + (distanceBetweenCrystals / 2);
 
-        private GameObject InstantiateArrow(ActionType type, Vector3 arrowPosition)
-            => Instantiate(_arrowSprites[type].ArrowBody, arrowPosition, Quaternion.identity, _arrowsOrigin);
+        private GameObject InstantiateArrow(ActionType? type, Vector3 arrowPosition)
+            => Instantiate(type.HasValue ? _arrowSprites[type.Value].ArrowBody : _voidedArrowSprites.ArrowBody, arrowPosition, Quaternion.identity, _arrowsOrigin);
 
         private void RotateTransformOntoTargetCrystal(BattleUnitCrystalView target, GameObject tran)
             => tran.transform.LookAt2D(target.Tran.position, true);
@@ -116,7 +118,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
         private Vector3 CalculateFinalArrowLength(bool isClashingArrow, Vector3 distanceBetweenCrystals)
             => new (distanceBetweenCrystals.magnitude / ArrowSideLength * 2 - (!isClashingArrow ? 0f : ArrowSideLength * 2), 1f, 1f);
 
-        private GameObject SpawnArrowHeads(ActionType type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
+        private GameObject SpawnArrowHeads(ActionType? type, BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClashingArrow = false)
         {
             var lengthMultiplier = GetClashingArrowLengthMultiplier(isClashingArrow);
             var distanceBetweenCrystals = GetDistanceBetweenCrystals(initiator, target, lengthMultiplier);
@@ -135,8 +137,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
                 distanceBetweenCrystals += distanceBetweenCrystals.normalized * WeirdConstantToRuleTheUniverse;
         }
 
-        private GameObject InstantiateHead(ActionType type, BattleUnitCrystalView initiator, Vector3 distanceBetweenCrystals)
-            => Instantiate(_arrowSprites[type].ArrowHead, initiator.Tran.position + ((distanceBetweenCrystals) / 2), Quaternion.identity, transform);
+        private GameObject InstantiateHead(ActionType? type, BattleUnitCrystalView initiator, Vector3 distanceBetweenCrystals)
+            => Instantiate(type.HasValue ? _arrowSprites[type.Value].ArrowHead : _voidedArrowSprites.ArrowHead, initiator.Tran.position + ((distanceBetweenCrystals) / 2), Quaternion.identity, transform);
 
         private Vector3 GetHeadPosition(BattleUnitCrystalView target, bool isClashingArrow, Vector3 distanceBetweenCrystals)
             => !isClashingArrow ? target.Tran.position : target.Tran.position - distanceBetweenCrystals;

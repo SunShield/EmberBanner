@@ -65,9 +65,19 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning
         {
             var actionTargetType = action.Model.TargetType;
             var crystalTarget = CardTargetsMatrix.I.GetTarget(action.Holder);
+
+            // If action does not target self, but can do it...
+            if (crystalTarget != action.Holder && actionTargetType.AllowsSelf())
+            {
+                // ...and cannot target the crystal target, action always targets self
+                if (crystalTarget.Controller == action.Holder.Controller.Enemy() && !actionTargetType.AllowsEnemy() ||
+                    crystalTarget.Controller == action.Holder.Controller.Ally() && !actionTargetType.AllowsAlly())
+                    return action.Holder;
+            }
+            
             if (crystalTarget == action.Holder && actionTargetType.AllowsSelf() ||
-                crystalTarget.Controller == action.Holder.Controller.Enemy() || actionTargetType.AllowsEnemy() ||
-                crystalTarget.Controller == action.Holder.Controller.Ally() || actionTargetType.AllowsAlly())
+                crystalTarget.Controller == action.Holder.Controller.Enemy() && actionTargetType.AllowsEnemy() ||
+                crystalTarget.Controller == action.Holder.Controller.Ally() && actionTargetType.AllowsAlly())
                 return crystalTarget;
             
             return null;
