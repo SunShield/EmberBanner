@@ -116,6 +116,21 @@ namespace Plugins.ComplexValue
         public void AddTag(string tag) => Tags.Add(tag);
         public void AddTags(List<string> tags) => Tags.AddRange(tags);
 
+        public ComplexValue Clone()
+        {
+            var newValue = new ComplexValue(_isAlwaysPositive, BaseValue);
+            newValue.BaseValueFlatAdditions = new Dictionary<ulong, ComplexValueModifier>(BaseValueFlatAdditions);
+            newValue.BaseValueFlatReductions = new Dictionary<ulong, ComplexValueModifier>(BaseValueFlatReductions);
+            newValue.BaseValuePercentIncreasements = new Dictionary<ulong, ComplexValueModifier>(BaseValuePercentIncreasements);
+            newValue.BaseValuePercentDecreasements = new Dictionary<ulong, ComplexValueModifier>(BaseValuePercentDecreasements);
+            newValue.AdditionalValueFlatAdditions = new Dictionary<ulong, ComplexValueModifier>(AdditionalValueFlatAdditions);
+            newValue.AdditionalValueFlatReductions = new Dictionary<ulong, ComplexValueModifier>(AdditionalValueFlatReductions);
+            newValue.MoreMultipliers = new Dictionary<ulong, ComplexValueModifier>(MoreMultipliers);
+            newValue.LessMultipliers = new Dictionary<ulong, ComplexValueModifier>(LessMultipliers);
+
+            return newValue;
+        }
+
         public int CalculateValue(ComplexValueFilterDelegate filter = null)
         {
             var finalBaseFlatValue = CalculateFinalBaseFlatValue(filter);

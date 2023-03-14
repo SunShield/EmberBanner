@@ -113,7 +113,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         }
 
         private BattlePlayingActionEntity FindFirstSelfPlayableAction(List<BattlePlayingActionEntity> actions)
-            => actions.FirstOrDefault(action => !action.IsSelfPlayable());
+            => actions.FirstOrDefault(action => action.IsSelfPlayable());
 
         private BattlePlayingActionEntity FindFirstNonReactiveAction(List<BattlePlayingActionEntity> actions)
             => actions.FirstOrDefault(action => !action.IsReactive());
@@ -126,5 +126,25 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
 
         private List<BattlePlayingActionEntity> GetNonCancelledActions(BattleUnitCrystalView crystal) =>
             crystal.Actions.Where(a => !a.IsCancelled).ToList();
+
+        public BattlePlayingActionEntity FindProperTargetAction(BattlePlayingActionEntity initiatingAction, BattleUnitCrystalView target)
+        {
+            var targetNonCancelledActions = GetNonCancelledActions(target);
+            var isClash = CardTargetsMatrix.I.CheckClash(initiatingAction.Holder, target);
+
+            if (!isClash)
+            {
+                if (initiatingAction.Model.Type == ActionType.Aggression)
+                    return FindFirstReactiveActionAgainstInitiator(targetNonCancelledActions, initiatingAction.Holder);
+            }
+            else
+            {
+                return initiatingAction.Model.Type == ActionType.Aggression 
+                    ? FindFirstClashableActionAgainstInitiatorsAggression(targetNonCancelledActions, initiatingAction.Holder) 
+                    : FindFirstNonReactiveAction(targetNonCancelledActions);
+            }
+
+            return null;
+        }
     }
 }

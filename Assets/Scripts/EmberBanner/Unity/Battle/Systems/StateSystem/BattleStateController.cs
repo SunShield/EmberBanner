@@ -68,6 +68,8 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 if (ActionsResolver.I.State == ActionsResolveState.GetCurrentActions)
                 {
                     ActionsResolver.I.GetCurrentActions();
+                    if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                        State = BattleState.CrystalTurnEnd;
                 }
                 else if (ActionsResolver.I.State == ActionsResolveState.RollCurrentActions)
                 {
@@ -76,20 +78,21 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 else if (ActionsResolver.I.State == ActionsResolveState.ResolveCurrentActions)
                 {
                     ActionsResolver.I.ResolveCurrentActions();
-                    State = BattleState.CrystalTurnEnd;
+                } 
+                else if (ActionsResolver.I.State == ActionsResolveState.PostResolveActions)
+                {
+                    ActionsResolver.I.PostResolveCurrentActions();
+                    if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                        State = BattleState.CrystalTurnEnd;
                 } 
             }
             else if (State == BattleState.CrystalTurnEnd)
             {
-                if (ActionsResolver.I.State == ActionsResolveState.PostResolveActions)
-                {
-                    ActionsResolver.I.PostResolveCurrentActions();
-                } 
-                else if (ActionsResolver.I.State == ActionsResolveState.FinishResolvingActions)
+                if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
                 {
                     ActionsResolver.I.DoOnAllActionsResolved();
                 } 
-                else if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                else if (ActionsResolver.I.State == ActionsResolveState.FinishResolvingActions)
                 {
                     if (TurnOrderController.I.AllCrystalsEndedTurns)
                         State = BattleState.TurnEnd;

@@ -23,6 +23,8 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         public BattleUnitCrystalView TargetCrystal { get; private set; }
         private BattlePlayingActionEntity _currentAction;
         private BattlePlayingActionEntity _currentTargetAction;
+        private bool _isClash;
+        private ClashState _clashState;
         
         public ActionsResolveState State { get; private set; }
 
@@ -33,6 +35,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             TargetCrystal = CardTargetsMatrix.I.GetTarget(InitiatorCrystal);
             if (TargetCrystal != InitiatorCrystal)
                 ActionsResolveUi.I.SetTargetCrystal(TargetCrystal);
+            _isClash = CardTargetsMatrix.I.CheckClash(InitiatorCrystal, TargetCrystal);
 
             State = ActionsResolveState.GetCurrentActions;
         }
@@ -43,15 +46,22 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             _currentAction = actions.initiatorAction;
             _currentTargetAction = actions.targetAction;
 
+            if (!_isClash && _currentAction == null ||
+                _isClash && _currentAction == null && _currentTargetAction == null)
+            {
+                State = ActionsResolveState.AllActionsResolved;
+                return;
+            }
+
             if (_currentAction != null)
             {
-                InitiatorCrystal.PickAction(_currentAction);
+                //InitiatorCrystal.PickAction(_currentAction);
                 ActionsResolveUi.I.SetInitiatorMainAction(_currentAction);
             }
 
             if (_currentTargetAction != null)
             {
-                TargetCrystal.PickAction(_currentTargetAction);
+                //TargetCrystal.PickAction(_currentTargetAction);
                 ActionsResolveUi.I.SetTargetMainAction(_currentTargetAction);
             }
             
@@ -60,26 +70,39 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
 
         public void RollCurrentActions()
         {
-            _currentAction.Roll();
-            _currentTargetAction.Roll();
-            ActionsResolveUi.I.SetRolls(_currentAction.CurrentRoll.Value, _currentTargetAction.CurrentRoll.Value);
+            _currentAction?.Roll();
+            _currentTargetAction?.Roll();
+
+            if (!_isClash)
+            {
+                FlipCoins();
+            }
+            else
+            {
+                DetermineClashState();
+                if (_clashState != ClashState.Tie)
+                {
+                    FlipCoins();
+                }
+            }
+            
+            ActionsResolveUi.I.SetRolls(_currentAction?.CurrentRoll, _currentTargetAction?.CurrentRoll);
             State = ActionsResolveState.ResolveCurrentActions;
         }
 
         public void ResolveCurrentActions()
         {
-            var clashState = ClashStateChecker.I.GetClashState(_currentAction, _currentTargetAction);
-            if (clashState == ClashState.Tie)
+            if (!_isClash)
             {
-                State = ActionsResolveState.RollCurrentActions;
-                return;
+                // Resolve actions here
             }
+            else
+            {
+                SetClashLoserMagnitude();
 
-            var loser = GetClashLoserAction(clashState);
-            var losingMagnitude = loser.GetLosingMagnitude();
-            ActionsResolveUi.I.SetLosingMagnitude(losingMagnitude, clashState);
-
-            loser.FlipCoin();
+                // Resolve actions here
+            }
+            
             ActionsResolveUi.I.UpdateActions();
             
             State = ActionsResolveState.PostResolveActions;
@@ -87,11 +110,36 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
 
         public void PostResolveCurrentActions()
         {
-            State = ActionsResolveState.AllActionsResolved;
+            if (_currentAction != null)
+            {
+                if (_currentAction.IsFullyResolved)
+                {
+                    ActionsResolveUi.I.ClearInitiatorMainAction();
+                    InitiatorCrystal.PickAction(_currentAction);
+                    _currentAction = null;
+                }
+                else
+                    _currentAction.PostSingleResolve();
+            }
+
+            if (_currentTargetAction != null)
+            {
+                if (_currentTargetAction.IsFullyResolved)
+                {
+                    ActionsResolveUi.I.ClearTargetMainAction();
+                    TargetCrystal.PickAction(_currentTargetAction);
+                    _currentTargetAction = null;
+                }
+                else
+                    _currentTargetAction.PostSingleResolve();
+            }
+            
+            State = ActionsResolveState.GetCurrentActions;
         }
 
         public void DoOnAllActionsResolved()
         {
+            ActionsResolveUi.I.Clear();
             State = ActionsResolveState.FinishResolvingActions;
         }
 
@@ -100,5 +148,20 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
             ClashState.InitiatorWon => _currentTargetAction,
             ClashState.TargetWon    => _currentAction,
         };
+
+        private void FlipCoins()
+        {
+            _currentAction?.FlipCoin();
+            _currentTargetAction?.FlipCoin();
+        }
+
+        private void DetermineClashState() => _clashState = ClashStateChecker.I.GetClashState(_currentAction, _currentTargetAction);
+
+        private void SetClashLoserMagnitude()
+        {
+            var loser = GetClashLoserAction(_clashState);
+            loser.SetLosingMagnitude();
+            ActionsResolveUi.I.SetLosingMagnitude(_clashState);
+        }
     }
 }

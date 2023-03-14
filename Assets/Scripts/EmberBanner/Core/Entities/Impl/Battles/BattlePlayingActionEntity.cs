@@ -102,15 +102,14 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
             if (Model.Type == ActionType.Aggression && !IsTargetingSelf) return false;
             
             // Block and Barrier defenses are reactive if targeting self or initiator of an attack
-            if (Model.Type == ActionType.Defense && (IsTargetingSelf || Target != initiator)) return false;
+            if (Model.Type == ActionType.Defense && (IsTargetingSelf || Target == initiator)) return false;
 
             return true;
         }
 
-        public int GetLosingMagnitude()
+        public void SetLosingMagnitude()
         {
             Magnitude.AddModifier(0, ValueModifierType.BaseFlatRemove, ClashLoseHandicap.CalculateValue());
-            return Magnitude.CalculateValue();
         }
 
         public bool FlipCoin()
@@ -120,6 +119,12 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
             CoinResults.Add(result);
 
             return result;
+        }
+
+        public void PostSingleResolve()
+        {
+            Magnitude.RemoveModifier(0, ValueModifierType.BaseFlatRemove);
+            CurrentRoll = null;
         }
     }
 }

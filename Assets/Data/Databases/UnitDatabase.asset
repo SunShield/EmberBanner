@@ -62,22 +62,10 @@ MonoBehaviour:
       DefaultCards:
       - <Name>k__BackingField: 1
         CardName: Holy Slash
-        Amount: 3
-      - <Name>k__BackingField: 2
-        CardName: Defence of the Stalwart
         Amount: 2
-      - <Name>k__BackingField: 3
-        CardName: Smite
-        Amount: 1
       - <Name>k__BackingField: 4
         CardName: Benediction
         Amount: 2
-      - <Name>k__BackingField: 5
-        CardName: Shield of Faith
-        Amount: 2
-      - <Name>k__BackingField: 6
-        CardName: Holy Beam
-        Amount: 1
       Sprite: {fileID: 21300000, guid: a29b4396cf8962f429537ae0a687f948, type: 3}
     - <Name>k__BackingField: Death Knight
       StartingHealth: 70
@@ -99,10 +87,10 @@ MonoBehaviour:
       DefaultCards:
       - <Name>k__BackingField: 1
         CardName: Ray of Death
-        Amount: 4
+        Amount: 1
       - <Name>k__BackingField: 2
         CardName: Unearth
-        Amount: 1
+        Amount: 4
       - <Name>k__BackingField: 3
         CardName: Darkness
         Amount: 1

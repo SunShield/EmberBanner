@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
@@ -11,6 +12,9 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
 {
     public class CurrentActionUi : EBMonoBehaviour
     {
+        private readonly Color _losingColor  = new (1f, 0.1f, 0.1f, 1f);
+        private readonly Color _defaultColor = new (1f, 1f, 1f, 1f);
+        
         [SerializeField] private SpriteRenderer _backgroundSprite;
         [SerializeField] private TextMeshPro _magnitudeRoll;
         [SerializeField] private SpriteRenderer _magnitudeTypeSprite;
@@ -20,53 +24,56 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         [SerializeField] private TextMeshPro _currentRollText;
         [SerializeField] private List<PrePlayedCoinUi> _coins;
 
-        private readonly Color _losingColor  = new (1f, 0.1f, 0.1f, 1f);
-        private readonly Color _defaultColor = new (1f, 1f, 1f, 1f);
-
+        private Color _defaultBgColor;
         private BattlePlayingActionEntity _action;
+
+        private void Start()
+        {
+            _defaultBgColor = _backgroundSprite.color;
+        }
 
         public void SetAction(BattlePlayingActionEntity action)
         {
             _action = action;
-            gameObject.SetActive(action != null);
-            if (action == null) return;
+            gameObject.SetActive(_action != null);
+            if (_action == null) return;
             
-            _magnitudeRoll.text = action.Magnitude.CalculateValue().ToString();
+            _magnitudeRoll.text = _action.Magnitude.CalculateValue().ToString();
             _magnitudeRoll.color = _defaultColor;
-            var typeSprite = action.Model.Type switch
+            var typeSprite = _action.Model.Type switch
             {
-                ActionType.Aggression => DataHolder.I.GameData.ActionTypeIcons[action.Model.AggressionType.ToString()],
-                ActionType.Defense    => DataHolder.I.GameData.ActionTypeIcons[action.Model.DefenseType.ToString()],
-                ActionType.Support    => DataHolder.I.GameData.ActionTypeIcons[action.Model.SupportType.ToString()],
+                ActionType.Aggression => DataHolder.I.GameData.ActionTypeIcons[_action.Model.AggressionType.ToString()],
+                ActionType.Defense    => DataHolder.I.GameData.ActionTypeIcons[_action.Model.DefenseType.ToString()],
+                ActionType.Support    => DataHolder.I.GameData.ActionTypeIcons[_action.Model.SupportType.ToString()],
                 _ => null
             };
             _magnitudeTypeSprite.sprite = typeSprite;
-            if (action.Model.Type != ActionType.Defense)
+            if (_action.Model.Type != ActionType.Defense)
                 _thresholdBlock.SetActive(false);
             else
-                _thresholdText.text = action.Threshold.CalculateValue().ToString();
+                _thresholdText.text = _action.Threshold.CalculateValue().ToString();
             
             _backgroundSprite.color = DataHolder.I.GameData.ActionTypeColors[action.Model.Type];
 
-            _descriptionText.text = action.Model.RawDescription; // TODO: later use description formatter
+            _descriptionText.text = _action.Model.RawDescription; // TODO: later use description formatter
 
-            var actionCoinsAmount = action.CoinsAmount.CalculateValue();
+            var actionCoinsAmount = _action.CoinsAmount.CalculateValue();
             for (int i = 0; i < _coins.Count; i++)
             {
                 _coins[i].gameObject.SetActive(actionCoinsAmount > i);
             }
 
-            for (int i = 0; i < action.CoinResults.Count; i++)
+            for (int i = 0; i < _action.CoinResults.Count; i++)
             {
-                _coins[i].SetState(action.CoinResults[i]);
+                _coins[i].SetState(_action.CoinResults[i]);
             }
         }
         
-        public void SetRoll(int roll) => _currentRollText.text = roll.ToString();
+        public void SetRoll(int? roll) => _currentRollText.text = roll != null ? roll.Value.ToString() : "?";
 
-        public void SetLosingMagnitude(int magnitude)
+        public void SetLosingMagnitude()
         {
-            _magnitudeRoll.text = magnitude.ToString();
+            _magnitudeRoll.text = _action.Magnitude.CalculateValue().ToString();
             _magnitudeRoll.color = _losingColor;
         }
 
@@ -85,6 +92,17 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             {
                 _coins[i].SetState(_action.CoinResults[i]);
             }
+        }
+
+        public void Clear()
+        {
+            _magnitudeRoll.text = "?";
+            _magnitudeRoll.color = _defaultColor;
+            _backgroundSprite.color = _defaultBgColor;
+            _descriptionText.text = "";
+            _thresholdBlock.SetActive(false);
+            _coins.ForEach(c => c.SetState(null));
+            gameObject.SetActive(false);
         }
     }
 }

@@ -52,15 +52,12 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             gameObject.SetActive(true);
             _initiatorCrystal = mainCrystal;
             
-            InitiatorCrystalUis.unitUi.gameObject.SetActive(true);
-            InitiatorCrystalUis.actionsUi.gameObject.SetActive(true);
             InitiatorCrystalUis.unitUi.SetUnit(_initiatorCrystal.OwnerView);
             InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
         }
 
         public void SetInitiatorMainAction(BattlePlayingActionEntity action)
         {
-            InitiatorCrystalUis.currentActionUi.gameObject.SetActive(true);
             InitiatorCrystalUis.currentActionUi.SetAction(action);
             InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
         }
@@ -68,36 +65,26 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         public void SetTargetCrystal(BattleUnitCrystalView secondaryCrystal)
         {
             _targetCrystal = secondaryCrystal;
-            TargetCrystalUis.unitUi.gameObject.SetActive(true);
-            TargetCrystalUis.actionsUi.gameObject.SetActive(true);
             TargetCrystalUis.unitUi.SetUnit(_targetCrystal.OwnerView);
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
         }
         
         public void SetTargetMainAction(BattlePlayingActionEntity action)
         {
-            TargetCrystalUis.currentActionUi.gameObject.SetActive(action != null);
             TargetCrystalUis.currentActionUi.SetAction(action);
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
         }
 
-        public void HideTargetUi()
-        {
-            TargetCrystalUis.unitUi.gameObject.SetActive(false);
-            TargetCrystalUis.actionsUi.gameObject.SetActive(false);
-            TargetCrystalUis.currentActionUi.gameObject.SetActive(false);
-        }
-
-        public void SetRolls(int initiatorRoll, int targetRoll)
+        public void SetRolls(int? initiatorRoll, int? targetRoll)
         {
             InitiatorCrystalUis.currentActionUi.SetRoll(initiatorRoll);
             TargetCrystalUis.currentActionUi.SetRoll(targetRoll);
         }
 
-        public void SetLosingMagnitude(int magnitude, ClashState state)
+        public void SetLosingMagnitude(ClashState state)
         {
-            if      (state == ClashState.InitiatorWon) TargetCrystalUis.currentActionUi.SetLosingMagnitude(magnitude);
-            else if (state == ClashState.TargetWon) InitiatorCrystalUis.currentActionUi.SetLosingMagnitude(magnitude);
+            if      (state == ClashState.InitiatorWon) TargetCrystalUis.currentActionUi.SetLosingMagnitude();
+            else if (state == ClashState.TargetWon) InitiatorCrystalUis.currentActionUi.SetLosingMagnitude();
         }
 
         public void UpdateActions()
@@ -106,6 +93,25 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
             _playerCurrentAction.UpdateAction();
             _enemyCurrentAction.UpdateAction();
+        }
+
+        public void ClearInitiatorMainAction() => InitiatorCrystalUis.currentActionUi.Clear();
+        public void ClearTargetMainAction() => TargetCrystalUis.currentActionUi.Clear();
+        
+        public void ClearMainActions()
+        {
+            _playerCurrentAction.Clear();
+            _enemyCurrentAction.Clear();
+        }
+
+        public void Clear()
+        {
+            _playerUi.Clear();
+            _enemyUi.Clear();
+            _playerActions.Clear();
+            _enemyActions.Clear();
+            ClearMainActions();
+            gameObject.SetActive(false);
         }
     }
 }

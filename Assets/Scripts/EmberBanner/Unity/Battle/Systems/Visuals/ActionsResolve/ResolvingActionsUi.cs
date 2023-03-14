@@ -12,15 +12,24 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         
         public void SetActions(BattleUnitCrystalView crystal)
         {
+            gameObject.SetActive(true);
             _crystal = crystal;
             for (int i = 0; i < _actions.Count; i++)
             {
-                var crystalActionsCount = crystal.Actions.Count;
-                if (i >= crystal.Actions.Count)
-                    _actions[i].gameObject.SetActive(false);
-                else
+                _actions[i].gameObject.SetActive(i < crystal.Actions.Count);
+                if (i < crystal.Actions.Count)
                     _actions[i].SetAction(crystal.Actions[i]);
             }
+        }
+
+        public void Clear()
+        {
+            _crystal = null;
+            foreach (var action in _actions)
+            {
+                action.gameObject.SetActive(false);
+            }
+            gameObject.SetActive(false);
         }
     }
 }

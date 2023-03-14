@@ -17,6 +17,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         
         public void SetUnit(BattleUnitView unit)
         {
+            gameObject.SetActive(true);
             _unit = unit;
             SetGraphics();
             AddCrystals();
@@ -31,7 +32,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
 
         private void AddCrystals()
         {
-            _unitCrystals.SetCrystals(_unit.UnitCrystals.Crystals);
+            _unitCrystals.SetCrystals(_unitCrystals.Crystals);
         }
         
         private void Update()
@@ -40,6 +41,12 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             
             _unitHealthBar.localScale = new Vector3((float)_unit.Entity.CurrentHealth / _unit.Entity.MaxHealth.CalculateValue(), 1f, 1f);
             _unitHealthText.text = $"{_unit.Entity.CurrentHealth}/{_unit.Entity.MaxHealth.CalculateValue()}";
+        }
+
+        public void Clear()
+        {
+            _unit = null;
+            gameObject.SetActive(false);
         }
     }
 }

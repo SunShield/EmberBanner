@@ -11,6 +11,9 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
         public ClashState GetClashState(BattlePlayingActionEntity initiatorAction,
             BattlePlayingActionEntity targetAction)
         {
+            if (initiatorAction != null && targetAction == null) return ClashState.InitiatorWon;
+            if (targetAction != null && initiatorAction == null) return ClashState.TargetWon;
+            
             if (initiatorAction.CurrentRoll.Value > targetAction.CurrentRoll.Value) return ClashState.InitiatorWon;
             if (initiatorAction.CurrentRoll.Value < targetAction.CurrentRoll.Value) return ClashState.TargetWon;
             return ClashState.Tie;

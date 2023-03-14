@@ -132,7 +132,7 @@ MonoBehaviour:
           Growth: 1
         ClashLoseHandicap: 1
         Threshold: 0
-        CoinsAmount: 2
+        CoinsAmount: 4
         IsFast: 0
         TargetsCount: 0
         Type: 0

@@ -22,12 +22,6 @@ MonoBehaviour:
       - <Name>k__BackingField: 3
         UnitName: Skeleton
         Wave: 1
-      - <Name>k__BackingField: 6
+      - <Name>k__BackingField: 4
         UnitName: Death Knight
-        Wave: 1
-      - <Name>k__BackingField: 7
-        UnitName: Wraith
-        Wave: 1
-      - <Name>k__BackingField: 8
-        UnitName: Bone Beast
         Wave: 1
