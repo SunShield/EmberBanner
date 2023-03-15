@@ -11,22 +11,33 @@
             <ui:VisualElement name="BaseStatsContainer" style="flex-grow: 1; width: 100%; min-height: 149px;">
                 <ui:Label text="Name" display-tooltip-when-elided="true" name="ElementName" style="background-color: rgba(0, 0, 0, 0.51); font-size: 14px; -unity-font-style: bold;" />
                 <ui:VisualElement name="HealthContainer" style="height: 26px; flex-direction: row;">
-                    <ui:Label text="Start/Max Health" display-tooltip-when-elided="true" name="StartingMaxHealthLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <ui:Label text="Start/Max Health" display-tooltip-when-elided="true" name="StartingMaxHealthLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
                     <uie:IntegerField value="0" name="StartingHealthField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                     <uie:IntegerField value="0" name="MaxHealthField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                    <ui:Label text="Health Regen" display-tooltip-when-elided="true" name="HealthRegenLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <uie:IntegerField value="0" name="HealthRegenField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="WillContainer" style="height: 26px; flex-direction: row;">
+                    <ui:Label text="Start/Max Will" display-tooltip-when-elided="true" name="StartingMaxWillLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <uie:IntegerField value="0" name="StartingWillField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                    <uie:IntegerField value="0" name="MaxWillField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                    <ui:Label text="Will Regen" display-tooltip-when-elided="true" name="WillRegenLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <uie:IntegerField value="0" name="WillRegenField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="EnergyContainer" style="height: 26px; flex-direction: row;">
-                    <ui:Label text="Start/Max Energy" display-tooltip-when-elided="true" name="StartingMaxEnergyLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <ui:Label text="Start/Max Energy" display-tooltip-when-elided="true" name="StartingMaxEnergyLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
                     <uie:IntegerField value="0" name="StartingEnergyField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                     <uie:IntegerField value="0" name="MaxEnergyField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
+                    <ui:Label text="Energy Regen" display-tooltip-when-elided="true" name="EnergyRegenLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <uie:IntegerField value="0" name="EnergyRegenField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="HandContainer" style="height: 26px; flex-direction: row;">
-                    <ui:Label text="Hand Size/Draw" display-tooltip-when-elided="true" name="HandDrawLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
+                    <ui:Label text="Hand Size/Draw" display-tooltip-when-elided="true" name="HandDrawLabel" style="margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-left; color: rgb(255, 255, 255); -unity-font-style: bold; width: 123px;" />
                     <uie:IntegerField value="0" name="HandSizeField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                     <uie:IntegerField value="0" name="DrawField" style="height: 100%; width: 52px; -unity-text-align: middle-center;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="IsEnemyContainer" style="height: 26px; flex-direction: row;">
-                    <ui:Label text="IsEnemy" display-tooltip-when-elided="true" name="IsEnemyLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 125px;" />
+                    <ui:Label text="IsEnemy" display-tooltip-when-elided="true" name="IsEnemyLabel" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-font-style: bold; width: 128px;" />
                     <ui:Toggle name="IsEnemyToggle" style="width: 102px;" />
                 </ui:VisualElement>
             </ui:VisualElement>

@@ -11,8 +11,13 @@ namespace EmberBanner.Core.Models.Units
     {
         public int StartingHealth;
         public int MaxHealth;
+        public int HealthRegen;
+        public int StartingWill;
+        public int MaxWill;
+        public int WillRegen;
         public int StartingEnergy;
         public int MaxEnergy;
+        public int EnergyRegen;
         public int HandSize;
         public int Draw;
         public List<UnitCrystalModel> Crystals = new();

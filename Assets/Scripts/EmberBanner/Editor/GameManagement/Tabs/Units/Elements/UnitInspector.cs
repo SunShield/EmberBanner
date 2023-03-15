@@ -21,8 +21,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
         private ObjectField   _iconPicker;
         private IntegerField  _startingHealthField;
         private IntegerField  _maxHealthField;
+        private IntegerField  _healthRegenField;
+        private IntegerField  _startingWillField;
+        private IntegerField  _maxWillField;
+        private IntegerField  _willRegenField;
         private IntegerField  _startingEnergyField;
         private IntegerField  _maxEnergyField;
+        private IntegerField  _energyRegenField;
         private IntegerField  _handSizeField;
         private IntegerField  _drawField;
         private Toggle        _isEnemyToggle;
@@ -43,12 +48,22 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _elementName          = Root.Q<Label>("ElementName");
             _icon                 = Root.Q<VisualElement>("Icon");
             _iconPicker           = Root.Q<ObjectField>("IconPicker");
+            
             _startingHealthField  = Root.Q<IntegerField>("StartingHealthField");
             _maxHealthField       = Root.Q<IntegerField>("MaxHealthField");
+            _healthRegenField     = Root.Q<IntegerField>("HealthRegenField");
+            
+            _startingWillField    = Root.Q<IntegerField>("StartingWillField");
+            _maxWillField         = Root.Q<IntegerField>("MaxWillField");
+            _willRegenField       = Root.Q<IntegerField>("WillRegenField");
+            
             _startingEnergyField  = Root.Q<IntegerField>("StartingEnergyField");
             _maxEnergyField       = Root.Q<IntegerField>("MaxEnergyField");
+            _energyRegenField     = Root.Q<IntegerField>("EnergyRegenField");
+            
             _handSizeField        = Root.Q<IntegerField>("HandSizeField");
             _drawField            = Root.Q<IntegerField>("DrawField");
+            
             _isEnemyToggle        = Root.Q<Toggle>("IsEnemyToggle");
             _crystalsContainer    = Root.Q<VisualElement>("CrystalsContainer");
             _cardsContainer       = Root.Q<VisualElement>("CardsContainer");
@@ -77,6 +92,26 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
                 InspectedElement.MaxHealth = evt.newValue;
             });
 
+            _healthRegenField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.HealthRegen = evt.newValue;
+            });
+            
+            _startingWillField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.StartingWill = evt.newValue;
+            });
+
+            _maxWillField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.MaxWill = evt.newValue;
+            });
+
+            _willRegenField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.WillRegen = evt.newValue;
+            });
+
             _startingEnergyField.RegisterValueChangedCallback(evt =>
             {
                 InspectedElement.StartingEnergy = evt.newValue;
@@ -85,6 +120,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _maxEnergyField.RegisterValueChangedCallback(evt =>
             {
                 InspectedElement.MaxEnergy = evt.newValue;
+            });
+
+            _energyRegenField.RegisterValueChangedCallback(evt =>
+            {
+                InspectedElement.EnergyRegen = evt.newValue;
             });
 
             _handSizeField.RegisterValueChangedCallback(evt =>
@@ -189,10 +229,19 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             _elementName.text = InspectedElement.Name;
             _icon.style.backgroundImage = new StyleBackground(InspectedElement.Sprite);
             _iconPicker.value = InspectedElement.Sprite;
+            
             _startingHealthField.value = InspectedElement.StartingHealth;
             _maxHealthField.value = InspectedElement.MaxHealth;
+            _healthRegenField.value = InspectedElement.HealthRegen;
+            
+            _startingWillField.value = InspectedElement.StartingWill;
+            _maxWillField.value = InspectedElement.MaxWill;
+            _willRegenField.value = InspectedElement.WillRegen;
+            
             _startingEnergyField.value = InspectedElement.StartingEnergy;
             _maxEnergyField.value = InspectedElement.MaxEnergy;
+            _energyRegenField.value = InspectedElement.EnergyRegen;
+            
             _handSizeField.value = InspectedElement.HandSize;
             _drawField.value = InspectedElement.Draw;
             _isEnemyToggle.value = InspectedElement.IsEnemyUnit;

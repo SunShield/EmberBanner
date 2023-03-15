@@ -24,8 +24,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Skeleton
       StartingHealth: 40
       MaxHealth: 40
+      HealthRegen: 0
+      StartingWill: 40
+      MaxWill: 40
+      WillRegen: 0
       StartingEnergy: 30
       MaxEnergy: 30
+      EnergyRegen: 10
       HandSize: 3
       Draw: 1
       Crystals:
@@ -42,8 +47,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Sir Calvus
       StartingHealth: 140
       MaxHealth: 140
+      HealthRegen: 0
+      StartingWill: 80
+      MaxWill: 80
+      WillRegen: 0
       StartingEnergy: 120
       MaxEnergy: 120
+      EnergyRegen: 20
       HandSize: 4
       Draw: 2
       Crystals:
@@ -83,8 +93,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Death Knight
       StartingHealth: 70
       MaxHealth: 70
+      HealthRegen: 0
+      StartingWill: 50
+      MaxWill: 50
+      WillRegen: 0
       StartingEnergy: 70
       MaxEnergy: 70
+      EnergyRegen: 15
       HandSize: 3
       Draw: 2
       Crystals:
@@ -111,8 +126,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Wraith
       StartingHealth: 30
       MaxHealth: 30
+      HealthRegen: 0
+      StartingWill: 90
+      MaxWill: 90
+      WillRegen: 0
       StartingEnergy: 90
       MaxEnergy: 90
+      EnergyRegen: 18
       HandSize: 3
       Draw: 2
       Crystals:
@@ -132,8 +152,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Bone Beast
       StartingHealth: 60
       MaxHealth: 60
+      HealthRegen: 0
+      StartingWill: 45
+      MaxWill: 45
+      WillRegen: 0
       StartingEnergy: 35
       MaxEnergy: 35
+      EnergyRegen: 10
       HandSize: 3
       Draw: 2
       Crystals:
@@ -150,8 +175,13 @@ MonoBehaviour:
     - <Name>k__BackingField: Stalli Hors
       StartingHealth: 140
       MaxHealth: 180
+      HealthRegen: 0
+      StartingWill: 120
+      MaxWill: 150
+      WillRegen: 0
       StartingEnergy: 80
       MaxEnergy: 100
+      EnergyRegen: 14
       HandSize: 3
       Draw: 2
       Crystals:

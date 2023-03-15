@@ -17,7 +17,11 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         [SerializeField] private BattleUnitCrystalsView _unitCrystals;
         [SerializeField] private Transform _unitHealthBar;
         [SerializeField] private TextMeshPro _unitHealthText;
+        [SerializeField] private Transform _unitWillBar;
+        [SerializeField] private TextMeshPro _unitWillText;
         [SerializeField] private TextMeshPro _unitEnergyText;
+        [SerializeField] private TextMeshPro _unitShieldText;
+        [SerializeField] private TextMeshPro _unitFieldText;
         
         private UnitCardZonesManager _zonesManager;
 
@@ -93,7 +97,13 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         {
             _unitHealthBar.localScale = new Vector3((float)Entity.CurrentHealth / Entity.MaxHealth.CalculateValue(), 1f, 1f);
             _unitHealthText.text = $"{Entity.CurrentHealth}/{Entity.MaxHealth.CalculateValue()}";
+            
+            _unitWillBar.localScale = new Vector3((float)Entity.CurrentWill / Entity.MaxWill.CalculateValue(), 1f, 1f);
+            _unitWillText.text = $"{Entity.CurrentWill}/{Entity.MaxWill.CalculateValue()}";
+            
             _unitEnergyText.text = Entity.CurrentEnergy.ToString();
+            _unitShieldText.text = Entity.CurrentShield.ToString();
+            _unitFieldText.text = Entity.CurrentField.ToString();
         }
     }
 }

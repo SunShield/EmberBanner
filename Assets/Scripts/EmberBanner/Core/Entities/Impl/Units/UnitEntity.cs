@@ -15,19 +15,29 @@ namespace EmberBanner.Core.Entities.Impl.Units
         
         public ComplexValue StartingHealth { get; }
         public ComplexValue MaxHealth      { get; }
+        public ComplexValue HealthRegen    { get; }
+        public ComplexValue StartingWill   { get; }
+        public ComplexValue MaxWill        { get; }
+        public ComplexValue WillRegen      { get; }
         public ComplexValue StartingEnergy { get; }
         public ComplexValue MaxEnergy      { get; }
+        public ComplexValue EnergyRegen    { get; }
         public ComplexValue HandSize       { get; }
         public ComplexValue Draw           { get; }
 
         public UnitEntity(int id, UnitModel model) : base(id, model)
         {
-            StartingHealth = new(true, model.StartingHealth);
-            MaxHealth      = new(true, model.MaxHealth);
-            StartingEnergy = new(true, model.StartingEnergy);
-            MaxEnergy      = new(true, model.MaxEnergy);
-            HandSize       = new(true, model.HandSize);
-            Draw           = new(true, model.Draw);
+            StartingHealth = new (true, model.StartingHealth);
+            MaxHealth      = new (true, model.MaxHealth);
+            HealthRegen    = new (true, model.HealthRegen);
+            StartingWill   = new (true, model.StartingWill);
+            MaxWill        = new (true, model.MaxWill);
+            WillRegen      = new (true, model.WillRegen);
+            StartingEnergy = new (true, model.StartingEnergy);
+            MaxEnergy      = new (true, model.MaxEnergy);
+            EnergyRegen    = new (true, model.EnergyRegen);
+            HandSize       = new (true, model.HandSize);
+            Draw           = new (true, model.Draw);
         }
 
         protected override UnitSaveData GenerateSaveDataInternal(UnitSaveData saveData)
