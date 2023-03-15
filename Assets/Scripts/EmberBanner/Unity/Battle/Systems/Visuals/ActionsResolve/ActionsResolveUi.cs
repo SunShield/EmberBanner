@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
+using EmberBanner.Core.Service.Extensions;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using EmberBanner.Unity.Service;
 using UnityEngine;
@@ -34,7 +35,10 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         private UnitControllerType InitiatorCrystalController => _initiatorCrystal.Controller;
         private UnitControllerType TargetCrystalController => _targetCrystal.Controller; 
         private (ResolvingUnitUi unitUi, ResolvingActionsUi actionsUi, CurrentActionUi currentActionUi) InitiatorCrystalUis => _uiMap[InitiatorCrystalController];
-        private (ResolvingUnitUi unitUi, ResolvingActionsUi actionsUi, CurrentActionUi currentActionUi) TargetCrystalUis => _uiMap[TargetCrystalController];
+        private (ResolvingUnitUi unitUi, ResolvingActionsUi actionsUi, CurrentActionUi currentActionUi) TargetCrystalUis 
+            => InitiatorCrystalController != TargetCrystalController 
+                ? _uiMap[TargetCrystalController]
+                : _uiMap[TargetCrystalController.Enemy()];
         
         private void Awake()
         {
