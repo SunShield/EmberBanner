@@ -72,7 +72,22 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
         
         private void ResolveSupport(BattlePlayingActionEntity action)
         {
-            
+            var actionTargetUnit = action.Target.OwnerView;
+            var actionMagnitude = action.Magnitude.CalculateValue();
+            if (action.Model.SupportType == SupportType.Healing)
+                AddHealth(actionTargetUnit, actionMagnitude);
+            else if (action.Model.SupportType == SupportType.Stabilization)
+                AddWill(actionTargetUnit, actionMagnitude);
+        }
+
+        private void AddHealth(BattleUnitView unit, int amount)
+        {
+            unit.Entity.ChangeHealth(amount);
+        }
+        
+        private void AddWill(BattleUnitView unit, int amount)
+        {
+            unit.Entity.ChangeWill(amount);
         }
     }
 }
