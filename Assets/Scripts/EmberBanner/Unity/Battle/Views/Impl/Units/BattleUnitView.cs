@@ -2,6 +2,7 @@
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Models.Units;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving.Damaging;
 using EmberBanner.Unity.Battle.Systems.CardZonesSystem;
 using EmberBanner.Unity.Battle.Systems.UnitSpotSystem;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
@@ -11,7 +12,7 @@ using BattleUnitCrystalView = EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Units
 {
-    public class BattleUnitView : BattleView<BattleUnitEntity, UnitModel>
+    public partial class BattleUnitView : BattleView<BattleUnitEntity, UnitModel>
     {
         [SerializeField] private SpriteRenderer _graphics;
         [SerializeField] private BattleUnitCrystalsView _unitCrystals;
@@ -30,15 +31,12 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         public UnitControllerType Controller => Entity.Controller;
         public BattleUnitCrystalsView UnitCrystals => _unitCrystals;
         public List<BattleCardView> CardsInHand => _zonesManager.CardsInHand;
-        
-        public bool IsDead { get; private set; }
+        public bool IsStaggered => Entity.IsStaggered;
+        public bool IsDead => Entity.IsDead;
 
         public void SetCrystals(List<BattleUnitCrystalView> crystals) => _unitCrystals.SetCrystals(crystals);
 
-        protected override void PostInitialize()
-        {
-            SetGraphics();
-        }
+        protected override void PostInitialize() => SetGraphics();
 
         private void SetGraphics()
         {
@@ -47,25 +45,11 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
                 _graphics.transform.localScale = new(-1f, 1f, 1f);
         }
 
-        public void SetZonesManager(UnitCardZonesManager zonesManager)
-        {
-            _zonesManager = zonesManager;
-        }
-
+        public void SetZonesManager(UnitCardZonesManager zonesManager) => _zonesManager = zonesManager;
+        public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
         public void SetSpot(UnitSpot spot) => Spot = spot;
 
-        public void SetZonesActive(bool active) => _zonesManager.SetActive(active);
-
-        public void DrawCards(bool isFirstTurn)
-        {
-            if (isFirstTurn) _zonesManager.DrawCardsAtBattleStart();
-            else             _zonesManager.DrawCardsAtTurnStart();
-        }
-
-        public bool CanPlayCard(BattleCardView card)
-        {
-            return card.Entity.Cost.CalculateValue() <= Entity.CurrentEnergy;
-        }
+        public bool CanPlayCard(BattleCardView card) => card.Entity.Cost.CalculateValue() <= Entity.CurrentEnergy;
 
         public void PayCard(BattleCardView card)
         {
@@ -80,18 +64,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.SetCardPrePlayed(card, crystal);
         public void UnsetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.UnsetCardPrePlayed(card, crystal);
 
-        public void OnTurnEnd()
-        {
-            foreach (var crystal in _unitCrystals.Crystals)
-            {
-                crystal.OnTurnEnd();
-                if (crystal.Card == null) continue;
-
-                var card = crystal.Card;
-                _zonesManager.UnsetCardPrePlayed(crystal.Card, crystal);
-                _zonesManager.MoveToGraveyard(card);
-            }
-        }
+        public void ReceiveDamage(BattlePlayingActionEntity inflictor) => UnitDamageCalculator.I.InflictDamage(inflictor);
 
         private void Update()
         {

@@ -20,6 +20,12 @@ namespace EmberBanner.Core.Models.Units
         public int EnergyRegen;
         public int HandSize;
         public int Draw;
+        public int PhysicalResistance;
+        public int NaturalResistance;
+        public int MagicResistance;
+        public int WillPhysicalResistance;
+        public int WillNaturalResistance;
+        public int WillMagicResistance;
         public List<UnitCrystalModel> Crystals = new();
 
         public bool IsEnemyUnit;

@@ -62,6 +62,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -87,6 +88,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -117,6 +119,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -147,6 +150,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -177,6 +181,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -202,6 +207,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -232,6 +238,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -262,6 +269,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 6
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -287,6 +295,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 4
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -317,6 +326,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -342,6 +352,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -367,6 +378,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 4
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -397,6 +409,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -427,6 +440,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -457,6 +471,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -482,6 +497,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -512,6 +528,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -537,6 +554,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -562,6 +580,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -592,6 +611,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -622,6 +642,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 4
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -647,6 +668,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -677,6 +699,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -707,6 +730,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 2
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -737,6 +761,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -767,6 +792,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 4
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -792,6 +818,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -822,6 +849,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 1
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -847,6 +875,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 1
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -872,6 +901,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 1
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -902,6 +932,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -932,6 +963,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -957,6 +989,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -982,6 +1015,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 0
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -1012,6 +1046,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []
@@ -1037,6 +1072,7 @@ MonoBehaviour:
         AidTags: 
         PossibleTargets: 3
         IsAoE: 0
+        DamageType: 0
         Params:
           m_keys: []
           m_values: []

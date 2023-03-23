@@ -1,7 +1,7 @@
 ﻿using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 
-namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
+namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
 {
     public class ClashStateChecker
     {

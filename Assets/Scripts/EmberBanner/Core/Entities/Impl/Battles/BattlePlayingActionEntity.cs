@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using EmberBanner.Core.Entities.Impl.Cards;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Unity.Battle.Views.Impl.Cards;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 using Plugins.ComplexValue;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EmberBanner.Core.Ingame.Impl.Battles

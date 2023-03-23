@@ -1,7 +1,8 @@
 ﻿using System;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Unity.Battle.Management;
-using EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.Actions;
+using EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.PostTurnPlanning;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Systems.EnemyAttacks;
@@ -10,6 +11,7 @@ using EmberBanner.Unity.Battle.Systems.Startup;
 using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Systems.Visuals.Arrows;
 using EmberBanner.Unity.Battle.Systems.Visuals.PrePlayedCards;
+using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
 using TMPro;
 using UnityEngine;
@@ -22,6 +24,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
         [SerializeField] private TextMeshProUGUI _resolveState;
         public BattleState State { get; private set; } = BattleState.PreStart;
         public int TurnNumber { get; private set; } = 0;
+        private bool IsFirstTurn => TurnNumber == 1;
 
         private void Update()
         {
@@ -44,9 +47,13 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.TurnStart)
             {
-                TurnNumber++;
-                DrawCards();
-                RollCrystals();
+                AdvanceTurn();
+                OnTurnStart();
+                State = BattleState.TurnPrePlan;
+            }
+            else if (State == BattleState.TurnPrePlan)
+            {
+                OnTurnPrePlan();
                 EnemyAttackPlanner.I.SetEnemyAttacks();
                 TurnOrderController.I.DetermineTurnOrder();
                 State = BattleState.TurnPlan;
@@ -72,54 +79,50 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 {
                     if (TurnOrderController.I.AllCrystalsEndedTurns)
                     {
-                        ActionsResolver.I.DoOnAllActionsResolved();
+                        ActionResolveFlowController.I.DoOnAllActionsResolved();
                         State = BattleState.TurnEnd;
                         return;
                     }
                     
                     if (!TurnOrderController.I.CurrentCrystal.HasNonCancelledActions)
-                    {
                         TurnOrderController.I.AdvanceOrder();
-                    }
                     else
-                    {
                         break;
-                    }
                 }
                 
-                ActionsResolver.I.PickCrystal();
+                ActionResolveFlowController.I.PickCrystal();
                 State = BattleState.CrustalTurn;
             }
             else if (State == BattleState.CrustalTurn)
             {
-                if (ActionsResolver.I.State == ActionsResolveState.GetCurrentActions)
+                if (ActionResolveFlowController.I.State == ActionsResolveState.GetCurrentActions)
                 {
-                    ActionsResolver.I.GetCurrentActions();
-                    if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                    ActionResolveFlowController.I.GetCurrentActions();
+                    if (ActionResolveFlowController.I.State == ActionsResolveState.AllActionsResolved)
                         State = BattleState.CrystalTurnEnd;
                 }
-                else if (ActionsResolver.I.State == ActionsResolveState.RollCurrentActions)
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.RollCurrentActions)
                 {
-                    ActionsResolver.I.RollCurrentActions();
+                    ActionResolveFlowController.I.RollCurrentActions();
                 }  
-                else if (ActionsResolver.I.State == ActionsResolveState.ResolveCurrentActions)
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.ResolveCurrentActions)
                 {
-                    ActionsResolver.I.ResolveCurrentActions();
+                    ActionResolveFlowController.I.ResolveCurrentActions();
                 } 
-                else if (ActionsResolver.I.State == ActionsResolveState.PostResolveActions)
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.PostResolveActions)
                 {
-                    ActionsResolver.I.PostResolveCurrentActions();
-                    if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                    ActionResolveFlowController.I.PostResolveCurrentActions();
+                    if (ActionResolveFlowController.I.State == ActionsResolveState.AllActionsResolved)
                         State = BattleState.CrystalTurnEnd;
                 } 
             }
             else if (State == BattleState.CrystalTurnEnd)
             {
-                if (ActionsResolver.I.State == ActionsResolveState.AllActionsResolved)
+                if (ActionResolveFlowController.I.State == ActionsResolveState.AllActionsResolved)
                 {
-                    ActionsResolver.I.DoOnAllActionsResolved();
+                    ActionResolveFlowController.I.DoOnAllActionsResolved();
                 } 
-                else if (ActionsResolver.I.State == ActionsResolveState.FinishResolvingActions)
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.FinishResolvingActions)
                 {
                     if (TurnOrderController.I.AllCrystalsEndedTurns)
                         State = BattleState.TurnEnd;
@@ -132,7 +135,7 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             }
             else if (State == BattleState.TurnEnd)
             {
-                ClearTurn();
+                OnTurnEnd();
                 State = BattleState.TurnStart;
             }
             else if (State == BattleState.PreEnd)
@@ -142,38 +145,36 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
 
             onStateChanged?.Invoke(State);
             _stateText.text = State.ToString();
-            _resolveState.text = ActionsResolver.I.State.ToString();
+            _resolveState.text = ActionResolveFlowController.I.State.ToString();
         }
 
-        private void DrawCards()
-        {
-            // todo: implement proper order, later (first p -> first e -> second p -> second e -> ...)
-            foreach (var unit in BattleManager.I.Registry.Units.Values)
-            {
-                unit.DrawCards(TurnNumber == 1);
-            }
-        }
+        private void AdvanceTurn() => TurnNumber++;
 
-        private void RollCrystals()
+        private void OnTurnStart()
         {
             foreach (var unit in BattleManager.I.Registry.Units.Values)
             {
-                foreach (var crystal in unit.UnitCrystals.Crystals)
-                {
-                    crystal.Roll();
-                }
+                BattleUnitView.BattleUnitStateHandler.OnTurnStart(unit, IsFirstTurn);
             }
         }
 
-        private void ClearTurn()
+        private void OnTurnPrePlan()
+        {
+            foreach (var unit in BattleManager.I.Registry.Units.Values)
+            {
+                BattleUnitView.BattleUnitStateHandler.OnTurnPrePlan(unit);
+            }
+        }
+
+        private void OnTurnEnd()
         {
             CardTargetsMatrix.I.Clear();
-            ActionsResolver.I.ClearAll();
+            ActionResolveFlowController.I.ClearAll();
             CardTargetsMatrixUi.I.OnTurnEnd();
             
             foreach (var unit in BattleManager.I.Registry.Units.Values)
             {
-                unit.OnTurnEnd();
+                BattleUnitView.BattleUnitStateHandler.OnTurnEnd(unit);
             }
         }
 

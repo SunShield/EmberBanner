@@ -13,31 +13,43 @@ namespace EmberBanner.Core.Entities.Impl.Units
         protected List<UnitCrystalEntity> Crystals { get; } = new();
         protected Dictionary<int, CardEntity> Deck { get; } = new();
         
-        public ComplexValue StartingHealth { get; }
-        public ComplexValue MaxHealth      { get; }
-        public ComplexValue HealthRegen    { get; }
-        public ComplexValue StartingWill   { get; }
-        public ComplexValue MaxWill        { get; }
-        public ComplexValue WillRegen      { get; }
-        public ComplexValue StartingEnergy { get; }
-        public ComplexValue MaxEnergy      { get; }
-        public ComplexValue EnergyRegen    { get; }
-        public ComplexValue HandSize       { get; }
-        public ComplexValue Draw           { get; }
+        public ComplexValue StartingHealth         { get; }
+        public ComplexValue MaxHealth              { get; }
+        public ComplexValue HealthRegen            { get; }
+        public ComplexValue StartingWill           { get; }
+        public ComplexValue MaxWill                { get; }
+        public ComplexValue WillRegen              { get; }
+        public ComplexValue StartingEnergy         { get; }
+        public ComplexValue MaxEnergy              { get; }
+        public ComplexValue EnergyRegen            { get; }
+        public ComplexValue HandSize               { get; }
+        public ComplexValue Draw                   { get; }
+        public ComplexValue PhysicalResistance     { get; }
+        public ComplexValue NaturalResistance      { get; }
+        public ComplexValue MagicResistance        { get; }
+        public ComplexValue WillPhysicalResistance { get; }
+        public ComplexValue WillNaturalResistance  { get; }
+        public ComplexValue WillMagicResistance    { get; }
 
         public UnitEntity(int id, UnitModel model) : base(id, model)
         {
-            StartingHealth = new (true, model.StartingHealth);
-            MaxHealth      = new (true, model.MaxHealth);
-            HealthRegen    = new (true, model.HealthRegen);
-            StartingWill   = new (true, model.StartingWill);
-            MaxWill        = new (true, model.MaxWill);
-            WillRegen      = new (true, model.WillRegen);
-            StartingEnergy = new (true, model.StartingEnergy);
-            MaxEnergy      = new (true, model.MaxEnergy);
-            EnergyRegen    = new (true, model.EnergyRegen);
-            HandSize       = new (true, model.HandSize);
-            Draw           = new (true, model.Draw);
+            StartingHealth         = new (true, model.StartingHealth);
+            MaxHealth              = new (true, model.MaxHealth);
+            HealthRegen            = new (true, model.HealthRegen);
+            StartingWill           = new (true, model.StartingWill);
+            MaxWill                = new (true, model.MaxWill);
+            WillRegen              = new (true, model.WillRegen);
+            StartingEnergy         = new (true, model.StartingEnergy);
+            MaxEnergy              = new (true, model.MaxEnergy);
+            EnergyRegen            = new (true, model.EnergyRegen);
+            HandSize               = new (true, model.HandSize);
+            Draw                   = new (true, model.Draw);
+            PhysicalResistance     = new(false, model.PhysicalResistance);
+            NaturalResistance      = new(false, model.NaturalResistance);
+            MagicResistance        = new(false, model.MagicResistance);
+            WillPhysicalResistance = new(false, model.WillPhysicalResistance);
+            WillNaturalResistance  = new(false, model.WillNaturalResistance);
+            WillMagicResistance    = new(false, model.WillMagicResistance);
         }
 
         protected override UnitSaveData GenerateSaveDataInternal(UnitSaveData saveData)

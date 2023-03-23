@@ -1,5 +1,4 @@
-﻿using System;
-using EmberBanner.Core.Enums.Battle;
+﻿using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
@@ -7,17 +6,17 @@ using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
-namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
+namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
 {
     /// <summary>
     /// Breakdown of how exactly actions are resolved:
     /// 1. Actions resolve one-after-one, from the topmost to the bottommost.
     /// 2. There are two types of 
     /// </summary>
-    public class ActionsResolver
+    public class ActionResolveFlowController
     {
-        private static ActionsResolver _instance;
-        public static ActionsResolver I => _instance ??= new();
+        private static ActionResolveFlowController _instance;
+        public static ActionResolveFlowController I => _instance ??= new();
         
         public BattleUnitCrystalView InitiatorCrystal { get; private set; }
         public BattleUnitCrystalView TargetCrystal { get; private set; }

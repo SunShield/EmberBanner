@@ -5,7 +5,7 @@ using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
 using EmberBanner.Unity.Battle.Views.Impl.Units.Crystals;
 
-namespace EmberBanner.Unity.Battle.Systems.CardPlaying.CrystalTurn
+namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
 {
     /// <summary>
     /// Logic behind choosing a proper action (PrA) is not simple

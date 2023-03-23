@@ -4,7 +4,8 @@
     {
         PreStart,
         Start,
-        TurnStart,
+        TurnStart, // drawing cards, regenerating stats etc
+        TurnPrePlan, // rolling crystals
         TurnPlan, // selecting cards and targets here
         PostTurnPlan, // pre-execution battlefield state is calculated here
         

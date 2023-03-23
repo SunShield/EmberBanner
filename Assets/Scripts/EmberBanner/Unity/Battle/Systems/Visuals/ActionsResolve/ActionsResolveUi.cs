@@ -94,9 +94,12 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
         public void UpdateActions()
         {
             InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
+            InitiatorCrystalUis.currentActionUi.UpdateAction();
+
+            if (_targetCrystal == null) return;
+            
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
-            _playerCurrentAction.UpdateAction();
-            _enemyCurrentAction.UpdateAction();
+            TargetCrystalUis.currentActionUi.UpdateAction();
         }
 
         public void ClearInitiatorMainAction() => InitiatorCrystalUis.currentActionUi.Clear();

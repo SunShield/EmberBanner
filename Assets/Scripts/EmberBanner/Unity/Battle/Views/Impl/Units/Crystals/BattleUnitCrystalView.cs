@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Battle.Views.Impl.Units.Crystals
 {
-    public class BattleUnitCrystalView : BattleView<BattleUnitCrystalEntity, UnitCrystalModel>
+    public partial class BattleUnitCrystalView : BattleView<BattleUnitCrystalEntity, UnitCrystalModel>
     {
         [SerializeField] private GameObject _selectedGraphics;
         [SerializeField] private TextMeshPro _rollText;
