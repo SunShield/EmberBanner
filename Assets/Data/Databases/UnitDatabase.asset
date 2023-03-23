@@ -53,10 +53,10 @@ MonoBehaviour:
     - <Name>k__BackingField: Sir Calvus
       StartingHealth: 100
       MaxHealth: 140
-      HealthRegen: 0
+      HealthRegen: 10
       StartingWill: 50
       MaxWill: 80
-      WillRegen: 0
+      WillRegen: 10
       StartingEnergy: 50
       MaxEnergy: 120
       EnergyRegen: 20
@@ -131,15 +131,9 @@ MonoBehaviour:
           Max: 5
       IsEnemyUnit: 1
       DefaultCards:
-      - <Name>k__BackingField: 1
-        CardName: Ray of Death
-        Amount: 0
       - <Name>k__BackingField: 2
         CardName: Unearth
         Amount: 4
-      - <Name>k__BackingField: 3
-        CardName: Darkness
-        Amount: 0
       Sprite: {fileID: 21300000, guid: f6cffd73850cf2f4a9bcff6d72351e01, type: 3}
     - <Name>k__BackingField: Wraith
       StartingHealth: 30

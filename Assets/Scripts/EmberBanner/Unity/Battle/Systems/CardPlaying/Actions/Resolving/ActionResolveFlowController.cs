@@ -115,13 +115,14 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
             if (!_isClash)
             {
                 // Resolve actions here
+                ActionResolver.I.ResolveActionPair(_currentAction, null);
             }
             else
             {
                 if (_currentAction != null && _currentTargetAction != null)
                     SetClashLoserMagnitude();
 
-                // Resolve actions here
+                ActionResolver.I.ResolveActionPair(_currentAction, _currentTargetAction);
             }
             
             ActionsResolveUi.I.UpdateActions();

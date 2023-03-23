@@ -86,14 +86,14 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
         {
             if (IsDead) return;
             
-            CurrentEnergy = Mathf.Max(CurrentShield + changeMagnitude, 0);
+            CurrentShield = Mathf.Max(CurrentShield + changeMagnitude, 0);
         }
         
         public void ChangeField(int changeMagnitude)
         {
             if (IsDead) return;
             
-            CurrentEnergy = Mathf.Max(CurrentField + changeMagnitude, 0);
+            CurrentField = Mathf.Max(CurrentField + changeMagnitude, 0);
         }
 
         #endregion

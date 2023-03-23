@@ -54,8 +54,8 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             else if (State == BattleState.TurnPrePlan)
             {
                 OnTurnPrePlan();
-                EnemyAttackPlanner.I.SetEnemyAttacks();
                 TurnOrderController.I.DetermineTurnOrder();
+                EnemyAttackPlanner.I.SetEnemyAttacks();
                 State = BattleState.TurnPlan;
             }
             else if (State == BattleState.TurnPlan)

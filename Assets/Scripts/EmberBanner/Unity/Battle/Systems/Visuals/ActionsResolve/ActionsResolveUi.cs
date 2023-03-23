@@ -81,8 +81,10 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
 
         public void SetRolls(int? initiatorRoll, int? targetRoll)
         {
-            InitiatorCrystalUis.currentActionUi.SetRoll(initiatorRoll);
-            TargetCrystalUis.currentActionUi.SetRoll(targetRoll);
+            if (initiatorRoll != null)
+                InitiatorCrystalUis.currentActionUi.SetRoll(initiatorRoll);
+            if (targetRoll != null)
+                TargetCrystalUis.currentActionUi.SetRoll(targetRoll);
         }
 
         public void SetLosingMagnitude(ClashState state)

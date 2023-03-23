@@ -99,7 +99,7 @@ MonoBehaviour:
       Actions:
       - <Name>k__BackingField: 1
         RawDescription: 
-        Magnitude: 11
+        Magnitude: 4
         ClashingPower:
           Min: 3
           Max: 6
@@ -108,13 +108,13 @@ MonoBehaviour:
           Growth: 1
         ClashLoseHandicap: 4
         Threshold: 2
-        CoinsAmount: 1
+        CoinsAmount: 3
         IsFast: 0
         TargetsCount: 0
         Type: 1
         AggressionType: 0
         HarmTags: 
-        DefenseType: 0
+        DefenseType: 1
         SupportType: 0
         AidTags: 
         PossibleTargets: 0

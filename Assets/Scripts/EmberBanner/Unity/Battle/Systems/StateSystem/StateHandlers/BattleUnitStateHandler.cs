@@ -14,6 +14,7 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             {
                 RegenerateStats(unit, isFirstTurn);
                 DrawCards(unit, isFirstTurn);
+                RemoveTempStats(unit);
             }
 
             private static void RegenerateStats(BattleUnitView unit, bool isFirstTurn)
@@ -37,6 +38,12 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
             }
 
             private static void RegenerateUnitEnergy(BattleUnitView unit) => unit.Entity.ChangeEnergy(unit.Entity.EnergyRegen.CalculateValue());
+
+            private static void RemoveTempStats(BattleUnitView unit)
+            {
+                unit.Entity.ChangeShield(-unit.Entity.CurrentShield);
+                unit.Entity.ChangeField(-unit.Entity.CurrentField);
+            }
             
             private static void DrawCards(BattleUnitView unit, bool isFirstTurn)
             {
