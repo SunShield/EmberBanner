@@ -40,7 +40,7 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
             CardTargetsMatrix.I.onAttackMatrixChanged += RedrawArrows;
         }
 
-        private void RedrawArrows()
+        public void RedrawArrows()
         {
             ClearArrows();
             DestroyPreviousArrowGos();
@@ -50,6 +50,8 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.Arrows
             foreach (var initiator in attackMatrix.Keys)
             {
                 if (attackersToSkip.Contains(initiator)) continue;
+                if (initiator.IsDead) continue;
+                if (CardTargetsMatrix.I.GetTarget(initiator).IsDead) continue;
                 
                 var clashingCrystal = CardTargetsMatrix.I.GetClashingCrystal(initiator);
                 if (clashingCrystal != null)

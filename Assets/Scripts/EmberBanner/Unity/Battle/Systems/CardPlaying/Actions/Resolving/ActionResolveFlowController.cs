@@ -43,7 +43,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
             
             ActionsResolveUi.I.SetMainCrystal(InitiatorCrystal);
             TargetCrystal = CardTargetsMatrix.I.GetTarget(InitiatorCrystal);
-            if (TargetCrystal != InitiatorCrystal)
+            if (!TargetCrystal.IsDead && TargetCrystal != InitiatorCrystal)
                 ActionsResolveUi.I.SetTargetCrystal(TargetCrystal);
             _isClash = CardTargetsMatrix.I.CheckClash(InitiatorCrystal, TargetCrystal);
 
@@ -68,7 +68,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
             
             ActionsResolveUi.I.UpdateActions();
             
-            var actions = CrystalProperActionSelector.I.FindProperActions(InitiatorCrystal, TargetCrystal);
+            var actions = CrystalProperActionSelector.I.FindProperActions(InitiatorCrystal, TargetCrystal, _isClash);
             _currentAction = actions.initiatorAction;
             _currentTargetAction = actions.targetAction;
 

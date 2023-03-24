@@ -72,7 +72,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
         private static CrystalProperActionSelector _instance;
         public static CrystalProperActionSelector I => _instance ??= new();
 
-        public (BattlePlayingActionEntity initiatorAction, BattlePlayingActionEntity targetAction) FindProperActions(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
+        public (BattlePlayingActionEntity initiatorAction, BattlePlayingActionEntity targetAction) FindProperActions(BattleUnitCrystalView initiator, BattleUnitCrystalView target, bool isClash)
         {
             BattlePlayingActionEntity properInitiatorAction = null;
             BattlePlayingActionEntity properTargetAction = null;
@@ -80,9 +80,9 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
             var targetNonCancelledActions = GetNonCancelledActions(target);
 
             var isTargetingSelf = CardTargetsMatrix.I.CheckTargetsSelf(initiator);
-            if (isTargetingSelf) return (FindFirstSelfPlayableAction(initiatorNonCancelledActions), null);
+            var isTargetDead = target.IsDead;
+            if (isTargetingSelf || isTargetDead) return (FindFirstSelfPlayableAction(initiatorNonCancelledActions), null);
             
-            var isClash = CardTargetsMatrix.I.CheckClash(initiator, target);
             if (!isClash)
             {
                 properInitiatorAction = FindFirstNonReactiveAction(initiatorNonCancelledActions);

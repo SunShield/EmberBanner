@@ -114,7 +114,7 @@ MonoBehaviour:
         Type: 1
         AggressionType: 0
         HarmTags: 
-        DefenseType: 0
+        DefenseType: 2
         SupportType: 0
         AidTags: 
         PossibleTargets: 0
@@ -479,18 +479,18 @@ MonoBehaviour:
         RawDescription: 
         Magnitude: 7
         ClashingPower:
-          Min: 4
-          Max: 5
+          Min: 10
+          Max: 20
         ClashingPowerGrowthRate:
           Span: 2
           Growth: 1
         ClashLoseHandicap: 3
         Threshold: 0
-        CoinsAmount: 2
+        CoinsAmount: 3
         IsFast: 0
         TargetsCount: 0
         Type: 0
-        AggressionType: 1
+        AggressionType: 0
         HarmTags: 
         DefenseType: 0
         SupportType: 0

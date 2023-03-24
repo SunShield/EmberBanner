@@ -12,9 +12,13 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 
             public static void OnTurnStart(BattleUnitView unit, bool isFirstTurn)
             {
+                if (unit.IsDead) return;
+                
                 RegenerateStats(unit, isFirstTurn);
-                DrawCards(unit, isFirstTurn);
                 RemoveTempStats(unit);
+                
+                if (!unit.IsStaggered)
+                    DrawCards(unit, isFirstTurn);
             }
 
             private static void RegenerateStats(BattleUnitView unit, bool isFirstTurn)
@@ -57,11 +61,15 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 
             public static void OnTurnPrePlan(BattleUnitView unit)
             {
+                if (unit.IsDead) return;
+                
                 OnCrystalsPrePlan(unit);
             }
 
             private static void OnCrystalsPrePlan(BattleUnitView unit)
             {
+                if (unit.IsStaggered) return;
+                
                 foreach (var crystal in unit._unitCrystals.Crystals)
                 {
                     OnCrystalPrePlan(unit, crystal);
@@ -79,6 +87,8 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
 
             public static void OnTurnEnd(BattleUnitView unit)
             {
+                if (unit.IsDead) return;
+                
                 OnCrystalsTurnEnd(unit);
             }
 

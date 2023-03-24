@@ -24,5 +24,14 @@ namespace EmberBanner.Unity.Battle.Management
             if (unit.Controller == UnitControllerType.Player) PlayerUnits.Add(unit.Id, unit);
             else                                              EnemyUnits.Add(unit.Id, unit);
         }
+        
+        public void RemoveUnit(BattleUnitView unit)
+        {
+            
+            if (unit.Controller == UnitControllerType.Player) PlayerUnits.Remove(unit.Id);
+            else                                              EnemyUnits.Remove(unit.Id);
+            
+            Units.Remove(unit.Id);                                         
+        }
     }
 }

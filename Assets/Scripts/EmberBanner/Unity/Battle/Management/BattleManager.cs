@@ -1,7 +1,7 @@
-﻿using EmberBanner.Core.Enums.Battle;
+﻿using System.Linq;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.StateSystem;
-using EmberBanner.Unity.Battle.Systems.TurnOrder;
 using EmberBanner.Unity.Battle.Views.Factories.Impl;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using EmberBanner.Unity.Service;
@@ -46,6 +46,20 @@ namespace EmberBanner.Unity.Battle.Management
             var isUnitPlayer = unit.Controller == UnitControllerType.Player;
             var spot = isUnitPlayer ? _structure.GetFreePlayerSpot() : _structure.GetFreeEnemySpot();
             spot.AddUnit(unit);
+        }
+
+        public void OnTurnEnd()
+        {
+            var deadUnits = Registry.Units.Values.Where(u => u.IsDead).ToList();
+            foreach (var deadUnit in deadUnits)
+            {
+                RemoveUnit(deadUnit);
+            }
+        }
+        
+        private void RemoveUnit(BattleUnitView unit)
+        {
+            Registry.RemoveUnit(unit);
         }
     }
 }

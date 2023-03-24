@@ -2,6 +2,7 @@
 using EmberBanner.Core.Entities.Impl.Units;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Models.Units;
+using EmberBanner.Unity.Battle.Systems.DeathHandling;
 using UnityEngine;
 
 namespace EmberBanner.Core.Ingame.Impl.Battles
@@ -66,6 +67,8 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
             if (IsDead) return;
             
             CurrentHealth = Mathf.Clamp(CurrentHealth + changeMagnitude, 0, MaxHealth.CalculateValue());
+            if (IsDead)
+                UnitDeathHandler.I.HandleUnitDeath(this);
         }
 
         public void ChangeWill(int changeMagnitude)

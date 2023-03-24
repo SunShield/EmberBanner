@@ -149,7 +149,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning
         public bool CheckTargetsSelf(BattleUnitCrystalView initiator) => GetTarget(initiator) == initiator;
 
         public bool CheckClash(BattleUnitCrystalView initiator, BattleUnitCrystalView target)
-            => initiator != target && GetClashingCrystal(initiator) == target;
+            => !initiator.IsDead && !target.IsDead && initiator != target && GetClashingCrystal(initiator) == target;
 
         public void Clear()
         {

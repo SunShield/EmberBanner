@@ -84,7 +84,8 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                         return;
                     }
                     
-                    if (!TurnOrderController.I.CurrentCrystal.HasNonCancelledActions)
+                    if (TurnOrderController.I.CurrentCrystal.IsDead || 
+                        !TurnOrderController.I.CurrentCrystal.HasNonCancelledActions)
                         TurnOrderController.I.AdvanceOrder();
                     else
                         break;
@@ -184,6 +185,8 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
             {
                 BattleUnitView.BattleUnitStateHandler.OnTurnEnd(unit);
             }
+            
+            BattleManager.I.OnTurnEnd();
         }
 
         public event Action<BattleState> onStateChanged;
