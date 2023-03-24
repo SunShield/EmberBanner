@@ -4,8 +4,12 @@ using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions;
+using EmberBanner.Editor.GameManagement.Windows;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using NFate.Editor.EditorElements;
+using OerGraph.Editor.Graphs;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,6 +28,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
         private ActionList    _actionList;
         private VisualElement _baseStatsContainer;
         private DropdownField _possibleTargetsField;
+        private VisualElement _graphContainer;
+        private GraphView     _graphView;
 
         public CardInspector() : base()
         {
@@ -33,6 +39,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
 
         private void BuildGeometry()
         {
+            style.flexGrow = 1f;
+            
             _elementName = Root.Q<Label>("ElementName");
             _icon = Root.Q<VisualElement>("Icon");
             _iconPicker = Root.Q<ObjectField>("IconPicker");
@@ -42,6 +50,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _possibleTargetsField = new DropdownField();
             _possibleTargetsField.choices.AddRange(Enum.GetValues(typeof(TargetType)).Cast<TargetType>().Select(e => e.ToString()).ToList());
             _baseStatsContainer.Add(_possibleTargetsField);
+
+            _graphContainer = Root.Q<VisualElement>("GraphContainer");
+            _graphView = new OerGraphView(EditorWindow.GetWindow<GameManagerWindow>());
+            _graphView.style.flexGrow = 1f;
+            _graphContainer.Add(_graphView);
             
             AddActionsList();
         }
