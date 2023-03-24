@@ -95,10 +95,12 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
 
         public void UpdateActions()
         {
-            InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
-            InitiatorCrystalUis.currentActionUi.UpdateAction();
-
-            if (_targetCrystal == null) return;
+            if (!_initiatorCrystal.IsDead)
+            {
+                InitiatorCrystalUis.actionsUi.SetActions(_initiatorCrystal);
+                InitiatorCrystalUis.currentActionUi.UpdateAction();
+            }
+            if (_targetCrystal == null || _targetCrystal.IsDead) return;
             
             TargetCrystalUis.actionsUi.SetActions(_targetCrystal);
             TargetCrystalUis.currentActionUi.UpdateAction();
@@ -121,6 +123,22 @@ namespace EmberBanner.Unity.Battle.Systems.Visuals.ActionsResolve
             _enemyActions.Clear();
             ClearMainActions();
             gameObject.SetActive(false);
+        }
+
+        public void ClearCrystalIfNeeded(BattleUnitCrystalView crystal)
+        {
+            if (_initiatorCrystal == crystal)
+            {
+                InitiatorCrystalUis.unitUi.Clear();
+                InitiatorCrystalUis.actionsUi.Clear();
+                InitiatorCrystalUis.currentActionUi.Clear();
+            }
+            else if (_targetCrystal == crystal)
+            {
+                TargetCrystalUis.unitUi.Clear();
+                TargetCrystalUis.actionsUi.Clear();
+                TargetCrystalUis.currentActionUi.Clear();
+            }
         }
     }
 }
