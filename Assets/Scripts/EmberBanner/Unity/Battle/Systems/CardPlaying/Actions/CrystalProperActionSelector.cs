@@ -90,19 +90,19 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
                 // If during one-sided attack Aggression was initiator's proper action, target can respond on it
                 // with reactive action
                 if (properInitiatorAction?.Model.Type == ActionType.Aggression)
-                    properTargetAction = FindFirstReactiveActionAgainstInitiator(targetNonCancelledActions, initiator);
+                    properTargetAction = FindFirstReactiveActionAgainstInitiator(targetNonCancelledActions, properInitiatorAction);
             }
             else
             {
                 properInitiatorAction = FindFirstNonReactiveAction(initiatorNonCancelledActions);
                 if (properInitiatorAction?.Model.Type == ActionType.Aggression)
-                    properTargetAction = FindFirstClashableActionAgainstInitiatorsAggression(targetNonCancelledActions, initiator);
+                    properTargetAction = FindFirstClashableActionAgainstInitiatorsAggression(targetNonCancelledActions, properInitiatorAction);
                 else
                 {
                     properTargetAction = FindFirstNonReactiveAction(targetNonCancelledActions);
                     if (properTargetAction?.Model.Type == ActionType.Aggression)
                     {
-                        var possibleReactiveAction = FindFirstReactiveActionAgainstInitiator(initiatorNonCancelledActions, target);
+                        var possibleReactiveAction = FindFirstReactiveActionAgainstInitiator(initiatorNonCancelledActions, properTargetAction);
                         if (possibleReactiveAction != null)
                             properInitiatorAction = possibleReactiveAction;
                     }
@@ -118,16 +118,16 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
         private BattlePlayingActionEntity FindFirstNonReactiveAction(List<BattlePlayingActionEntity> actions)
             => actions.FirstOrDefault(action => !action.IsReactive());
         
-        private BattlePlayingActionEntity FindFirstReactiveActionAgainstInitiator(List<BattlePlayingActionEntity> actions, BattleUnitCrystalView initiator)
+        private BattlePlayingActionEntity FindFirstReactiveActionAgainstInitiator(List<BattlePlayingActionEntity> actions, BattlePlayingActionEntity initiator)
             => actions.FirstOrDefault(action => !action.IsNotReactiveAgainstTarget(initiator));
         
-        private BattlePlayingActionEntity FindFirstClashableActionAgainstInitiatorsAggression(List<BattlePlayingActionEntity> actions, BattleUnitCrystalView initiator)
+        private BattlePlayingActionEntity FindFirstClashableActionAgainstInitiatorsAggression(List<BattlePlayingActionEntity> actions, BattlePlayingActionEntity initiator)
             => actions.FirstOrDefault(action => !action.IsNotReactiveAgainstTarget(initiator) || action.Model.Type == ActionType.Aggression);
 
         private List<BattlePlayingActionEntity> GetNonCancelledActions(BattleUnitCrystalView crystal) =>
             crystal.Actions.Where(a => !a.IsCancelled).ToList();
 
-        public BattlePlayingActionEntity FindProperTargetAction(BattlePlayingActionEntity initiatingAction, BattleUnitCrystalView target)
+        /*public BattlePlayingActionEntity FindProperTargetAction(BattlePlayingActionEntity initiatingAction, BattleUnitCrystalView target)
         {
             var targetNonCancelledActions = GetNonCancelledActions(target);
             var isClash = CardTargetsMatrix.I.CheckClash(initiatingAction.Holder, target);
@@ -145,6 +145,6 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions
             }
 
             return null;
-        }
+        }*/
     }
 }

@@ -85,22 +85,7 @@ MonoBehaviour:
       DefaultCards:
       - <Name>k__BackingField: 1
         CardName: Holy Slash
-        Amount: 2
-      - <Name>k__BackingField: 4
-        CardName: Benediction
-        Amount: 2
-      - <Name>k__BackingField: 5
-        CardName: Smite
-        Amount: 2
-      - <Name>k__BackingField: 7
-        CardName: Shield of Faith
-        Amount: 2
-      - <Name>k__BackingField: 8
-        CardName: Holy Beam
-        Amount: 2
-      - <Name>k__BackingField: 9
-        CardName: Defence of the Stalwart
-        Amount: 2
+        Amount: 5
       Sprite: {fileID: 21300000, guid: a29b4396cf8962f429537ae0a687f948, type: 3}
     - <Name>k__BackingField: Death Knight
       StartingHealth: 70
@@ -124,16 +109,16 @@ MonoBehaviour:
       - <Name>k__BackingField: 1
         RollBounds:
           Min: 1
-          Max: 2
+          Max: 1
       - <Name>k__BackingField: 2
         RollBounds:
           Min: 4
           Max: 5
       IsEnemyUnit: 1
       DefaultCards:
-      - <Name>k__BackingField: 2
-        CardName: Unearth
-        Amount: 4
+      - <Name>k__BackingField: 3
+        CardName: Ray of Death
+        Amount: 5
       Sprite: {fileID: 21300000, guid: f6cffd73850cf2f4a9bcff6d72351e01, type: 3}
     - <Name>k__BackingField: Wraith
       StartingHealth: 30
@@ -206,7 +191,7 @@ MonoBehaviour:
       StartingEnergy: 80
       MaxEnergy: 100
       EnergyRegen: 14
-      HandSize: 3
+      HandSize: 4
       Draw: 2
       PhysicalResistance: 0
       NaturalResistance: 0
@@ -217,23 +202,23 @@ MonoBehaviour:
       Crystals:
       - <Name>k__BackingField: 1
         RollBounds:
-          Min: 1
-          Max: 5
+          Min: 2
+          Max: 2
       - <Name>k__BackingField: 2
         RollBounds:
           Min: 1
-          Max: 5
+          Max: 1
       IsEnemyUnit: 1
       DefaultCards:
       - <Name>k__BackingField: 1
         CardName: Infectious Offering
-        Amount: 5
+        Amount: 1
       - <Name>k__BackingField: 2
         CardName: Craving Vines
         Amount: 1
       - <Name>k__BackingField: 3
         CardName: Poison Spray
-        Amount: 1
+        Amount: 6
       - <Name>k__BackingField: 4
         CardName: Noxious Bomb
         Amount: 1

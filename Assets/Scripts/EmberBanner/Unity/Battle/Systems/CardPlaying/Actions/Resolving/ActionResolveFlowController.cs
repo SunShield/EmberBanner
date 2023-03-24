@@ -1,4 +1,5 @@
-﻿using EmberBanner.Core.Enums.Battle;
+﻿using EmberBanner.Core.Enums.Actions;
+using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Enums.Battle.States;
 using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Unity.Battle.Systems.CardPlaying.TurnPlanning;
@@ -24,6 +25,15 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
         private BattlePlayingActionEntity _currentTargetAction;
         private bool _isClash;
         private ClashState _clashState;
+
+        private bool ActionsSuccessfullyClashed => _isClash && _currentAction != null && _currentTargetAction != null;
+
+        // if one-sided damage aggression targets Block, or one-sided harm aggression targets barrier
+        private bool OneSidedAggressionTargetsMatchingReactiveDefense 
+            => !_isClash && _currentAction != null && _currentAction.Model.Type == ActionType.Aggression && 
+               _currentTargetAction != null && _currentTargetAction.Model.Type == ActionType.Defense && 
+               (_currentAction.Model.AggressionType == AggressionType.Damage && _currentTargetAction.Model.DefenseType == DefenseType.Block || 
+                _currentAction.Model.AggressionType == AggressionType.Harm && _currentTargetAction.Model.DefenseType == DefenseType.Barrier);
         
         public ActionsResolveState State { get; private set; }
 
@@ -112,18 +122,24 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
 
         public void ResolveCurrentActions()
         {
-            if (!_isClash)
-            {
-                // Resolve actions here
-                ActionResolver.I.ResolveActionPair(_currentAction, null);
-            }
-            else
-            {
-                if (_currentAction != null && _currentTargetAction != null)
-                    SetClashLoserMagnitude();
+            if (ActionsSuccessfullyClashed ||
+                OneSidedAggressionTargetsMatchingReactiveDefense)
+                SetLoserMagnitude();
+            
+            State = ActionsResolveState.ResolveCurrentActions_Step2;
+        }
 
-                ActionResolver.I.ResolveActionPair(_currentAction, _currentTargetAction);
-            }
+        public void ResolveCurrentActionsStep2()
+        {
+            ActionResolver.I.ResolveActionIfPossible(_currentAction, _currentTargetAction);
+            
+            State = ActionsResolveState.ResolveCurrentActions_Step3;
+        }
+        
+        public void ResolveCurrentActionsStep3()
+        {
+            if (_isClash)
+                ActionResolver.I.ResolveActionIfPossible(_currentTargetAction, _currentAction);
             
             ActionsResolveUi.I.UpdateActions();
             
@@ -152,7 +168,7 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving
 
         private void DetermineClashState() => _clashState = ClashStateChecker.I.GetClashState(_currentAction, _currentTargetAction);
 
-        private void SetClashLoserMagnitude()
+        private void SetLoserMagnitude()
         {
             var loser = GetClashLoserAction(_clashState);
             loser.SetLosingMagnitude();

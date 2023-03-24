@@ -1,5 +1,4 @@
 ﻿using EmberBanner.Core.Enums.Battle;
-using EmberBanner.Core.Ingame.Impl.Battles;
 using EmberBanner.Core.Service.Extensions;
 using EmberBanner.Unity.Battle.Views.Impl.Units;
 using UnityEngine;
@@ -11,20 +10,18 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving.Damagin
         private static UnitDamageCalculator _instance;
         public static UnitDamageCalculator I => _instance ??= new();
 
-        public (int finalDamage, bool isLethal) InflictDamage(BattlePlayingActionEntity inflictorAction)
+        public (int finalDamage, bool isLethal) InflictDamage(BattleUnitView target, int outgoingDamage, DamageType damageType)
         {
-            var targetUnit = inflictorAction.Target.OwnerView;
-            var isUnitDead = targetUnit.IsDead;
+            var isUnitDead = target.IsDead;
             if (isUnitDead) return (0, false);
             
-            var outgoingDamage = inflictorAction.Magnitude.CalculateValue();
-            var baseDamageType = inflictorAction.Model.DamageType.GetBaseDamageType();
-            var resistance = GetMatchingResistance(targetUnit, baseDamageType);
+            var baseDamageType = damageType.GetBaseDamageType();
+            var resistance = GetMatchingResistance(target, baseDamageType);
             var damageMultiplier = GetResistanceMultiplier(resistance);
             var incomingDamage = (int)(damageMultiplier * outgoingDamage);
-            var finalIncomingDamage = GetFinalIncomingDamage(incomingDamage, targetUnit);
-            ApplyDamageToTarget(targetUnit, incomingDamage);
-            return (finalIncomingDamage, targetUnit.IsDead);
+            var finalIncomingDamage = GetFinalIncomingDamage(incomingDamage, target);
+            ApplyDamageToTarget(target, incomingDamage);
+            return (finalIncomingDamage, target.IsDead);
         }
 
         private int GetMatchingResistance(BattleUnitView unit, BaseDamageType damageType) => damageType switch
@@ -43,21 +40,19 @@ namespace EmberBanner.Unity.Battle.Systems.CardPlaying.Actions.Resolving.Damagin
         
         private void ApplyDamageToTarget(BattleUnitView targetUnit, int incomingDamage) => targetUnit.Entity.ChangeHealth(-incomingDamage);
         
-        public (int finalDamage, bool isStaggering) InflictWillDamage(BattlePlayingActionEntity inflictorAction)
+        public (int finalDamage, bool isStaggering) InflictWillDamage(BattleUnitView target, int outgoingDamage, DamageType damageType)
         {
-            var targetUnit = inflictorAction.Target.OwnerView;
-            var isUnitDead = targetUnit.IsDead;
-            var isUnitStaggered = targetUnit.IsStaggered;
+            var isUnitDead = target.IsDead;
+            var isUnitStaggered = target.IsStaggered;
             if (isUnitStaggered || isUnitDead) return (0, false);
             
-            var outgoingDamage = inflictorAction.Magnitude.CalculateValue();
-            var baseDamageType = inflictorAction.Model.DamageType.GetBaseDamageType();
-            var resistance = GetMatchingWillResistance(targetUnit, baseDamageType);
+            var baseDamageType = damageType.GetBaseDamageType();
+            var resistance = GetMatchingWillResistance(target, baseDamageType);
             var damageMultiplier = GetResistanceMultiplier(resistance);
             var incomingDamage = (int)(damageMultiplier * outgoingDamage);
-            var finalIncomingDamage = GetFinalWillIncomingDamage(incomingDamage, targetUnit);
-            ApplyWillDamageToTarget(targetUnit, incomingDamage);
-            return (finalIncomingDamage, targetUnit.IsDead);
+            var finalIncomingDamage = GetFinalWillIncomingDamage(incomingDamage, target);
+            ApplyWillDamageToTarget(target, incomingDamage);
+            return (finalIncomingDamage, target.IsDead);
         }
         
         private int GetMatchingWillResistance(BattleUnitView unit, BaseDamageType damageType) => damageType switch

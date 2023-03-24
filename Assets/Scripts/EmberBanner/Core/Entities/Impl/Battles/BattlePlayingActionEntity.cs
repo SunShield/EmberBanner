@@ -88,19 +88,29 @@ namespace EmberBanner.Core.Ingame.Impl.Battles
             return false;
         }
         
-        public bool IsNotReactiveAgainstTarget(BattleUnitCrystalView initiator)
+        public bool IsNotReactiveAgainstTarget(BattlePlayingActionEntity initiator)
         {
             // Supports are never reactive
             if (Model.Type == ActionType.Support) return false;
             
             // Field and Shield defenses are never reactive
-            if (Model.Type == ActionType.Defense && (Model.DefenseType == DefenseType.Shield || Model.DefenseType == DefenseType.Field)) return false;
+            if (Model.Type == ActionType.Defense && (Model.DefenseType == DefenseType.Shield || Model.DefenseType == DefenseType.Field)) return true;
             
             // Targeted Aggressions are never reactive
             if (Model.Type == ActionType.Aggression && !IsTargetingSelf) return false;
             
-            // Block and Barrier defenses are reactive if targeting self or initiator of an attack
-            if (Model.Type == ActionType.Defense && (IsTargetingSelf || Target == initiator)) return false;
+            // Block and Barrier defenses can be reactive only if targeting self or initiator of an attack
+            if (Model.Type == ActionType.Defense && (IsTargetingSelf || Target == initiator.Holder))
+            {
+                // only proper-typed reactive defense actions are reactive against aggression
+                // Block reacts on Damage
+                // Barrier reacts on Harm
+                if (initiator.Model.Type == ActionType.Aggression &&
+                    (initiator.Model.AggressionType == AggressionType.Damage && Model.DefenseType == DefenseType.Block ||
+                     initiator.Model.AggressionType == AggressionType.Harm && Model.DefenseType == DefenseType.Barrier))
+                    return false;
+            }
+            
 
             return true;
         }

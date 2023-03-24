@@ -109,6 +109,14 @@ namespace EmberBanner.Unity.Battle.Systems.StateSystem
                 {
                     ActionResolveFlowController.I.ResolveCurrentActions();
                 } 
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.ResolveCurrentActions_Step2)
+                {
+                    ActionResolveFlowController.I.ResolveCurrentActionsStep2();
+                } 
+                else if (ActionResolveFlowController.I.State == ActionsResolveState.ResolveCurrentActions_Step3)
+                {
+                    ActionResolveFlowController.I.ResolveCurrentActionsStep3();
+                } 
                 else if (ActionResolveFlowController.I.State == ActionsResolveState.PostResolveActions)
                 {
                     ActionResolveFlowController.I.PostResolveCurrentActions();

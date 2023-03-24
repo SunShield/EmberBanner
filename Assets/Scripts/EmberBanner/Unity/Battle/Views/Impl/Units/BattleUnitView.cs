@@ -64,8 +64,6 @@ namespace EmberBanner.Unity.Battle.Views.Impl.Units
         public void SetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.SetCardPrePlayed(card, crystal);
         public void UnsetCardPrePlayed(BattleCardView card, BattleUnitCrystalView crystal) => _zonesManager.UnsetCardPrePlayed(card, crystal);
 
-        public void ReceiveDamage(BattlePlayingActionEntity inflictor) => UnitDamageCalculator.I.InflictDamage(inflictor);
-
         private void Update()
         {
             _unitHealthBar.localScale = new Vector3((float)Entity.CurrentHealth / Entity.MaxHealth.CalculateValue(), 1f, 1f);
