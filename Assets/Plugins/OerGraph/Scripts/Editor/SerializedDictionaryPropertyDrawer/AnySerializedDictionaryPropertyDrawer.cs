@@ -2,6 +2,7 @@
 using OerGraph.Runtime.Core.Service.Classes.Dicts;
 using OerGraph.Runtime.Unity.Data.EditorRelated;
 using OerGraph_FlowGraph.Runtime.Service.Classes;
+using SpecialSerializables;
 
 namespace OerGraph.Editor.SerializedDictionaryPropertyDrawer
 {
@@ -15,5 +16,5 @@ namespace OerGraph.Editor.SerializedDictionaryPropertyDrawer
     [CustomPropertyDrawer(typeof(StringToStringDictionary))]
     [CustomPropertyDrawer(typeof(StringToBoolDictionary))]
     [CustomPropertyDrawer(typeof(StringToOerGraphDataDictionary))]
-    public partial class AnySerializableDictionaryPropertyDrawer : SerializableDictionaryPropertyDrawer {}
+    public partial class AnySerializableDictionaryPropertyDrawer : SpecialSerializableDictionaryPropertyDrawer {}
 }

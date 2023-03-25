@@ -11,7 +11,6 @@ using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using NFate.Editor.EditorElements;
 using OerGraph.Editor.Graphs;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -31,7 +30,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
         private VisualElement _baseStatsContainer;
         private DropdownField _possibleTargetsField;
         private VisualElement _graphContainer;
-        private GraphView     _graphView;
+        private OerGraphView  _graphView;
+        private Label         _currentGraphNameLabel;
 
         public CardInspector() : base()
         {
@@ -54,9 +54,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _baseStatsContainer.Add(_possibleTargetsField);
 
             _graphContainer = Root.Q<VisualElement>("GraphContainer");
-            _graphView = new OerGraphView(EditorWindow.GetWindow<GameManagerWindow>());
+            _graphView = new OerGraphView(GameManagerWindow.EI);
             _graphView.style.flexGrow = 1f;
             _graphContainer.Add(_graphView);
+
+            _currentGraphNameLabel = Root.Q<Label>("CurrentGraphLabel");
             
             AddActionsList();
         }
@@ -102,8 +104,14 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 UpdatePossibleTargetsDropdown();
                 Database.Update();
             }
+
+            void OnElementSelectionChanged(string elementKey)
+            {
+                SetGraph(elementKey ?? "Card");
+            }
             
             _actionList = new ActionList();
+            _actionList.onElementSelectionChanged += OnElementSelectionChanged;
             _actionList.Initialize(actionListData);
             _actionsContainer.Add(_actionList);
         }
@@ -141,6 +149,26 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
             _possibleTargetsField.index = (int)InspectedElement.Target;
             _actionList.Update();
             UpdatePossibleTargetsDropdown();
+            
+            _graphView.SetAsset(InspectedElement.GraphAsset);
+            SetGraph("Card");
+        }
+
+        private void SetGraph(string key)
+        {
+            _graphContainer.Remove(_graphView);
+            _graphView = new OerGraphView(GameManagerWindow.EI);
+            _graphView.style.flexGrow = 1f;
+            _graphContainer.Add(_graphView);
+            _graphView.SetAsset(InspectedElement.GraphAsset);
+            _graphView.SetGraph(InspectedElement.GraphAsset.Graphs[key]);
+            
+            var infoLabelText = "";
+            if (key == "Card")
+                infoLabelText = $"Card '{InspectedElement.Name}' graph";
+            else
+                infoLabelText = $"Card '{InspectedElement.Name}' > Action '{key}' graph";
+            _currentGraphNameLabel.text = infoLabelText;
         }
 
         private void UpdatePossibleTargetsDropdown()

@@ -1,4 +1,5 @@
 ﻿using EmberBanner.Core.Models.Units.Crystals;
+using Serializables;
 using UnityEngine;
 
 namespace EmberBanner.Core.Service.Classes.Collections

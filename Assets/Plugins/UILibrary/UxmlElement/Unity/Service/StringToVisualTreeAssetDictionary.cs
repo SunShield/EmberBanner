@@ -1,4 +1,5 @@
 ﻿using System;
+using Serializables;
 using UnityEngine.UIElements;
 
 namespace UILibrary.UxmlElement.Unity.Service

@@ -1,6 +1,7 @@
 ﻿using OerGraph.Editor.Graphs.Factories;
 using OerGraph.Runtime.Unity.Data;
 using OerGraph.Runtime.Unity.Data.EditorRelated;
+using UnityEditor;
 using UnityEngine;
 
 namespace OerGraph.Editor.Graphs.Systems.ElementManagement
@@ -15,6 +16,8 @@ namespace OerGraph.Editor.Graphs.Systems.ElementManagement
             graphData.EditorData.Nodes.Add(runtimeNode.Id, nodeEditorData);
             
             OerPortManager.AddAllNodePorts(runtimeNode, graphView);
+            
+            EditorUtility.SetDirty(graphView.Asset);
         }
 
         public static void AddExistingNode(OerGraphData graphData, OerGraphView graphView, int id)

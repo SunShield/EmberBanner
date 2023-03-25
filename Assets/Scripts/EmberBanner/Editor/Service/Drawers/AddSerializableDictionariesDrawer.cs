@@ -1,4 +1,5 @@
 ﻿using EmberBanner.Core.Service.Classes.Collections;
+using Serializables.Editor;
 using UnityEditor;
 
 namespace EmberBanner.Editor.Service.Drawers

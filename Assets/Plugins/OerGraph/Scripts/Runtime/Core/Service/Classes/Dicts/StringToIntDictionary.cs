@@ -1,9 +1,10 @@
 ﻿using System;
+using SpecialSerializables;
 
 namespace OerGraph.Runtime.Core.Service.Classes.Dicts
 {
     [Serializable]
-    public class StringToIntDictionary : SerializableDictionary<string, int>
+    public class StringToIntDictionary : SpecialSerializableDictionary<string, int>
     {
         
     }

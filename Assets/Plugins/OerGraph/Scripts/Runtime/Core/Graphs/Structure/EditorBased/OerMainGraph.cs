@@ -15,7 +15,7 @@ namespace OerGraph.Runtime.Core.Graphs.Structure.EditorBased
         [SerializeField] [HideInInspector] private int _currentPortId;
         [SerializeField] [HideInInspector] private int _currentDynPortId;
         
-        [SerializeReference] [HideInInspector] private IntToOerNodeDictionary _nodes = new();
+        [SerializeReference] /*[HideInInspector]*/ private IntToOerNodeDictionary _nodes = new();
         [SerializeReference] [HideInInspector] private IntToOerPortDictionary _ports = new();
         [SerializeReference] [HideInInspector] private IntToIntListDictionary _connections = new();
         [SerializeReference] [HideInInspector] private IntToOerDynamicPortDictionary _dynPorts = new();

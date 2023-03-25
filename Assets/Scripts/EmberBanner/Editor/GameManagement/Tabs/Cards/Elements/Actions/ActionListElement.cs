@@ -6,7 +6,6 @@ using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Actions.Params;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params;
-using EmberBanner.Unity.Data;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
 using UnityEditor.UIElements;
@@ -36,6 +35,9 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private   ActionParamList _paramsList;
         private   VisualElement   _topRowContainer;
         protected DropdownField   PossibleTargetsField;
+        private   Label           _selectedLabel;
+
+        public bool IsSelected { get; private set; }
         
         protected override void PostGatherElements()
         {
@@ -54,12 +56,15 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _topRowContainer           = Root.Q<VisualElement>("TopRowContainer");
             _listContainer             = Root.Q<VisualElement>("ListContainer");
             PossibleTargetsField       = Root.Q<DropdownField>("PossibleTargetsField");
+            _selectedLabel             = Root.Q<Label>("SelectedLabel");
             
             _magnitudeField.style.fontSize = 32f;
             _topRowContainer.Insert(1, PossibleTargetsField);
 
             _paramsList = CreateActionParamsList();
             _listContainer.Add(_paramsList);
+
+            AddManipulators();
         }
 
         private ActionParamList CreateActionParamsList()
@@ -109,6 +114,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             var list = new ActionParamList();
             list.Initialize(data);
             return list;
+        }
+
+        private void AddManipulators()
+        {
+            _typeColorElement.AddManipulator(new Clickable(OnSelectionAreaClicked));
         }
 
         protected override void PostInitialize()
@@ -193,5 +203,18 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ? "Show"
                 : "Hide";
         }
+
+        public void SetSelected(bool selected)
+        {
+            IsSelected = selected;
+            _selectedLabel.text = selected ? "X" : "";
+        }
+
+        private void OnSelectionAreaClicked()
+        {
+            onSelectionAreaClicked?.Invoke(Element.Name);
+        }
+
+        public event Action<string> onSelectionAreaClicked;
     }
 }

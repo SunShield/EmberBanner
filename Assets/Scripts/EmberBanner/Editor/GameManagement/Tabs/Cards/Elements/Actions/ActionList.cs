@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using EmberBanner.Core.Enums;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.TypedElements;
@@ -17,6 +16,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private DropdownField _paramTypeDropdown;
 
         public ActionType CurrentActionType => Enum.Parse<ActionType>(_paramTypeDropdown.value);
+
+        private string _currentSelectedElementKey;
 
         protected override void PostGatherElements()
         {
@@ -43,6 +44,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 _ => null
             };
 
+            listElement.onSelectionAreaClicked += SelectElement;
+
             return listElement;
         }
 
@@ -57,5 +60,25 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ? elements.Select(e => int.Parse(e.Name)).Max() 
                 : 0;
         }
+
+        private void SelectElement(string elementKey)
+        {
+            if (_currentSelectedElementKey != null && Elements.ContainsKey(_currentSelectedElementKey))
+                Elements[_currentSelectedElementKey].SetSelected(false);
+            
+            if (_currentSelectedElementKey == elementKey)
+            {
+                _currentSelectedElementKey = null;
+            }
+            else
+            {
+                _currentSelectedElementKey = elementKey;
+                Elements[_currentSelectedElementKey].SetSelected(true);
+                
+            }
+            onElementSelectionChanged?.Invoke(_currentSelectedElementKey);
+        }
+
+        public event Action<string> onElementSelectionChanged;
     }
 }

@@ -21,4 +21,4 @@ MonoBehaviour:
       Cost: 0
       Actions: []
       Target: 0
-      GraphAsset: {fileID: 0}
+      GraphAsset: {fileID: 11400000, guid: 62d05a1bcd9278e47a63ebaeced25a6e, type: 2}

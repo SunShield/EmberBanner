@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpecialSerializables;
 
 namespace OerGraph.Runtime.Core.Service.Classes.Dicts
 {
     [Serializable]
-    public class IntToIntListDictionary : SerializableDictionary<int, IntList>
+    public class IntToIntListDictionary : SpecialSerializableDictionary<int, IntList>
     {
     }
 
