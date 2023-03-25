@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
 {
-    [CreateAssetMenu(menuName = "Databases/Battle Database", fileName = "BattleDatabase")]
+    [CreateAssetMenu(menuName = "EB/Databases/Battle Database", fileName = "BattleDatabase")]
     public class BattlesDatabase : ScriptableObject, IDictionaryDatabase<string, BattleModel>
     {
         [FormerlySerializedAs("_cards")] [SerializeField] private StringToBattleModelDictionary _battles;

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
 {
-    [CreateAssetMenu(menuName = "Databases/Card Database", fileName = "CardDatabase")]
+    [CreateAssetMenu(menuName = "EB/Databases/Card Database", fileName = "CardDatabase")]
     public class CardsDatabase : ScriptableObject, IDictionaryDatabase<string, CardModel>
     {
         [SerializeField] private StringToCardModelDictionary _cards;

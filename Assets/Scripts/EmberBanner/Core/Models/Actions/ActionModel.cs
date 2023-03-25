@@ -2,6 +2,7 @@
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Enums.Battle.Targeting;
+using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Classes.Fundamental;
 
@@ -10,6 +11,8 @@ namespace EmberBanner.Core.Models.Actions
     [Serializable]
     public class ActionModel : AbstractModel
     {
+        public string WielderCardName;
+        
         public string RawDescription;
         public int Magnitude;
         public IntSpan ClashingPower = new();

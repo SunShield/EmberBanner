@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
 using EmberBanner.Core.Enums.Battle.Targeting;
+using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions;
 using EmberBanner.Editor.GameManagement.Windows;
+using EmberBanner.Editor.Graphs.Cards.Management;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using NFate.Editor.EditorElements;
 using OerGraph.Editor.Graphs;
@@ -72,8 +74,12 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
 
             void AddAction(string actionName)
             {
-                var action = new ActionModel(actionName, _actionList.CurrentActionType);
-                action.PossibleTargets = 0;
+                var action = new ActionModel(actionName, _actionList.CurrentActionType)
+                {
+                    PossibleTargets = 0,
+                    WielderCardName = InspectedElement.Name
+                };
+                OerCardGraphManager.I.CreateActionGraph(InspectedElement.GraphAsset, actionName);
                 
                 InspectedElement.Actions.Add(action);
                 
@@ -88,10 +94,11 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                     if (InspectedElement.Actions[i].Name == actionName)
                     {
                         InspectedElement.Actions.RemoveAt(i);
-                        return;
+                        break;
                     }
                 }
                 
+                OerCardGraphManager.I.RemoveActionGraph(InspectedElement.GraphAsset, actionName);
                 UpdatePossibleTargetsDropdown();
                 Database.Update();
             }
@@ -138,35 +145,6 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
 
         private void UpdatePossibleTargetsDropdown()
         {
-            /*var choiceMask = new List<int>() { 0, 0, 0, 0, 0, 0, 0 };
-            foreach (var action in InspectedElement.Actions)
-            {
-                if (action.Type == ActionType.Aggression)
-                {
-                    if (action.PossibleAggressionTargets.HasFlag(AggressionTargetType.Self))
-                        choiceMask[0] = (int)(CardTargetType.Self);
-                    if (action.PossibleAggressionTargets.HasFlag(AggressionTargetType.Enemy))
-                        choiceMask[3] = (int)(CardTargetType.Enemy);
-                }
-                else if (action.Type == ActionType.Defense)
-                {
-                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Self))
-                        choiceMask[0] = (int)(CardTargetType.Self);
-                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Ally))
-                        choiceMask[1] = (int)(CardTargetType.Ally);
-                    if (action.PossibleDefenseTargets.HasFlag(DefenseTargetType.Enemy))
-                        choiceMask[3] = (int)(CardTargetType.Enemy);
-                }
-                else if (action.Type == ActionType.Support)
-                {
-                    if (action.PossibleSupportTargets.HasFlag(SupportTargetType.Self))
-                        choiceMask[0] = (int)(CardTargetType.Self);
-                    if (action.PossibleSupportTargets.HasFlag(SupportTargetType.Ally))
-                        choiceMask[1] = (int)(CardTargetType.Ally);
-                }
-            }
-            
-            _possibleTargetsField.choicesMasks = choiceMask;*/
         }
     }
 }

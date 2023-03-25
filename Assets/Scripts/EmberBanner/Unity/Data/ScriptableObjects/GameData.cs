@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Data.ScriptableObjects
 {
-    [CreateAssetMenu(menuName = "Game Data", fileName = "GameData")]
+    [CreateAssetMenu(menuName = "EB/Game Data", fileName = "GameData")]
     public class GameData : ScriptableObject
     {
 #if UNITY_EDITOR

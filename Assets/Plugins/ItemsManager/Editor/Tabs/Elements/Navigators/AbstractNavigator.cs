@@ -57,6 +57,8 @@ namespace ItemsManager.Editor.Tabs.Elements.Navigators
             var element = ConstructElement(elementName);
             Database.AddElement(element);
             ElementNames.Add(element.Name);
+            PostConstructElement(element);
+            
             CreateNavigatorElement(element);
             Database.Update();
 
@@ -64,7 +66,8 @@ namespace ItemsManager.Editor.Tabs.Elements.Navigators
             onElementAdded?.Invoke(elementName);
         }
 
-        protected abstract TElement ConstructElement(string name); 
+        protected abstract TElement ConstructElement(string name);
+        protected virtual void PostConstructElement(TElement element) { } 
 
         protected void CreateNavigatorElement(TElement element)
         {
@@ -85,6 +88,7 @@ namespace ItemsManager.Editor.Tabs.Elements.Navigators
 
         public void RemoveElement(TNavigatorElement navigatorElement)
         {
+            PreRemoveElement(navigatorElement.WrappedElement);
             ElementNames.Remove(navigatorElement.WrappedElement.Name);
             Database.RemoveElement(navigatorElement.WrappedElement);
             Database.Update();
@@ -106,6 +110,8 @@ namespace ItemsManager.Editor.Tabs.Elements.Navigators
                 ? NavigatorElements[CurrentNavigatorElementIndex - 1]
                 : NavigatorElements[CurrentNavigatorElementIndex]);
         }
+        
+        protected virtual void PreRemoveElement(TElement element) { }
 
         protected void SelectElementInternal(TNavigatorElement navigatorElement)
         {

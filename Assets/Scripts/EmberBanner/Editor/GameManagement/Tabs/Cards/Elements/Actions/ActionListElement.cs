@@ -2,9 +2,12 @@
 using System.Linq;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle.Targeting;
+using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Actions.Params;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params;
+using EmberBanner.Unity.Data;
+using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -79,10 +82,27 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 };
                 
                 Element.Params.Add(element.Name, element);
+
+                var cardGraphAsset = GeneralDatabase.EI.Cards[Element.WielderCardName].GraphAsset;
+                var graph = cardGraphAsset.Graphs[Element.Name].Graph as ActionGraph;
+                
+                if (element.Type == ActionParamType.Int)
+                    graph.IntVariables.Add(elementKey, new(0));
+                else if (element.Type == ActionParamType.String)
+                    graph.StringVariables.Add(elementKey, new(""));
             }
 
             void RemoveElement(string elementKey)
             {
+                var param = Element.Params[elementKey];
+                var cardGraphAsset = GeneralDatabase.EI.Cards[Element.WielderCardName].GraphAsset;
+                var graph = cardGraphAsset.Graphs[Element.Name].Graph as ActionGraph;
+                
+                if (param.Type == ActionParamType.Int)
+                    graph.IntVariables.Remove(elementKey);
+                else if (param.Type == ActionParamType.String)
+                    graph.StringVariables.Remove(elementKey);
+                
                 Element.Params.Remove(elementKey);
             }
 

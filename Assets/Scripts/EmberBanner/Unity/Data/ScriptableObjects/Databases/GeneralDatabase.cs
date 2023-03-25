@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EmberBanner.Unity.Data.ScriptableObjects.Databases
 {
-    [CreateAssetMenu(menuName = "Databases/General Database", fileName = "GeneralDatabase")]
+    [CreateAssetMenu(menuName = "EB/Databases/General Database", fileName = "GeneralDatabase")]
     public class GeneralDatabase : AbstractGeneralDatabase
     {
 #if UNITY_EDITOR
