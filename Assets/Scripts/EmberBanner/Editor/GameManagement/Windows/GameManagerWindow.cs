@@ -13,15 +13,15 @@ namespace EmberBanner.Editor.GameManagement.Windows
 {
     public class GameManagerWindow : AbstractWindow
     {
-        public static GameManagerWindow EI { get; private set; }
+        public static GameManagerWindow EI => GetWindow<GameManagerWindow>("Manager Window", false);
         
         [MenuItem("Game Management/Manager Window")]
         public static void Show()
         {
-            EI = GetWindow<GameManagerWindow>();
-            EI.titleContent = new GUIContent("Manager Window");
+            var window = GetWindow<GameManagerWindow>();
+            window.titleContent = new GUIContent("Manager Window");
         }
-        
+
         protected override string Title { get; } = "Game Manager";
         
         protected override List<IAbstractTab> GetTabs()

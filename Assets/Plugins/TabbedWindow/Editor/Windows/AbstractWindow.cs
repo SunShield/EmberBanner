@@ -22,6 +22,7 @@ namespace TabbedWindow.Windows
         {
             LoadUml();
             BuildTabs();
+            PostOnEnable();
         }
 
         private void LoadUml()
@@ -46,6 +47,8 @@ namespace TabbedWindow.Windows
             BuildTabButtons();
             AddTabs();
         }
+        
+        protected virtual void PostOnEnable() { }
 
         private void AddTabs()
         {
