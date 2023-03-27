@@ -13,39 +13,5 @@ MonoBehaviour:
   m_Name: CardDatabase
   m_EditorClassIdentifier: 
   _cards:
-    m_keys:
-    - Weak Strike
-    m_values:
-    - <Name>k__BackingField: Weak Strike
-      Sprite: {fileID: 0}
-      Cost: 0
-      Actions:
-      - <Name>k__BackingField: 1
-        WielderCardName: Weak Strike
-        RawDescription: 
-        Magnitude: 0
-        ClashingPower:
-          Min: 0
-          Max: 0
-        ClashingPowerGrowthRate:
-          Span: 0
-          Growth: 0
-        ClashLoseHandicap: 0
-        Threshold: 0
-        CoinsAmount: 0
-        IsFast: 0
-        TargetsCount: 0
-        Type: 0
-        AggressionType: 0
-        HarmTags: 
-        DefenseType: 0
-        SupportType: 0
-        AidTags: 
-        PossibleTargets: 0
-        IsAoE: 0
-        DamageType: 0
-        Params:
-          m_keys: []
-          m_values: []
-      Target: 0
-      GraphAsset: {fileID: 11400000, guid: 62d05a1bcd9278e47a63ebaeced25a6e, type: 2}
+    m_keys: []
+    m_values: []

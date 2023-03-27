@@ -2,7 +2,6 @@
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Enums.Battle.Targeting;
-using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Service.Classes.Collections;
 using EmberBanner.Core.Service.Classes.Fundamental;
 
