@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmberBanner.Core.Enums.Battle;
 using EmberBanner.Core.Enums.Battle.Targeting;
 using EmberBanner.Core.Models.Actions;
 using OerGraph.Runtime.Unity.Data;
-using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace EmberBanner.Core.Models.Cards
 {

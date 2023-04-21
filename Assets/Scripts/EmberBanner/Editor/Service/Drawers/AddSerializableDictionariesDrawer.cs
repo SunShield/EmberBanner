@@ -12,6 +12,7 @@ namespace EmberBanner.Editor.Service.Drawers
     [CustomPropertyDrawer(typeof(ActionTypeToArrowSpritesDictionary))]
     [CustomPropertyDrawer(typeof(StringToSpriteDictionary))]
     [CustomPropertyDrawer(typeof(ActionTypeToColorDictionary))]
+    [CustomPropertyDrawer(typeof(IntHashset))]
     public class AddSerializableDictionariesDrawer : SerializableDictionaryPropertyDrawer
     {
         

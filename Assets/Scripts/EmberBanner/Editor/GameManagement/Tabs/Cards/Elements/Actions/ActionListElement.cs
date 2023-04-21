@@ -2,9 +2,11 @@
 using System.Linq;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle.Targeting;
+using EmberBanner.Core.Enums.Events.Actions;
 using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Actions.Params;
+using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Events;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params;
 using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
@@ -36,7 +38,9 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private   VisualElement   _topRowContainer;
         protected DropdownField   PossibleTargetsField;
         private   Label           _selectedLabel;
+        private   ScrollView      _eventsContainer;
 
+        private ActionEventInspector _selectedEventInspector;
         public bool IsSelected { get; private set; }
         
         protected override void PostGatherElements()
@@ -57,6 +61,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _listContainer             = Root.Q<VisualElement>("ListContainer");
             PossibleTargetsField       = Root.Q<DropdownField>("PossibleTargetsField");
             _selectedLabel             = Root.Q<Label>("SelectedLabel");
+            _eventsContainer           = Root.Q<ScrollView>("EventsContainer");
+            PopulateEvents();
             
             _magnitudeField.style.fontSize = 32f;
             _topRowContainer.Insert(1, PossibleTargetsField);
@@ -114,6 +120,42 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             var list = new ActionParamList();
             list.Initialize(data);
             return list;
+        }
+
+        private void PopulateEvents()
+        {
+            var events = Enum.GetValues(typeof(ActionModifyingEvent)).Cast<ActionModifyingEvent>().ToList();
+            foreach (var modifyingEvent in events)
+            {
+                var eventIndex = (int)modifyingEvent;
+                var eventInspector = new ActionModifyingEventInspector(modifyingEvent.ToString(), eventIndex, Element.ModifyingEvents.ContainsKey(eventIndex));
+                eventInspector.onActiveStateChanged += OnModifyingEventActiveStateChange;
+                eventInspector.onClick += OnEventInspectorClicked;
+                _eventsContainer.Add(eventInspector);
+            }
+        }
+
+        private void OnModifyingEventActiveStateChange(int eventIndex)
+        {
+            if (Element.ModifyingEvents.ContainsKey(eventIndex))
+                Element.ModifyingEvents.Remove(eventIndex);
+            else
+                Element.ModifyingEvents.Add(eventIndex, true);
+        }
+
+        private void OnEventInspectorClicked(ActionEventInspector clickedEventInspector)
+        {
+            if (_selectedEventInspector != null)
+                _selectedEventInspector.SetSelected(false);
+
+            if (_selectedEventInspector == clickedEventInspector)
+            {
+                _selectedEventInspector = null;
+                return;
+            }
+
+            _selectedEventInspector = clickedEventInspector;
+            _selectedEventInspector.SetSelected(true);
         }
 
         private void AddManipulators()

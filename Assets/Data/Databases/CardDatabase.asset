@@ -15,10 +15,11 @@ MonoBehaviour:
   _cards:
     m_keys:
     - Weak Strike
+    - Maw
     m_values:
     - <Name>k__BackingField: Weak Strike
-      Sprite: {fileID: 0}
-      Cost: 0
+      Sprite: {fileID: 21300000, guid: 6dc44e475e482144585be7eeb022e1be, type: 3}
+      Cost: 10
       Actions:
       - <Name>k__BackingField: 1
         WielderCardName: Weak Strike
@@ -47,5 +48,83 @@ MonoBehaviour:
         Params:
           m_keys: []
           m_values: []
-      Target: 0
+        ActiveEvents:
+          m_keys: 
+          m_values: 
+        ModifyingEvents:
+          m_keys: 000000000100000002000000
+          m_values: 010101
+      Target: 3
       GraphAsset: {fileID: 11400000, guid: 62d05a1bcd9278e47a63ebaeced25a6e, type: 2}
+    - <Name>k__BackingField: Maw
+      Sprite: {fileID: 21300000, guid: 1b448446426efce4a9d9847f21d8686f, type: 3}
+      Cost: 20
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Maw
+        RawDescription: 
+        Magnitude: 5
+        ClashingPower:
+          Min: 0
+          Max: 0
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 0
+        Threshold: 0
+        CoinsAmount: 0
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 0
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+        ActiveEvents:
+          m_keys: 
+          m_values: 
+        ModifyingEvents:
+          m_keys: 
+          m_values: 
+      - <Name>k__BackingField: 2
+        WielderCardName: Maw
+        RawDescription: 
+        Magnitude: 0
+        ClashingPower:
+          Min: 0
+          Max: 0
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 0
+        Threshold: 0
+        CoinsAmount: 0
+        IsFast: 0
+        TargetsCount: 0
+        Type: 1
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 0
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+        ActiveEvents:
+          m_keys: 
+          m_values: 
+        ModifyingEvents:
+          m_keys: 
+          m_values: 
+      Target: 5
+      GraphAsset: {fileID: 11400000, guid: b1e94c7eb41a4a84bbb807e23547035a, type: 2}

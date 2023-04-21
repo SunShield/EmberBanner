@@ -17,6 +17,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3920950205235855360
+      type: {class: OerGraphIntVariable, ns: OerGraph_FlowGraph.Runtime.Graphs.Variables.Impl, asm: Assembly-CSharp-firstpass}
+      data:
+        DefaultValue: 0
+        CurrentValue: 0
     - rid: 6132656422121897986
       type: {class: StringToOerGraphDataDictionary, ns: OerGraph.Runtime.Core.Service.Classes.Dicts, asm: Assembly-CSharp-firstpass}
       data:
@@ -244,8 +249,10 @@ MonoBehaviour:
     - rid: 6132656422352060423
       type: {class: StringToIntVariableDictionary, ns: OerGraph_FlowGraph.Runtime.Graphs.Variables.Service.Classes, asm: Assembly-CSharp-firstpass}
       data:
-        m_keys: []
-        m_values: []
+        m_keys:
+        - 123123
+        m_values:
+        - rid: 3920950205235855360
     - rid: 6132656422352060424
       type: {class: StringToFloatVariableDictionary, ns: OerGraph_FlowGraph.Runtime.Graphs.Variables.Service.Classes, asm: Assembly-CSharp-firstpass}
       data:

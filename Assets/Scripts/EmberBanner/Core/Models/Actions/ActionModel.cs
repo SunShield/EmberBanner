@@ -32,6 +32,8 @@ namespace EmberBanner.Core.Models.Actions
         public bool IsAoE;
         public DamageType DamageType;
         public StringToActionParamModelDictionary Params;
+        public IntHashset ActiveEvents;
+        public IntHashset ModifyingEvents;
 
         public TargetType TargetType => (TargetType)PossibleTargets;
 
@@ -39,6 +41,8 @@ namespace EmberBanner.Core.Models.Actions
         {
             Name = name;
             Type = type;
+            ActiveEvents = new();
+            ModifyingEvents = new();
             Params = new();
         }
     }

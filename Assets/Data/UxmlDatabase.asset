@@ -34,6 +34,8 @@ MonoBehaviour:
     - BattleUnitListElement
     - UnitCardList
     - UnitCardListElement
+    - ActionModifyingEventInspector
+    - ActionActiveEventInspector
     m_values:
     - {fileID: 9197481963319205126, guid: 08e1ad7cb378cee4d98ff9af79647e23, type: 3}
     - {fileID: 9197481963319205126, guid: 55305e19e403af24dbf651e738036719, type: 3}
@@ -55,3 +57,5 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: 75112dfb742df3144996fbe9ba334bb9, type: 3}
     - {fileID: 9197481963319205126, guid: 5d492dfe3ecadc24dbab3d1b7e97fa77, type: 3}
     - {fileID: 9197481963319205126, guid: 992ecbfc426af0c49be964c63a2e1cb3, type: 3}
+    - {fileID: 9197481963319205126, guid: 67fe4d8f66de78b429f1051b8276a0fc, type: 3}
+    - {fileID: 9197481963319205126, guid: 66fb818e64b6d5649990776be15cf5af, type: 3}
