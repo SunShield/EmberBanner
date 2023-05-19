@@ -33,6 +33,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params
             _tagsField.RegisterValueChangedCallback(evt =>
             {
                 Element.TagString = evt.newValue;
+                Update();
             });
         }
 

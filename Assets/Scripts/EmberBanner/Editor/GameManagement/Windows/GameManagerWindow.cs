@@ -3,7 +3,6 @@ using EmberBanner.Editor.GameManagement.Tabs.Battles;
 using EmberBanner.Editor.GameManagement.Tabs.Cards;
 using EmberBanner.Editor.GameManagement.Tabs.General;
 using EmberBanner.Editor.GameManagement.Tabs.Units;
-using OerGraph.Editor.Configuration;
 using TabbedWindow.Tabs;
 using TabbedWindow.Windows;
 using UnityEditor;
@@ -26,8 +25,6 @@ namespace EmberBanner.Editor.GameManagement.Windows
         
         protected override List<IAbstractTab> GetTabs()
         {
-            ApplyConfiguration();
-
             var gameDataTab = new GameDataTab(this, "Game Data", @"Assets/Data/GameData.asset");
             
             var cardsTab = new CardsManagementTab(this, "Cards", @"Assets/Data/Databases/GeneralDatabase.asset");
@@ -46,12 +43,6 @@ namespace EmberBanner.Editor.GameManagement.Windows
             unitsTab.onUnitRemoved += battlesTab.OnUnitRemoved;
 
             return new() { gameDataTab, cardsTab, unitsTab, battlesTab };
-        }
-
-        private void ApplyConfiguration()
-        {
-            var configurator = (OerConfigurator)Resources.Load("OerConfigurator");
-            configurator.ApplyConfiguration();
         }
     }
 }

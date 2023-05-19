@@ -25,6 +25,7 @@ namespace UILibrary.ManagedList.Editor
         protected Action<string>                OnRemoveElementClickedCallback { get; private set; }
         protected Func<List<TInspectedValue>>   ValuesPoolGetter               { get; private set; }
         protected Func<string, TInspectedValue> ElementByKeyGetter             { get; private set; }
+        protected Action                        ElementUpdateCallback          { get; private set; }
 
         protected Button        AddButton              { get; private set; }
         protected ScrollView    ElementsContainer      { get; private set; }
@@ -53,6 +54,7 @@ namespace UILibrary.ManagedList.Editor
             OnRemoveElementClickedCallback = data.OnRemoveElementClickedCallback;
             ValuesPoolGetter = data.ValuesPoolGetter;
             ElementByKeyGetter = data.ElementByKeyGetter;
+            ElementUpdateCallback = data.ElementUpdateCallback;
 
             PostProcessData(data);
         }
@@ -114,6 +116,7 @@ namespace UILibrary.ManagedList.Editor
         {
             var realElement = GetElementByKey(elementKey);
             var listElement = CreateListElement(elementKey, realElement);
+            listElement.onUpdate += OnElementUpdated;
 
             Elements.Add(elementKey, listElement);
             ElementsContainer.Add(listElement);
@@ -170,5 +173,13 @@ namespace UILibrary.ManagedList.Editor
             
             Elements.Clear();
         }
+
+        private void OnElementUpdated(string elementKey)
+        {
+            ElementUpdateCallback();
+            PostElementUpdate(elementKey);
+        }
+        
+        protected virtual void PostElementUpdate(string elementKey) { }
     }
 }

@@ -74,11 +74,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             {
                 _currentSelectedElementKey = elementKey;
                 Elements[_currentSelectedElementKey].SetSelected(true);
-                
             }
-            onElementSelectionChanged?.Invoke(_currentSelectedElementKey);
         }
-
-        public event Action<string> onElementSelectionChanged;
     }
 }

@@ -45,7 +45,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements
                 ElementByKeyGetter = key => InspectedElement.DeterminedEnemies.First(enemy => enemy.Name == key),
                 ElementInListPredicate = crystal => true,
                 OnAddElementClickedCallback = AddUnit,
-                OnRemoveElementClickedCallback = RemoveUnit
+                OnRemoveElementClickedCallback = RemoveUnit,
+                ElementUpdateCallback = Database.Update
             };
 
             void AddUnit(string crystalName)

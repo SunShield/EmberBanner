@@ -47,6 +47,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
             _possibleUnitsDropdown.RegisterValueChangedCallback(evt =>
             {
                 Element.UnitName = _possibleUnitsDropdown.value;
+                Update();
             });
 
             _showHideButton.clicked += ToggleHiddenState;
@@ -54,6 +55,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements.BattleUnits
             _waveField.RegisterValueChangedCallback(evt =>
             {
                 Element.Wave = evt.newValue;
+                Update();
             });
         }
         

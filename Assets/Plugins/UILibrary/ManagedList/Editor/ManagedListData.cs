@@ -10,5 +10,8 @@ namespace UILibrary.ManagedList.Editor
         public Action<string> OnRemoveElementClickedCallback;
         public Func<List<TInspectedValue>> ValuesPoolGetter;
         public Func<string, TInspectedValue> ElementByKeyGetter;
+        
+        // Must be called whenever every element value is updated
+        public Action ElementUpdateCallback;
     }
 }

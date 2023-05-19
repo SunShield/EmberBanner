@@ -2,13 +2,9 @@
 using System.Linq;
 using EmberBanner.Core.Enums.Actions;
 using EmberBanner.Core.Enums.Battle.Targeting;
-using EmberBanner.Core.Enums.Events.Actions;
-using EmberBanner.Core.Graphs.Card.Action;
 using EmberBanner.Core.Models.Actions;
 using EmberBanner.Core.Models.Actions.Params;
-using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Events;
 using EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions.Params;
-using EmberBanner.Unity.Data.ScriptableObjects.Databases;
 using UILibrary.ManagedList.Editor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -38,9 +34,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
         private   VisualElement   _topRowContainer;
         protected DropdownField   PossibleTargetsField;
         private   Label           _selectedLabel;
-        private   ScrollView      _eventsContainer;
 
-        private ActionEventInspector _selectedEventInspector;
         public bool IsSelected { get; private set; }
         
         protected override void PostGatherElements()
@@ -61,8 +55,6 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _listContainer             = Root.Q<VisualElement>("ListContainer");
             PossibleTargetsField       = Root.Q<DropdownField>("PossibleTargetsField");
             _selectedLabel             = Root.Q<Label>("SelectedLabel");
-            _eventsContainer           = Root.Q<ScrollView>("EventsContainer");
-            PopulateEvents();
             
             _magnitudeField.style.fontSize = 32f;
             _topRowContainer.Insert(1, PossibleTargetsField);
@@ -81,7 +73,8 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 ElementByKeyGetter = key => Element.Params[key],
                 ElementInListPredicate = el => true,
                 OnAddElementClickedCallback = AddElement,
-                OnRemoveElementClickedCallback = RemoveElement
+                OnRemoveElementClickedCallback = RemoveElement,
+                ElementUpdateCallback = Update
             };
 
             void AddElement(string elementKey)
@@ -93,69 +86,16 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
                 };
                 
                 Element.Params.Add(element.Name, element);
-
-                var cardGraphAsset = GeneralDatabase.EI.Cards[Element.WielderCardName].GraphAsset;
-                var graph = cardGraphAsset.Graphs[Element.Name].Graph as ActionGraph;
-                
-                if (element.Type == ActionParamType.Int)
-                    graph.IntVariables.Add(elementKey, new(0));
-                else if (element.Type == ActionParamType.String)
-                    graph.StringVariables.Add(elementKey, new(""));
             }
 
             void RemoveElement(string elementKey)
             {
-                var param = Element.Params[elementKey];
-                var cardGraphAsset = GeneralDatabase.EI.Cards[Element.WielderCardName].GraphAsset;
-                var graph = cardGraphAsset.Graphs[Element.Name].Graph as ActionGraph;
-                
-                if (param.Type == ActionParamType.Int)
-                    graph.IntVariables.Remove(elementKey);
-                else if (param.Type == ActionParamType.String)
-                    graph.StringVariables.Remove(elementKey);
-                
                 Element.Params.Remove(elementKey);
             }
 
             var list = new ActionParamList();
             list.Initialize(data);
             return list;
-        }
-
-        private void PopulateEvents()
-        {
-            var events = Enum.GetValues(typeof(ActionModifyingEvent)).Cast<ActionModifyingEvent>().ToList();
-            foreach (var modifyingEvent in events)
-            {
-                var eventIndex = (int)modifyingEvent;
-                var eventInspector = new ActionModifyingEventInspector(modifyingEvent.ToString(), eventIndex, Element.ModifyingEvents.ContainsKey(eventIndex));
-                eventInspector.onActiveStateChanged += OnModifyingEventActiveStateChange;
-                eventInspector.onClick += OnEventInspectorClicked;
-                _eventsContainer.Add(eventInspector);
-            }
-        }
-
-        private void OnModifyingEventActiveStateChange(int eventIndex)
-        {
-            if (Element.ModifyingEvents.ContainsKey(eventIndex))
-                Element.ModifyingEvents.Remove(eventIndex);
-            else
-                Element.ModifyingEvents.Add(eventIndex, true);
-        }
-
-        private void OnEventInspectorClicked(ActionEventInspector clickedEventInspector)
-        {
-            if (_selectedEventInspector != null)
-                _selectedEventInspector.SetSelected(false);
-
-            if (_selectedEventInspector == clickedEventInspector)
-            {
-                _selectedEventInspector = null;
-                return;
-            }
-
-            _selectedEventInspector = clickedEventInspector;
-            _selectedEventInspector.SetSelected(true);
         }
 
         private void AddManipulators()
@@ -197,41 +137,49 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements.Actions
             _magnitudeField.RegisterValueChangedCallback(evt =>
             {
                 Element.Magnitude = evt.newValue;
+                Update();
             });
 
             _coinsField.RegisterValueChangedCallback(evt =>
             {
                 Element.CoinsAmount = evt.newValue;
+                Update();
             });
 
             _clashLoseHandicapField.RegisterValueChangedCallback(evt =>
             {
                 Element.ClashLoseHandicap = evt.newValue;
+                Update();
             });
 
             ThresholdField.RegisterValueChangedCallback(evt =>
             {
                 Element.Threshold = evt.newValue;
+                Update();
             });
 
             _cpMinField.RegisterValueChangedCallback(evt =>
             {
                 Element.ClashingPower.Min = evt.newValue;
+                Update();
             });
 
             _cpMaxField.RegisterValueChangedCallback(evt =>
             {
                 Element.ClashingPower.Max = evt.newValue;
+                Update();
             });
 
             _descriptionField.RegisterValueChangedCallback(evt =>
             {
                 Element.RawDescription = evt.newValue;
+                Update();
             });
             
             PossibleTargetsField.RegisterValueChangedCallback(evt =>
             {
                 Element.PossibleTargets = PossibleTargetsField.index;
+                Update();
             });
         }
 

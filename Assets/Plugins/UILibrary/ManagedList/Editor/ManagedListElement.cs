@@ -49,7 +49,11 @@ namespace UILibrary.ManagedList.Editor
         protected virtual void PostAddEvents() { }
         
         protected virtual void PostInitialize() { }
-        
+
+        // This must be called each time element is updated via editor
+        protected void Update() => onUpdate?.Invoke(ElementKey);
+
+        public event Action<string> onUpdate; 
         public event Action<string> onRemoveClicked;
     }
 }
