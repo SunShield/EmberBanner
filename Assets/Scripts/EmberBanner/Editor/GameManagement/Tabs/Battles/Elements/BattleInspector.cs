@@ -46,13 +46,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Battles.Elements
                 ElementInListPredicate = crystal => true,
                 OnAddElementClickedCallback = AddUnit,
                 OnRemoveElementClickedCallback = RemoveUnit,
-                ElementUpdateCallback = Database.Update
+                ElementUpdateCallback = UpdateDatabase
             };
 
             void AddUnit(string crystalName)
             {
                 InspectedElement.DeterminedEnemies.Add(new UnitInBattleModel(crystalName) { Wave = 1 });
-                Database.Update();
+                UpdateDatabase();
             }
 
             void RemoveUnit(string crystalName)

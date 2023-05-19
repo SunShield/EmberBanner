@@ -14,26 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cards:
     m_keys:
-    - Weak Strike
-    - Maw
+    - Poisonous Claws
+    - Deadly Swing
+    - Grave Callling
+    - Mutating Beam
+    - Holy Slash
+    - Benediction
+    - Infectious Offering
+    - Toxic Delivery
     m_values:
-    - <Name>k__BackingField: Weak Strike
-      Sprite: {fileID: 21300000, guid: 6dc44e475e482144585be7eeb022e1be, type: 3}
-      Cost: 10
+    - <Name>k__BackingField: Poisonous Claws
+      Sprite: {fileID: 21300000, guid: 825598986a65a12469aa0b750bd2cf86, type: 3}
+      Cost: 15
       Actions:
       - <Name>k__BackingField: 1
-        WielderCardName: Weak Strike
+        WielderCardName: Poisonous Claws
         RawDescription: 
-        Magnitude: 0
+        Magnitude: 12
         ClashingPower:
-          Min: 0
-          Max: 0
+          Min: 3
+          Max: 5
         ClashingPowerGrowthRate:
           Span: 0
           Growth: 0
-        ClashLoseHandicap: 0
+        ClashLoseHandicap: 6
         Threshold: 0
-        CoinsAmount: 0
+        CoinsAmount: 1
         IsFast: 0
         TargetsCount: 0
         Type: 0
@@ -42,57 +48,25 @@ MonoBehaviour:
         DefenseType: 0
         SupportType: 0
         AidTags: 
-        PossibleTargets: 0
-        IsAoE: 0
-        DamageType: 0
-        Params:
-          m_keys: []
-          m_values: []
-      Target: 3
-    - <Name>k__BackingField: Maw
-      Sprite: {fileID: 21300000, guid: 1b448446426efce4a9d9847f21d8686f, type: 3}
-      Cost: 20
-      Actions:
-      - <Name>k__BackingField: 1
-        WielderCardName: Maw
-        RawDescription: 
-        Magnitude: 5
-        ClashingPower:
-          Min: 0
-          Max: 0
-        ClashingPowerGrowthRate:
-          Span: 0
-          Growth: 0
-        ClashLoseHandicap: 0
-        Threshold: 0
-        CoinsAmount: 2
-        IsFast: 0
-        TargetsCount: 0
-        Type: 0
-        AggressionType: 0
-        HarmTags: 
-        DefenseType: 0
-        SupportType: 0
-        AidTags: 
-        PossibleTargets: 0
+        PossibleTargets: 4
         IsAoE: 0
         DamageType: 0
         Params:
           m_keys: []
           m_values: []
       - <Name>k__BackingField: 2
-        WielderCardName: Maw
+        WielderCardName: Poisonous Claws
         RawDescription: 
-        Magnitude: 0
+        Magnitude: 3
         ClashingPower:
-          Min: 0
-          Max: 0
+          Min: 5
+          Max: 5
         ClashingPowerGrowthRate:
           Span: 0
           Growth: 0
-        ClashLoseHandicap: 0
+        ClashLoseHandicap: 3
         Threshold: 0
-        CoinsAmount: 1
+        CoinsAmount: 2
         IsFast: 0
         TargetsCount: 0
         Type: 1
@@ -107,4 +81,363 @@ MonoBehaviour:
         Params:
           m_keys: []
           m_values: []
+      Target: 4
+    - <Name>k__BackingField: Deadly Swing
+      Sprite: {fileID: 21300000, guid: 1e628cfead794b54497e5b31decbead4, type: 3}
+      Cost: 10
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Deadly Swing
+        RawDescription: 
+        Magnitude: 4
+        ClashingPower:
+          Min: 1
+          Max: 5
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 2
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 3
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 3
+    - <Name>k__BackingField: Grave Callling
+      Sprite: {fileID: 21300000, guid: 235f0f13f717d1f4193404bf56261ab6, type: 3}
+      Cost: 30
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Grave Callling
+        RawDescription: 
+        Magnitude: 12
+        ClashingPower:
+          Min: 4
+          Max: 8
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 6
+        Threshold: 0
+        CoinsAmount: 1
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 2
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 2
+        WielderCardName: Grave Callling
+        RawDescription: 
+        Magnitude: 2
+        ClashingPower:
+          Min: 4
+          Max: 10
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 1
+        Threshold: 0
+        CoinsAmount: 3
+        IsFast: 0
+        TargetsCount: 0
+        Type: 1
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 1
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 2
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 1
+    - <Name>k__BackingField: Mutating Beam
+      Sprite: {fileID: 21300000, guid: 6dc44e475e482144585be7eeb022e1be, type: 3}
+      Cost: 18
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Mutating Beam
+        RawDescription: 
+        Magnitude: 10
+        ClashingPower:
+          Min: 1
+          Max: 10
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 10
+        Threshold: 0
+        CoinsAmount: 1
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 3
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 2
+        WielderCardName: Mutating Beam
+        RawDescription: 
+        Magnitude: 1
+        ClashingPower:
+          Min: 1
+          Max: 10
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 10
+        Threshold: 0
+        CoinsAmount: 1
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 1
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
       Target: 5
+    - <Name>k__BackingField: Holy Slash
+      Sprite: {fileID: 21300000, guid: c9abcbbbf53346b4bb79907fd85b7888, type: 3}
+      Cost: 11
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Holy Slash
+        RawDescription: 
+        Magnitude: 4
+        ClashingPower:
+          Min: 3
+          Max: 6
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 2
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 4
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 2
+        WielderCardName: Holy Slash
+        RawDescription: 
+        Magnitude: 5
+        ClashingPower:
+          Min: 1
+          Max: 8
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 5
+        Threshold: 0
+        CoinsAmount: 1
+        IsFast: 0
+        TargetsCount: 0
+        Type: 1
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 1
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 2
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 6
+    - <Name>k__BackingField: Benediction
+      Sprite: {fileID: 21300000, guid: 5960d5251b724ba42b567c367f0bd9b3, type: 3}
+      Cost: 38
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Benediction
+        RawDescription: 
+        Magnitude: 12
+        ClashingPower:
+          Min: 4
+          Max: 12
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 8
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 1
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 1
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 2
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 3
+        WielderCardName: Benediction
+        RawDescription: 
+        Magnitude: 5
+        ClashingPower:
+          Min: 3
+          Max: 5
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 5
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 1
+        AidTags: 
+        PossibleTargets: 0
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 2
+    - <Name>k__BackingField: Infectious Offering
+      Sprite: {fileID: 21300000, guid: 8f9c73a229195694cba51a80896199b5, type: 3}
+      Cost: 20
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Infectious Offering
+        RawDescription: 
+        Magnitude: 20
+        ClashingPower:
+          Min: 5
+          Max: 9
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 10
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 2
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 1
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 1
+    - <Name>k__BackingField: Toxic Delivery
+      Sprite: {fileID: 21300000, guid: 02d247d9785120d4aa38e15d58a9901c, type: 3}
+      Cost: 25
+      Actions:
+      - <Name>k__BackingField: 1
+        WielderCardName: Toxic Delivery
+        RawDescription: 
+        Magnitude: 6
+        ClashingPower:
+          Min: 3
+          Max: 8
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 5
+        Threshold: 0
+        CoinsAmount: 4
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 0
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 4
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      - <Name>k__BackingField: 2
+        WielderCardName: Toxic Delivery
+        RawDescription: 
+        Magnitude: 3
+        ClashingPower:
+          Min: 3
+          Max: 8
+        ClashingPowerGrowthRate:
+          Span: 0
+          Growth: 0
+        ClashLoseHandicap: 3
+        Threshold: 0
+        CoinsAmount: 2
+        IsFast: 0
+        TargetsCount: 0
+        Type: 0
+        AggressionType: 1
+        HarmTags: 
+        DefenseType: 0
+        SupportType: 0
+        AidTags: 
+        PossibleTargets: 4
+        IsAoE: 0
+        DamageType: 0
+        Params:
+          m_keys: []
+          m_values: []
+      Target: 4

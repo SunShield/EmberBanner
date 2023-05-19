@@ -152,13 +152,14 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
                 ElementByKeyGetter = key => InspectedElement.Crystals.First(crystal => crystal.Name == key),
                 ElementInListPredicate = crystal => true,
                 OnAddElementClickedCallback = AddCrystal,
-                OnRemoveElementClickedCallback = RemoveCrystal
+                OnRemoveElementClickedCallback = RemoveCrystal,
+                ElementUpdateCallback = UpdateDatabase
             };
 
             void AddCrystal(string crystalName)
             {
                 InspectedElement.Crystals.Add(new UnitCrystalModel() { Name = crystalName });
-                Database.Update();
+                UpdateDatabase();
             }
 
             void RemoveCrystal(string crystalName)
@@ -171,7 +172,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
                         return;
                     }
                 }
-                Database.Update();
+                UpdateDatabase();
             }
             
             _crystalList = new CrystalList();
@@ -193,7 +194,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
             void AddCard(string cardName)
             {
                 InspectedElement.DefaultCards.Add(new UnitDefaultCardModel() { Name = cardName, Amount = 1 });
-                Database.Update();
+                UpdateDatabase();
             }
 
             void RemoveCard(string cardName)
@@ -206,7 +207,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements
                         return;
                     }
                 }
-                Database.Update();
+                UpdateDatabase();
             }
             
             _unitUnitCardList = new UnitCardList();

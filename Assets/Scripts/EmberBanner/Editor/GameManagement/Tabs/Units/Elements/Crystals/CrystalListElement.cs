@@ -23,11 +23,13 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Units.Elements.Crystals
             _minRollBoundField.RegisterValueChangedCallback(evt =>
             {
                 Element.RollBounds.Min = evt.newValue;
+                Update();
             });
             
             _maxRollBoundField.RegisterValueChangedCallback(evt =>
             {
                 Element.RollBounds.Max = evt.newValue;
+                Update();
             });
         }
 

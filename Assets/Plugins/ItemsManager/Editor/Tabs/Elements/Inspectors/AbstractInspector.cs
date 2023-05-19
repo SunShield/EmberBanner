@@ -39,6 +39,8 @@ namespace ItemsManager.Editor.Tabs.Elements.Inspectors
 
         protected abstract void OnElementSet();
 
+        protected void UpdateDatabase() => Database.Update();
+
         public event Action onElementUpdated;
     }
 }

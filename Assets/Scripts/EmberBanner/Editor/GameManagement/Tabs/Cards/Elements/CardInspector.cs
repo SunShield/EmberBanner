@@ -61,7 +61,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 ElementInListPredicate = (e) => true,
                 OnAddElementClickedCallback = AddAction,
                 OnRemoveElementClickedCallback = RemoveAction,
-                ElementUpdateCallback = Database.Update
+                ElementUpdateCallback = UpdateDatabase
             };
 
             void AddAction(string actionName)
@@ -75,7 +75,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 InspectedElement.Actions.Add(action);
                 
                 UpdatePossibleTargetsDropdown();
-                Database.Update();
+                UpdateDatabase();
             }
 
             void RemoveAction(string actionName)
@@ -90,7 +90,7 @@ namespace EmberBanner.Editor.GameManagement.Tabs.Cards.Elements
                 }
                 
                 UpdatePossibleTargetsDropdown();
-                Database.Update();
+                UpdateDatabase();
             }
             
             _actionList = new ActionList();

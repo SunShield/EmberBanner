@@ -18,7 +18,6 @@ MonoBehaviour:
     - Sir Calvus
     - Death Knight
     - Wraith
-    - Bone Beast
     - Stalli Hors
     m_values:
     - <Name>k__BackingField: Skeleton
@@ -45,7 +44,13 @@ MonoBehaviour:
           Min: 1
           Max: 3
       IsEnemyUnit: 1
-      DefaultCards: []
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Deadly Swing
+        Amount: 3
+      - <Name>k__BackingField: 2
+        CardName: Grave Callling
+        Amount: 1
       Sprite: {fileID: 21300000, guid: 9b2035832fc6fb14ca68e89d9ab9e9b9, type: 3}
     - <Name>k__BackingField: Sir Calvus
       StartingHealth: 10
@@ -79,7 +84,13 @@ MonoBehaviour:
           Min: 1
           Max: 8
       IsEnemyUnit: 1
-      DefaultCards: []
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Holy Slash
+        Amount: 4
+      - <Name>k__BackingField: 2
+        CardName: Benediction
+        Amount: 4
       Sprite: {fileID: 21300000, guid: a29b4396cf8962f429537ae0a687f948, type: 3}
     - <Name>k__BackingField: Death Knight
       StartingHealth: 7
@@ -109,7 +120,13 @@ MonoBehaviour:
           Min: 4
           Max: 5
       IsEnemyUnit: 1
-      DefaultCards: []
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Grave Callling
+        Amount: 2
+      - <Name>k__BackingField: 2
+        CardName: Mutating Beam
+        Amount: 2
       Sprite: {fileID: 21300000, guid: f6cffd73850cf2f4a9bcff6d72351e01, type: 3}
     - <Name>k__BackingField: Wraith
       StartingHealth: 3
@@ -135,34 +152,14 @@ MonoBehaviour:
           Min: 3
           Max: 6
       IsEnemyUnit: 1
-      DefaultCards: []
-      Sprite: {fileID: 21300000, guid: a96e728ae6e152041b6b34ff61d7a2ee, type: 3}
-    - <Name>k__BackingField: Bone Beast
-      StartingHealth: 8
-      MaxHealth: 8
-      HealthRegen: 0
-      StartingWill: 45
-      MaxWill: 45
-      WillRegen: 0
-      StartingEnergy: 35
-      MaxEnergy: 35
-      EnergyRegen: 10
-      HandSize: 3
-      Draw: 2
-      PhysicalResistance: 0
-      NaturalResistance: 0
-      MagicResistance: 0
-      WillPhysicalResistance: 0
-      WillNaturalResistance: 0
-      WillMagicResistance: 0
-      Crystals:
+      DefaultCards:
       - <Name>k__BackingField: 1
-        RollBounds:
-          Min: 2
-          Max: 4
-      IsEnemyUnit: 1
-      DefaultCards: []
-      Sprite: {fileID: 21300000, guid: 739f8d3321bbbf54aaa7e22e949767b6, type: 3}
+        CardName: Grave Callling
+        Amount: 1
+      - <Name>k__BackingField: 2
+        CardName: Poisonous Claws
+        Amount: 2
+      Sprite: {fileID: 21300000, guid: a96e728ae6e152041b6b34ff61d7a2ee, type: 3}
     - <Name>k__BackingField: Stalli Hors
       StartingHealth: 15
       MaxHealth: 15
@@ -191,5 +188,11 @@ MonoBehaviour:
           Min: 1
           Max: 1
       IsEnemyUnit: 1
-      DefaultCards: []
+      DefaultCards:
+      - <Name>k__BackingField: 1
+        CardName: Infectious Offering
+        Amount: 3
+      - <Name>k__BackingField: 2
+        CardName: Toxic Delivery
+        Amount: 3
       Sprite: {fileID: 21300000, guid: b2c2f1e672d088441a94e16e2727f990, type: 3}
